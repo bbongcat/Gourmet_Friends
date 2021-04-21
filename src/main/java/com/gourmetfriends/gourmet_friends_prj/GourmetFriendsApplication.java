@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class GourmetFriendsApplication {
-
+//hihihihi
     public static void main(String[] args) {
         SpringApplication.run(GourmetFriendsApplication.class, args);
     }
