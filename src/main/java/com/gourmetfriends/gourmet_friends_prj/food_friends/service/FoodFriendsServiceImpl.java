@@ -17,7 +17,7 @@ public class FoodFriendsServiceImpl implements FoodFriendsService{
     }
 
     @Override
-    public FoodFriends get(Long ffBoardNo) {
+    public FoodFriends get(Long ffbno) {
         return null;
     }
 
@@ -27,7 +27,7 @@ public class FoodFriendsServiceImpl implements FoodFriendsService{
     }
 
     @Override
-    public boolean remove(Long ffBoardNo) {
+    public boolean remove(Long ffbno) {
         return false;
     }
 }

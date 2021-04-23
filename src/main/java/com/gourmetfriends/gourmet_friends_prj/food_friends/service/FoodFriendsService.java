@@ -10,13 +10,13 @@ public interface FoodFriendsService {
     void register(FoodFriends foodFriends);
 
     //게시글 상세 조회
-    FoodFriends get(Long ffBoardNo);
+    FoodFriends get(Long ffbno);
 
     //게시글 수정 과정
     boolean modify(FoodFriends foodFriends);
 
     //게시글 삭제 과정
-    boolean remove(Long ffBoardNo);
+    boolean remove(Long ffbno);
 
     //게시글 전체 조회
 
