@@ -27,4 +27,5 @@ public interface FoodFriendsService {
 
     //게시물 검색 조회 과정
     List<FoodFriends> searchList(Criteria cri);
+
 }
