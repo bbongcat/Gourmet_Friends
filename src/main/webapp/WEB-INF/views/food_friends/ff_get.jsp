@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">Board Read</h1>
+    <h1 class="page-header">foodFriends Read</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -17,25 +17,25 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
 
-      <div class="panel-heading">Board Read Page</div>
+      <div class="panel-heading">foodFriends Read Page</div>
       <!-- /.panel-heading -->
       <div class="panel-body">
 
         <div class="form-group">
-          <label>Bno</label> <input class="form-control" name='bno' value="${board.bno}" readonly>
+          <label>번호</label> <input class="form-control" name='ffBno' value="${foodFriends.ffBno}" readonly>
         </div>
 
         <div class="form-group">
-          <label>Title</label> <input class="form-control" name='title' value="${board.title}" readonly>
+          <label>제목</label> <input class="form-control" name='title' value="${foodFriends.title}" readonly>
         </div>
 
         <div class="form-group">
-          <label>Text area</label>
-          <textarea class="form-control" rows="3" name='content' readonly>${board.content}</textarea>
+          <label>내용</label>
+          <textarea class="form-control" rows="3" name='content' readonly>${foodFriends.content}</textarea>
         </div>
 
         <div class="form-group">
-          <label>Writer</label> <input class="form-control" name='writer' value="${board.writer }" readonly>
+          <label>회원ID</label> <input class="form-control" name='userId' value="${foodFriends.userId}" readonly>
         </div>
 
 
@@ -63,7 +63,7 @@
 
       
       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> 댓글 (<span class="replyCnt"></span>)
+        <i class="fa fa-comments fa-fw"></i> 댓글 (<span class="ffReplyCnt"></span>)
         <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록</button>
       </div>      
       
@@ -101,16 +101,16 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label>Reply</label> 
-                <input class="form-control" name='reply' value='New Reply!!!!'>
+                <label>댓글내용</label> 
+                <input class="form-control" name='ffContent' value='New Reply!!!!'>
               </div>      
               <div class="form-group">
-                <label>Replyer</label> 
-                <input class="form-control" name='replyer' value='replyer'>
+                <label>회원ID</label> 
+                <input class="form-control" name='userId' value='userId'>
               </div>
               <div class="form-group">
-                <label>Reply Date</label> 
-                <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
+                <label>댓글 등록 시간</label> 
+                <input class="form-control" name='ffDate' value='2018-01-01 13:13'>
               </div>
       
             </div>
@@ -133,23 +133,23 @@
 <!-- 댓글 관련 스크립트 -->
 <script>
 
-  let bno = '${board.bno}';//원본 글 번호
+  let bno = '${foodFriends.ffBno}';
 
-  //현재 댓글 페이지 정보
+  
   let curPageNum = 1; 
 
-  //날짜 포맷 변환 함수
+  
   function formatDate(datetime){
-    //문자열 날짜 데이터를 날짜 객체로 변환 
+    
     const dateObj = new Date(datetime);
-    //날짜 객체를 통해 각 날짜 정보 얻기
+    
     let year = dateObj.getFullYear();
     let month = dateObj.getMonth() + 1;
     let day = dateObj.getDate();
     let hour = dateObj.getHours();
     let minute = dateObj.getMinutes();
 
-    //오전 오후 체크 
+    
     let ampm = '';
     if(hour < 12 && hour >= 6){
       ampm = '오전';
@@ -164,7 +164,7 @@
     }else{
       ampm = '새벽';
     }
-    //숫자가 1자리일 경우 2자리로 변환 
+
     (month < 10) ? month = '0' + month : month;
     (day < 10) ? day = '0' + day : day;
     (hour < 10) ? hour = '0' + hour : hour;
@@ -173,19 +173,19 @@
     return year + "-" + month + "-" + day + "-" + ampm + " " + hour + ":" + minute ; 
   }
   
- //댓글 페이지 목록을 만들어주는 함수
+
  function showReplyPage(count) {
-    // console.log(count);
+   
     let pageNum = curPageNum;
     const $pageFooter = document.querySelector('.panel-footer');
 
-    //한번에 보여줄 페이지 개수
+   
     const DISPLAY_PAGE = 10;
 
     let endPage = Math.ceil(pageNum / DISPLAY_PAGE) * DISPLAY_PAGE;
     const beginPage = endPage - DISPLAY_PAGE + 1;
 
-    //끝페이지 보정
+    
     if (endPage * DISPLAY_PAGE >= count) {
       endPage = Math.ceil(count / DISPLAY_PAGE);
     }
@@ -213,21 +213,20 @@
 
     $pageFooter.innerHTML = data;
 
-      //댓글 체이지 클릭 이벤트 
+      
     document.querySelector('ul.pagination').addEventListener('click',e => {
       if(!e.target.matches('ul.pagination > li > a')){
         return;
       }
       e.preventDefault();
-      // console.log("페이지 버튼 클릭됨:",e.target.getAttribute('href'));
-
+      
       curPageNum = e.target.getAttribute('href');
       
       showReplyList(curPageNum);
     });
   }
 
-  //댓글 목록 DOM을 만드는 함수
+  
   function makeReplyListDOM({replies, count}){
     if(replies === null || replies.length === 0){
       return;
@@ -235,30 +234,29 @@
     let data = '';
   
     for(let reply of replies){
-      data += '<li class="left clearfix" data-rno = "'+ reply.rno +'">';
+      data += '<li class="left clearfix" data-rno = "'+ ffReply.ffRno +'">';
       data += '   <div>';
       data += '     <div class="header">';
-      data += '         <strong class="primary-font">' + reply.replyer + '</strong>';
-      data += '     <small class="pull-right text-muted">'+ formatDate(reply.replyDate) + '</small>';
+      data += '         <strong class="primary-font">' + ffReply.userId + '</strong>';
+      data += '     <small class="pull-right text-muted">'+ formatDate(ffReply.ffDate) + '</small>';
       data += '    </div>';
-      data += '    <p>'+ reply.reply +'</p>';
+      data += '    <p>'+ ffReply.ffContent +'</p>';
       data += '   </div>';
       data += '</li>';
     }
     document.querySelector('.chat').innerHTML = data;
-    //페이지 화면을 그려주는 함수
+    
     showReplyPage(count);
   }
 
 
-  //댓글 목록을 비동기로 불러오는 함수
   function showReplyList(page){
-    fetch('/api/v1/replies/'+ bno + '/' + page)
+    fetch('/api/v1/replies/'+ ffBno + '/' + page)
         .then(res => res.json())
-        .then(replyMap => {
-          // console.log(replyList);
-          makeReplyListDOM(replyMap);
-          document.querySelector('.replyCnt').textContent = replyMap.count;
+        .then(ffReplyMap => {
+          
+          makeReplyListDOM(ffReplyMap);
+          document.querySelector('.ffReplyCnt').textContent = ffReplyMap.count;
         });
   }
 
@@ -274,7 +272,7 @@
       //find() - 요소에서 자식노드를 모두 탐색하여 선택자에 맞는 요소르 가져옴 
       $modal.find('input').val('');
 
-      $modal.find('input[name=replyDate]').parent().hide();
+      $modal.find('input[name=ffDate]').parent().hide();
 
       $modal.find('button[id != modalRegisterBtn]').hide();
 
@@ -295,8 +293,8 @@
       //서버로 전송할 데이터 - 디버깅 
       const replyObj ={
           bno: bno,
-          reply: $('input[name=reply').val(),
-          replyer: $('input[name=replyer').val()
+          reply: $('input[name=ffReply').val(),
+          replyer: $('input[name=userId').val()
       };
 
       console.log(replyObj);
@@ -316,33 +314,32 @@
                 $modal.find('input').val('');
                 showReplyList(curPageNum);
               }else{
-                alert('댓글 등록 실패');
+                alert('댓글 등록을 실패하였습니다.');
               }
             });
 
     });
 
-    //댓글 li를 눌렀을 때 댓글 상세보기 모달이 뜨는 이벤트
+  
     $('ul.chat').on('click', 'li' ,e =>{
-      // console.log(e.currentTarget);
+      
       $modal.find('button[id=modalRegisterBtn]').hide();
       $modal.find('button[id != modalRegisterBtn]').show();
-      $modal.find('input[name=replyDate]').parent().show();
+      $modal.find('input[name=ffDate]').parent().show();
 
-      //서버에 댓글 개별 조회 비동기 요청
+      
       const rno = e.currentTarget.dataset.rno;
 
       fetch('/api/v1/replies/' + rno)
             .then(res => res.json())
             .then(reply => {
               // console.log(reply);
-              $('input[name=reply]').val(reply.reply);
-              $('input[name=replyer]').val(reply.replyer);
-              $('input[name=replyDate]').val(formatDate(reply.replyDate));
-              $('input[name=replyDate]').attr('redaonly','readonly');
+              $('input[name=ffReply]').val(ffReply.ffReply);
+              $('input[name=userId').val(ffReply.userId);
+              $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
+              $('input[name=ffDate]').attr('redaonly','readonly');
 
-              //모달에다가 rno를 붙여놓자 
-              $modal.data('rno',rno);
+              $modal.data('ffRno',ffRno);
             });
 
       $modal.modal('show');
@@ -351,8 +348,8 @@
     //댓글 수정 버튼 클릭 이벤트 
     $('#modalModBtn').on('click',e =>{
       const modDataObj = {
-        rno: $modal.data('rno'),
-        reply: $('input[name=reply]').val()
+        rno: $modal.data('ffRno'),
+        reply: $('input[name=ffReply]').val()
       }
       // console.log(modDataObj);
       const reqInfo = {
@@ -361,35 +358,34 @@
         body: JSON.stringify(modDataObj)
       }
 
-      fetch('/api/v1/replies/'+ modDataObj.rno,reqInfo)
+      fetch('/api/v1/replies/'+ modDataObj.ffRno,reqInfo)
             .then(res => res.text())
             .then(msg => {
               if(msg === 'modSuccess'){
                 $modal.modal('hide');
                 showReplyList(curPageNum);
               }else{
-                alert('수정실패!');
+                alert('수정에 실패하였습니다.');
               }
             });
     });
 
-    //댓글 삭제 버튼 클릭 이벤트 
+    
     $('#modalRemoveBtn').on('click',e => {
     
       const reqInfo = {
         method: 'DELETE'
       };
 
-      // const url = '/api/v1/replies/'+bno + '/'+ $modal.data('rno');
-      // console.log(url);
-      fetch('/api/v1/replies/'+bno + '/'+ $modal.data('rno'),reqInfo)
+      
+      fetch('/api/v1/replies/'+ ffBno + '/'+ $modal.data('ffRno'),reqInfo)
             .then(res => res.text())
             .then(msg => {
               if(msg === 'delSuccess'){
                 $modal.modal('hide');
                 showReplyList(curPageNum);
               }else{
-                alert('삭제실패');
+                alert('삭제에 실패하였습니다.');
               }
             });
 
@@ -407,14 +403,13 @@
 <script>
 $(document).ready(function() {
 
-      //목록 버튼 이벤트
+      
       document.getElementById('list-btn').addEventListener('click', e => {
-          location.href='/board/list?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}';
+          location.href='/food_friends/ff_list?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}';
       });
 
-      //수정 버튼 이벤트
       document.getElementById('modify-btn').addEventListener('click', e => {
-          location.href='/board/modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&bno=${board.bno}';
+          location.href='/food_friends/ff_modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&ffBno=${foodFriends.ffBno}';
       });
 
 });

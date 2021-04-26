@@ -7,7 +7,7 @@
 <%@include file="../includes/header.jsp"%>
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">Tables</h1>
+      <h1 class="page-header">게시판</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -17,7 +17,7 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-            Board List Page
+            foodFriends List Page
             <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">게시글 등록</button>
          </div>
 
@@ -28,25 +28,25 @@
                     <tr>
                         <th>#번호</th>
                         <th>제목</th>
-                        <th>작성자</th>
+                        <th>회원ID</th>
                         <th>작성일</th>
                         <th>수정일</th>
                     </tr>
 
 
-               <c:forEach var="board" items="${list}">
+               <c:forEach var="foodFriends" items="${ff_list}">
                   <tr>
-                     <td>${board.bno}</td>
+                     <td>${foodFriends.ffBno}</td>
 
                      <td>
-                        <a class='move' href="/board/get${pageInfo.makeParam(pageInfo.cri.page)}&bno=${board.bno}">
-                            ${board.title} [${board.replyCnt}]
+                        <a class='move' href="/foodFriends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
+                            ${foodFriends.title} [${foodFriends.ffReplyCnt}]
                         </a>
                      </td>
 
-                     <td>${board.writer}</td>
-                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${board.regDate}" /></td>
-                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${board.updateDate}" /></td>
+                     <td>${foodFriends.userId}</td>
+                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}" /></td>
+                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}" /></td>
                   </tr>
                </c:forEach>
             </table>
@@ -55,17 +55,17 @@
             <div class='row'>
                 <div class="col-lg-12">
  
-                   <form id='searchForm' action="/board/list" method='get'>
+                   <form id='searchForm' action="/foodFriends/ff_list" method='get'>
                     <select name='type'>
                         <option value="">--</option>
                         <option value="title" ${pageInfo.cri.type == 'title' ? 'selected' : ''}>제목</option>
                         <option value="content" ${pageInfo.cri.type == 'content' ? 'selected' : ''}>내용</option>
-                        <option value="writer" ${pageInfo.cri.type == 'writer' ? 'selected' : ''}>작성자</option>
+                        <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
                         <option value="titleContent" ${pageInfo.cri.type == 'titleContent' ? 'selected' : ''}>제목 or 내용</option>   
                      </select>  
                       <input type='text' name='keyword' value="${pageInfo.cri.keyword}" /> 
                          
-                      <button class='btn btn-default'>Search</button>
+                      <button class='btn btn-default'>검색</button>
                    </form>
                 </div>
              </div>
@@ -81,12 +81,12 @@
                     </c:if>
                         
                     <c:forEach var= "num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                        <li class="paginate_button"><a href="/board/list${pageInfo.makeParam(num)}">${num}</a></li>
+                        <li class="paginate_button"><a href="/foodFriends/ff_list${pageInfo.makeParam(num)}">${num}</a></li>
                     </c:forEach>
 
                     <c:if test = "${pageInfo.next}">
                         <li class="paginate_button next">
-                            <a href="/board/list${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
+                            <a href="/foodFriends/ff_list${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
                         </li>
                     </c:if>
 
@@ -124,16 +124,14 @@
 <script>
 $(document).ready(function() {
 
-    //게시글 등록 버튼 이벤트
+    
     document.getElementById('regBtn').addEventListener('click', e => {
-        //링크 이동
-        location.href='/board/register';
+        
+        location.href='/foodFriends/ff_register';
     });
 
     const resultMessage = '${msg}';
-    // console.log(resultMessage);
-
-    //게시물 처리에 따른 모달을 띄워주는 함수
+   
     function checkModal(msg) {
 
         const $modalBody = document.querySelector('.modal-body');
@@ -150,7 +148,6 @@ $(document).ready(function() {
             $modalBody.textContent = '게시글이 삭제되었습니다.';
         }
 
-        //모달창 오픈
         $('#myModal').modal('show');
     }
 
@@ -171,7 +168,6 @@ $(document).ready(function() {
         
         checkModal(resultMessage);
 
-        //현재 위치 한 페이지에 클래스 acitve 부여하는 함수
         appendPageActive("${pageInfo.cri.page}");
 
     }());

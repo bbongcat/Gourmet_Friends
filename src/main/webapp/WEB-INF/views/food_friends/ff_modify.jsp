@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Board Modify</h1>
+        <h1 class="page-header">foodFriends Modify</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -17,42 +17,42 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
 
-            <div class="panel-heading">Board Modify</div>
+            <div class="panel-heading">foodFriends Modify</div>
             <!-- /.panel-heading -->
             <div class="panel-body">
 
-                <form role="form" action="/board/modify" method="post">
+                <form role="form" action="/food_friends/ff_modify" method="post">
 
                     <div class="form-group">
-                        <label>Bno</label>
-                        <input class="form-control" name='bno' value='${board.bno}' readonly>
+                        <label>번호</label>
+                        <input class="form-control" name='bno' value='${foodFriends.ffBno}' readonly>
                     </div>
 
                     <div class="form-group">
-                        <label>Title</label>
-                        <input class="form-control" name='title' value='${board.title}'>
+                        <label>제목</label>
+                        <input class="form-control" name='title' value='${foodFriends.title}'>
                     </div>
 
                     <div class="form-group">
-                        <label>Text area</label>
-                        <textarea class="form-control" rows="5" name='content'>${board.content}</textarea>
+                        <label>내용</label>
+                        <textarea class="form-control" rows="5" name='content'>${foodFriends.content}</textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Writer</label>
-                        <input class="form-control" name='writer' value='${board.writer}' readonly>
+                        <label>회원ID</label>
+                        <input class="form-control" name='writer' value='${foodFriends.userId}' readonly>
                     </div>
 
                     <div class="form-group">
-                        <label>RegDate</label>
+                        <label>등록시간</label>
                         <input class="form-control" name='regDate'
-                            value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.regDate}" />' readonly>
+                            value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${foodFriends.regDate}" />' readonly>
                     </div>
 
                     <div class="form-group">
-                        <label>Update Date</label>
+                        <label>수정시간</label>
                         <input class="form-control" name='updateDate'
-                            value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.updateDate}" />' readonly>
+                            value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${foodFriends.updateDate}" />' readonly>
                     </div>
 
                     <!-- form에서 다른 URL로 파라미터를 넘기려면 name 속성을 활용해야 함 -->
@@ -80,22 +80,21 @@
 <script>
 
     document.querySelector('.btn-group').addEventListener('click',function(e){
-        e.preventDefault(); //submit기능 중지(서버로 전송 가능)
+        e.preventDefault(); 
 
         const oper = e.target.dataset.oper;
 
         const $actionForm = document.querySelector('form[role=form]')
 
         if(oper === 'list'){
-            //form의 action /board/list로 변경, method를 get으로 
-            $actionForm.setAttribute('action','/board/list');
+        
+            $actionForm.setAttribute('action','/food_friends/ff_list');
             $actionForm.setAttribute('method','get');
         }else if(oper === 'remove'){
-            //form의 action /board/remove로 변경
-            $actionForm.setAttribute('action','/board/remove');
+            
+            $actionForm.setAttribute('action','/food_friends/ff_remove');
         }
 
-        //form을 submit
         $actionForm.submit();
     });
 

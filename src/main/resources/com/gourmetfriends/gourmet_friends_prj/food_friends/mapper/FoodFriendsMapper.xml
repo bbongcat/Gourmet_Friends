@@ -3,4 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gourmetfriends.gourmet_friends_prj.food_friends.mapper.FoodFriendsMapper">
+
+    <resultMap id="foodFriendsMap" type="com.gourmetfriends.gourmet_friends_prj.food_friends.domain.FoodFriends">
+        <result property="ffBno" column="ff_bno"/>
+        <result property="userId" column="user_id"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="ffReplyCnt" column="ff_reply_cnt"/>
+    </resultMap>
 </mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gourmetfriends.gourmet_friends_prj.ff_reply.mapper.FFReplyMapper">
+
+    <resultMap id="ffReplyMap" type="com.gourmetfriends.gourmet_friends_prj.ff_reply.domain.FFReply">
+        <result property="ffRno" column="ff_rno"/>
+        <result property="ffBno" column="ff_bno"/>
+        <result property="userId" column="user_id"/>
+        <result property="ffContent" column="ff_content"/>
+        <result property="ffDate" column="ff_date"/>
+    </resultMap>
+
+</mapper>
