@@ -293,8 +293,8 @@
       //서버로 전송할 데이터 - 디버깅 
       const replyObj ={
           bno: bno,
-          reply: $('input[name=ffReply').val(),
-          replyer: $('input[name=userId').val()
+          reply: $('input[name=ffReply]').val(),
+          replyer: $('input[name=userId]').val()
       };
 
       console.log(replyObj);
@@ -335,7 +335,7 @@
             .then(reply => {
               // console.log(reply);
               $('input[name=ffReply]').val(ffReply.ffReply);
-              $('input[name=userId').val(ffReply.userId);
+              $('input[name=userId]').val(ffReply.userId);
               $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
               $('input[name=ffDate]').attr('redaonly','readonly');
 
