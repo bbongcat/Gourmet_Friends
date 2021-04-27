@@ -11,4 +11,12 @@
         <result property="updateDate" column="update_date"/>
         <result property="ffReplyCnt" column="ff_reply_cnt"/>
     </resultMap>
+
+    <select id="getList" resultMap="foodFriendsMap">
+        SELECT * FROM gourmet_friends
+        WHERE ff_bno > 0
+        ORDER BY ff_bno DESC
+    </select>
+
+
 </mapper>

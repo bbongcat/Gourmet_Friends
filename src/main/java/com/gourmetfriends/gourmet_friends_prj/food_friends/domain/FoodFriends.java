@@ -16,6 +16,9 @@ public class FoodFriends {
     private Date regDate;//밥친구 게시판 글 등록 시간
     private Date updateDate;//밥친구 게시판 글 수정 시간
     private String notice;//밥친구 게시판 공지사항
+
+    //밥친구 게시판 일반 글인지 공지사항 글인지 구분하기
+    private CateNotice cateNotice;//밥친구 게시판 공지사항 분리
     private Long ffReplyCnt;//밥친구 댓글수
 
 }
