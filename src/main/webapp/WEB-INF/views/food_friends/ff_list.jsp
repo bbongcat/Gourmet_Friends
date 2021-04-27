@@ -39,7 +39,7 @@
                      <td>${foodFriends.ffBno}</td>
 
                      <td>
-                        <a class='move' href="/foodFriends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
+                        <a class='move' href="/food_friends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
                             ${foodFriends.title} [${foodFriends.ffReplyCnt}]
                         </a>
                      </td>
@@ -55,7 +55,7 @@
             <div class='row'>
                 <div class="col-lg-12">
  
-                   <form id='searchForm' action="/foodFriends/ff_list" method='get'>
+                   <form id='searchForm' action="/food_friends/ff_list" method='get'>
                     <select name='type'>
                         <option value="">--</option>
                         <option value="title" ${pageInfo.cri.type == 'title' ? 'selected' : ''}>제목</option>
@@ -76,12 +76,12 @@
                 <ul class="pagination">
                     <c:if test = "${pageInfo.prev}">
                         <li class="paginate_button previous">
-                            <a href="/board/list${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
+                            <a href="/food_friends/ff_list${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
                         </li>
                     </c:if>
                         
                     <c:forEach var= "num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                        <li class="paginate_button"><a href="/foodFriends/ff_list${pageInfo.makeParam(num)}">${num}</a></li>
+                        <li class="paginate_button"><a href="/food_friends/ff_list${pageInfo.makeParam(num)}">${num}</a></li>
                     </c:forEach>
 
                     <c:if test = "${pageInfo.next}">
@@ -127,7 +127,7 @@ $(document).ready(function() {
     
     document.getElementById('regBtn').addEventListener('click', e => {
         
-        location.href='/foodFriends/ff_register';
+        location.href='/food_friends/ff_register';
     });
 
     const resultMessage = '${msg}';

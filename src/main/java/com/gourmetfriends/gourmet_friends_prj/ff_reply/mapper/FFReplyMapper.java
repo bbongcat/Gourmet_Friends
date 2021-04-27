@@ -3,10 +3,12 @@ package com.gourmetfriends.gourmet_friends_prj.ff_reply.mapper;
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.ff_reply.domain.FFReply;
 import com.gourmetfriends.gourmet_friends_prj.food_friends.domain.FoodFriends;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface FFReplyMapper {
 
     //댓글 입력

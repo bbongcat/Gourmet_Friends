@@ -25,7 +25,7 @@ public class FFReplyApiController {
             @PathVariable Long ffBno,
             @PathVariable int page){
         log.info("/api/v1/replies/" + ffBno + "/" + page + "GET");
-        Criteria cri = new Criteria(page, 10);
+        Criteria cri = new Criteria(page, 10,0);
         Map<String,Object> replies = ffReplyService.getList(ffBno,cri);
         return new ResponseEntity<>(replies, HttpStatus.OK);
     }

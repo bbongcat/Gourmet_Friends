@@ -136,3 +136,5 @@ create table `rev_reply`
     `rev_date`    datetime      not null
 ) ENGINE = InnoDB
   default charset = utf8;
+
+alter table food_friends add cate_notice varchar(20) DEFAULT 'GENERAL';

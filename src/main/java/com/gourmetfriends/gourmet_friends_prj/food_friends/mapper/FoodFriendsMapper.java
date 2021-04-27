@@ -16,7 +16,7 @@ public interface FoodFriendsMapper {
     List<FoodFriends> getListWithPaging(Criteria cri);
 
     //총 게시물 수 조회
-    int getTotalCount();
+    int getTotalCount(Criteria cri);
 
     //제목으로 검색 가능
     List<FoodFriends> getListByTitle(Criteria cri);
