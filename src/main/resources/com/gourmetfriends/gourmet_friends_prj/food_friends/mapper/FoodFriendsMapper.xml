@@ -23,7 +23,7 @@
     <select id="getListWithPaging" resultMap="foodFriendsMap">
         SELECT * FROM food_friends
         ORDER BY ff_bno DESC
-        limit #{startIndex}, #{amount}
+        LIMIT #{startIndex}, #{amount}
     </select>
 
     <!-- 총 페이지 수-->
@@ -34,8 +34,66 @@
     </select>
 
     <!-- 제목으로 게시물 검색 기능 -->
+    <select id="getListByTitle" resultMap="foodFriendsMap">
+        <![CDATA[
+            SELECT ff_bno,title,content,user_id, reg_date, update_date
+            FROM food_friends
+            WHERE title LIKE CONCAT('%',#{keyword},'%')
+            ORDER BY ff_bno DESC
+            LIMIT #{startIndex}, #{amount}
+        ]]>
+    </select>
+
     <!-- 제목으로 검색 게시물 조회 -->
+    <select id="getTotalCountByTitle" resultType="int">
+        SELECT COUNT(*)
+        FROM food_friends
+        WHERE title LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
     <!-- 목록 조회 통합 검색 -->
+    <select id="getSearchList" resultMap="foodFriendsMap">
+        <![CDATA[
+            SELECT ff_bno,title,content,user_id, reg_date, update_date,ff_reply_cnt
+            FROM food_friends
+            WHERE title
+        ]]>
+          <if test="type == 'title'">
+             title LIKE CONCAT('%',#{keyword},'%') AND
+          </if>
+          <if test="type == 'content'">
+            content LIKE CONCAT('%',#{keyword},'%') AND
+          </if>
+          <if test="type == 'userId'">
+            uesr_id LIKE CONCAT('%',#{keyword},'%') AND
+          </if>
+          <if test="type == 'titleContent'">
+            (title LIKE CONCAT('%',#{keyword},'%') OR
+              content LIKE CONCAT('%',#{keyword},'%'))
+          </if>
+        <![CDATA[
+            ORDER BY ff_bno DESC
+            LIMIT #{startIndex}, #{amount}
+        ]]>
+    </select>
+
+    <select id="getSearchTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM food_friends
+        <if test="type == 'title'">
+            WHERE itlet LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'userId'">
+            WHERE uesr_id LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'titleContent'">
+            WHERE (title LIKE CONCAT('%',#{keyword},'%') OR
+                    content LIKE CONCAT('%',#{keyword},'%'))
+        </if>
+    </select>
 
     <select id="findByBno" resultMap="foodFriendsMap">
         SELECT * FROM food_friends
@@ -44,8 +102,8 @@
     
     <insert id="write">
         INSERT INTO food_friends
-            (title, content, user_id)
-        VALUE(#{title},#{content},#{userId})
+            (ff_bno,title, content, user_id)
+        VALUE(ff_bno,#{title},#{content},#{userId})
     </insert>
 
     <update id="update">
@@ -53,8 +111,8 @@
         SET
             title = #{title},
             content = #{content},
-            user_id = #{user_id},
-            updatedate = datetime
+            user_id = #{userId},
+            update_date = now()
         WHERE ff_bno = #{ffBno}
     </update>
 
@@ -65,7 +123,9 @@
 
     <!-- 댓글 수 증가 -->
     <update id="increaseFfReplyCnt">
-
+        UPDATE food_friends
+        SET ff_reply_cnt = (SELECT COUNT(*) FROM ff_reply WHERE ff_bno = #{ffBno})
+        WHERE ff_bno = #{ffBno}
     </update>
 
 

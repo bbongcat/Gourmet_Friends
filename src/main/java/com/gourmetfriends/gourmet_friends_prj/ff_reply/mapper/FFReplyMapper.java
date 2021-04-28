@@ -2,7 +2,6 @@ package com.gourmetfriends.gourmet_friends_prj.ff_reply.mapper;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.ff_reply.domain.FFReply;
-import com.gourmetfriends.gourmet_friends_prj.food_friends.domain.FoodFriends;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,7 +26,7 @@ public interface FFReplyMapper {
     int getCount(Long ffBno);
 
     //댓글 목록 조회
-    List<FoodFriends> getList(
+    List<FFReply> getList(
             @Param("ffBno") Long ffBno,
             @Param("cri") Criteria cri);
 

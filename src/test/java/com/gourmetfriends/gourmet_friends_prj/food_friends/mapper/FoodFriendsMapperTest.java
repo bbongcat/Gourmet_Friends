@@ -20,16 +20,59 @@ class FoodFriendsMapperTest {
     @Autowired FoodFriendsService foodFriendsService;
 
     @Test
+    @DisplayName("데이터베이스에서 게시글 전체를 조회할 수 있어야 한다.")
+    void findAllTest(){
+        List<FoodFriends> foodFriendsList = foodFriendsMapper.getList();
+
+        assertTrue(foodFriendsList.size() == 105);
+
+        for (FoodFriends foodFriends : foodFriendsList) {
+            System.out.println(foodFriends);
+        }
+    }
+
+    @Test
     @DisplayName("데이터베이스 저장에 성공해야한다.")
     void writeTest(){
         FoodFriends foodFriends = new FoodFriends();
-        foodFriends.setTitle("짱구는 못말려");
-        foodFriends.setContent("짱구는 못말리는 내용입니다");
-        foodFriends.setUserId("ccc456");
+        foodFriends.setTitle("백설공주");
+        foodFriends.setContent("백설공주와 일곱난쟁이");
+        foodFriends.setUserId("ccc789");
 
         foodFriendsMapper.write(foodFriends);
 
-        assertTrue(foodFriendsMapper.getList().get(0).getFfBno() == 10);
+        assertTrue(foodFriendsMapper.getList().get(0).getFfBno() == 111);
+    }
+
+    @Test
+    @DisplayName("글 번호를 전달하면 해당 글 정보를 얻어야한다.")
+    void findOneTest(){
+        FoodFriends foodFriends = foodFriendsMapper.findByBno(111L);
+        System.out.println("foodFriends = " + foodFriends);
+
+        assertTrue(foodFriends.getFfBno() == 111);
+    }
+
+    @Test
+    @DisplayName("글 내용, 글 제목, 작성자를 수정할 수 있어야 한다.")
+    void updateTest(){
+        FoodFriends newFoodFriends = new FoodFriends();
+        newFoodFriends.setTitle("신데렐라");
+        newFoodFriends.setContent("신데렐라가 구두를 잃어버렸어요.");
+        newFoodFriends.setUserId("ggg1234");
+        newFoodFriends.setFfBno(111L);
+
+        foodFriendsMapper.update(newFoodFriends);
+
+        assertTrue(foodFriendsMapper.findByBno(111L).getUserId().equals("ggg1234"));
+    }
+
+    @Test
+    @DisplayName("글 번호를 전달하면 해당 글 정보가 삭제되어야 한다.")
+    void deleteTest(){
+        foodFriendsMapper.delete(111L);
+
+        assertNull(foodFriendsMapper.findByBno(111L));
     }
 
     @Test
@@ -56,4 +99,25 @@ class FoodFriendsMapperTest {
         }
     }
 
+    @Test
+    @DisplayName("총 게시물 수가 잘 조회되어야 한다.")
+    void totalCountTest(){
+        int totalCount = foodFriendsMapper.getTotalCount();
+
+        System.out.println("totalCount = " + totalCount);
+
+        assertTrue(totalCount == 104);
+    }
+
+    @Test
+    @DisplayName("제목으로 검색 수행")
+    void searchByTitleTest() {
+        Criteria cri = new Criteria();
+        cri.setKeyword("28");
+
+        List<FoodFriends> foodFriendsList = foodFriendsMapper.getListByTitle(cri);
+        for (FoodFriends foodFriends : foodFriendsList) {
+            System.out.println(foodFriends);
+        }
+    }
 }
