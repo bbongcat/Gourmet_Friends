@@ -28,7 +28,7 @@
                     <tr>
                         <th>#번호</th>
                         <th>제목</th>
-                        <th>회원ID</th>
+                        <th>회원</th>
                         <th>작성일</th>
                         <th>수정일</th>
                     </tr>

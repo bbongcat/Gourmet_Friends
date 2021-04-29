@@ -38,9 +38,10 @@
           <label>회원ID</label> <input class="form-control" name='userId' value="${foodFriends.userId}" readonly>
         </div>
 
-
-        <button id='modify-btn' class="btn btn-default">수정</button>
-        <button id='list-btn' class="btn btn-info">목록</button>
+        <c:if test="${loginUser.userNick == foodFriends.userId}">
+          <button id='modify-btn' class="btn btn-default">수정</button>
+        </c:if>
+          <button id='list-btn' class="btn btn-info">목록</button>
 
 
       </div>

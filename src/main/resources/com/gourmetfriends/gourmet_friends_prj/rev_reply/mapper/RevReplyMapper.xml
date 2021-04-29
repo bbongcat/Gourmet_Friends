@@ -5,6 +5,10 @@
 <mapper namespace="com.gourmetfriends.gourmet_friends_prj.rev_reply.mapper.RevReplyMapper">
 
     <resultMap id="revReplyMap" type="com.gourmetfriends.gourmet_friends_prj.rev_reply.domain.RevReply">
-
+        <result property="revRno" column="rev_bno"/>
+        <result property="revBno" column="rev_bno"/>
+        <result property="userId" column="user_id"/>
+        <result property="revReply" column="rev_reply"/>
+        <result property="revDate" column="rev_date"/>
     </resultMap>
 </mapper>
