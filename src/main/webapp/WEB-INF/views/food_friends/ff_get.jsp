@@ -65,7 +65,10 @@
       
       <div class="panel-heading">
         <i class="fa fa-comments fa-fw"></i> 댓글 (<span class="ffReplyCnt"></span>)
+
+      <c:if test="${loginUser != null}">
         <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록</button>
+      </c:if>
       </div>      
       
       

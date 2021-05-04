@@ -17,21 +17,21 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Transactional
     @Override
-    public void register(Review review) {
-        reviewMapper.write(review);
+    public void revRegister(Review review) {
+        reviewMapper.revWrite(review);
 
         //첨부파일이 있는 경우
-        List<String> revPhoto = review.getRevPhoto();
-        if(revPhoto != null){
-            for (String photo : revPhoto) {
+        List<String> revPhotos = review.getRevPhotos();
+        if(revPhotos != null){
+            for (String photo : revPhotos) {
                 reviewMapper.addRevPhoto(photo);
             }
         }
     }
 
     @Override
-    public Review get(Long revBno) {
-        return reviewMapper.findByBno(revBno);
+    public Review revGet(Long revBno) {
+        return reviewMapper.revFindByBno(revBno);
     }
 
     @Override
@@ -40,27 +40,27 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean modify(Review review) {
-        return reviewMapper.update(review) == 1;
+    public boolean revModify(Review review) {
+        return reviewMapper.revUpdate(review) == 1;
     }
 
     @Override
-    public boolean remove(Long revBno) {
-        return reviewMapper.delete(revBno) == 1;
+    public boolean revRemove(Long revBno) {
+        return reviewMapper.revDelete(revBno) == 1;
     }
 
     @Override
-    public List<Review> getList(Criteria cri) {
-        return reviewMapper.getListWithPaging(cri);
+    public List<Review> revGetList(Criteria cri) {
+        return reviewMapper.revGetListWithPaging(cri);
     }
 
     @Override
-    public int getTotal(Criteria cri) {
-        return reviewMapper.getSearchTotal(cri);
+    public int revGetTotal(Review review,Criteria cri) {
+        return reviewMapper.revGetSearchTotal(review,cri);
     }
 
     @Override
-    public List<Review> searchList(Criteria cri) {
-        return reviewMapper.getSearchList(cri);
+    public List<Review> revSearchList(Review review,Criteria cri) {
+        return reviewMapper.revGetSearchList(review,cri);
     }
 }

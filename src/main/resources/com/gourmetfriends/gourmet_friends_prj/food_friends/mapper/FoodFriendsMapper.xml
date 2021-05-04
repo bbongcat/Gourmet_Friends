@@ -21,7 +21,8 @@
 
     <!-- 페이징 처리 -->
     <select id="getListWithPaging" resultMap="foodFriendsMap">
-        SELECT * FROM food_friends
+        SELECT ff_bno,title,content,user_id,reg_date,update_date
+        FROM food_friends
         ORDER BY ff_bno DESC
         LIMIT #{startIndex}, #{amount}
     </select>

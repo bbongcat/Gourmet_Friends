@@ -55,15 +55,14 @@
                             value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${foodFriends.updateDate}" />' readonly>
                     </div>
 
-                    <!-- form에서 다른 URL로 파라미터를 넘기려면 name 속성을 활용해야 함 -->
                     <input type="hidden" name="page" value="${pageInfo.page}">
                     <input type="hidden" name="type" value="${pageInfo.type}">
                     <input type="hidden" name="keyword" value="${pageInfo.keyword}">
 
                     <div class="btn-group">
-                        <button type="submit" data-oper='modify' class="btn btn-default">수정</button>
-                        <button type="button" data-oper='remove' class="btn btn-danger">삭제</button>
-                        <button type="button" data-oper='list' class="btn btn-info">목록</button>
+                        <button type="submit" data-oper='ff_modify' class="btn btn-default">수정</button>
+                        <button type="button" data-oper='ff_remove' class="btn btn-danger">삭제</button>
+                        <button type="button" data-oper='ff_list' class="btn btn-info">목록</button>
                     </div>
                 </form>
 
@@ -86,11 +85,11 @@
 
         const $actionForm = document.querySelector('form[role=form]')
 
-        if(oper === 'list'){
+        if(oper === 'ff_list'){
         
             $actionForm.setAttribute('action','/food_friends/ff_list');
             $actionForm.setAttribute('method','get');
-        }else if(oper === 'remove'){
+        }else if(oper === 'ff_remove'){
             
             $actionForm.setAttribute('action','/food_friends/ff_remove');
         }

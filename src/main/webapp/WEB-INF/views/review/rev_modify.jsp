@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Board Modify</h1>
+        <h1 class="page-header">Review Modify</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -17,53 +17,46 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
 
-            <div class="panel-heading">Board Modify</div>
+            <div class="panel-heading">Review Modify</div>
             <!-- /.panel-heading -->
             <div class="panel-body">
 
-                <form role="form" action="/board/modify" method="post">
+                <form role="form" action="/review/rev_modify" method="post">
 
                     <div class="form-group">
-                        <label>Bno</label>
-                        <input class="form-control" name='bno' value='${board.bno}' readonly>
+                        <label>리뷰 번호</label>
+                        <input class="form-control" name='revBno' value='${review.revBno}' readonly>
                     </div>
 
                     <div class="form-group">
-                        <label>Title</label>
-                        <input class="form-control" name='title' value='${board.title}'>
+                        <label>음식점 이름</label>
+                        <input class="form-control" name='restNo' value='${restaurant.restName}' readonly>
                     </div>
 
                     <div class="form-group">
-                        <label>Text area</label>
-                        <textarea class="form-control" rows="5" name='content'>${board.content}</textarea>
+                        <label>리뷰 내용</label>
+                        <textarea class="form-control" rows="5" name='revContent'>${review.revContent}</textarea>
+                    </div>
+
+                    <!-- 리뷰 평점 api생성하기 -->
+                    <div class="form-group">
+                        <label>리뷰 평점</label> 
+                        <input class="form-control" name='restStar' value="${review.restStar}">
                     </div>
 
                     <div class="form-group">
-                        <label>Writer</label>
-                        <input class="form-control" name='writer' value='${board.writer}' readonly>
+                        <label>회원</label>
+                        <input class="form-control" name='userId' value='${review.userId}' readonly>
                     </div>
 
-                    <div class="form-group">
-                        <label>RegDate</label>
-                        <input class="form-control" name='regDate'
-                            value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.regDate}" />' readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Update Date</label>
-                        <input class="form-control" name='updateDate'
-                            value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.updateDate}" />' readonly>
-                    </div>
-
-                    <!-- form에서 다른 URL로 파라미터를 넘기려면 name 속성을 활용해야 함 -->
                     <input type="hidden" name="page" value="${pageInfo.page}">
                     <input type="hidden" name="type" value="${pageInfo.type}">
                     <input type="hidden" name="keyword" value="${pageInfo.keyword}">
 
                     <div class="btn-group">
-                        <button type="submit" data-oper='modify' class="btn btn-default">수정</button>
-                        <button type="button" data-oper='remove' class="btn btn-danger">삭제</button>
-                        <button type="button" data-oper='list' class="btn btn-info">목록</button>
+                        <button type="submit" data-oper='rev_modify' class="btn btn-default">수정</button>
+                        <button type="button" data-oper='rev_remove' class="btn btn-danger">삭제</button>
+                        <button type="button" data-oper='rev_list' class="btn btn-info">목록</button>
                     </div>
                 </form>
 
@@ -86,13 +79,11 @@
 
         const $actionForm = document.querySelector('form[role=form]')
 
-        if(oper === 'list'){
-            //form의 action /board/list로 변경, method를 get으로 
-            $actionForm.setAttribute('action','/board/list');
+        if(oper === 'rev_list'){
+            $actionForm.setAttribute('action','/review/rev_list');
             $actionForm.setAttribute('method','get');
-        }else if(oper === 'remove'){
-            //form의 action /board/remove로 변경
-            $actionForm.setAttribute('action','/board/remove');
+        }else if(oper === 'rev_remove'){
+            $actionForm.setAttribute('action','/review/rev_remove');
         }
 
         //form을 submit

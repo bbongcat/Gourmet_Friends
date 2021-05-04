@@ -8,37 +8,109 @@
         <result property="revBno" column="rev_bno"/>
         <result property="userId" column="user_id"/>
         <result property="restNo" column="rest_no"/>
-        <result property="revContent" column="revContent"/>
+        <result property="revContent" column="rev_content"/>
         <result property="revStar" column="rev_star"/>
-        <result property="revPhoto" column="revPhoto"/>
+        <result property="revPhoto" column="rev_photo"/>
         <result property="reportCnt" column="report_cnt"/>
         <result property="revReplyCnt" column="rev_reply_cnt"/>
     </resultMap>
 
-    <select id="getList" resultMap="reviewMap">
+    <select id="revGetList" resultMap="reviewMap">
         SELECT * FROM review
         WHERE rev_bno > 0
         ORDER BY rev_bno DESC
     </select>
 
     <!-- 페이징 처리 -->
-    <!-- 총 페이지 수 -->
-    <!-- 음식점 코드번호로 게시물 검색 기능 -->
-    <!-- 음식점 코드번호로 검색 게시물 조회 -->
-    <!-- 목록 조회 통합 검색(음식점 코드, 회원id)-->
+    <select id="revGetListWithPaging" resultMap="reviewMap">
+        SELECT rev_bno,user_id,rest_no,rev_star,rev_content
+        FROM review
+        ORDER BY rev_bno DESC
+        LIMIT #{startIndex},#{amount}
+    </select>
 
-    <select id="findByBno" resultMap="reviewMap">
+    <!-- 총 페이지 수 -->
+    <select id="revGetTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM review
+    </select>
+
+    <!-- 음식점 코드번호로 게시물 검색 기능 -->
+    <select id="revGetListByRestNo" resultMap="reviewMap">
+        SELECT rev_bno,user_id,rest_no,rev_star,rev_content
+        FROM review
+        WHERE rest_no = #{restNo}
+    </select>
+
+    <!-- 음식점 코드번호로 검색 게시물 조회 -->
+    <select id="revGetTotalCountByRestNo" resultType="int">
+        SELECT COUNT(*)
+        FROM review
+        WHERE rest_no = #{restNo}
+    </select>
+
+    <!-- 목록 조회 통합 검색(음식점 코드, 회원id)-->
+    <select id="revGetSearchList" resultMap="reviewMap">
+        <![CDATA[
+            SELECT rev_bno,user_id,rest_no,rev_content,rev_reply_cnt
+            FROM review
+            WHERE rest_no
+        ]]>
+            <if test="type == 'restNo'">
+                rest_no = #{restNo} AND
+            </if>
+            <if test="type == 'revContent'">
+                rev_content LIKE CONCAT('%',#{keyword},'%') AND
+            </if>
+            <if test="type == 'userId'">
+                uesr_id LIKE CONCAT('%',#{keyword},'%')
+            </if>
+        <![CDATA[
+            ORDER BY rev_bno DESC
+            LIMIT #{startIndex}, #{amount}
+        ]]>
+    </select>
+
+    <select id="revGetSearchTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM review
+        <if test="type == 'restNo'">
+            rest_no = #{restNo}
+        </if>
+        <if test="type == 'revContent'">
+            rev_content LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'userId'">
+            uesr_id LIKE CONCAT('%',#{keyword},'%')
+        </if>
+    </select>
+
+    <select id="revFindByBno" resultMap="reviewMap">
         SELECT * FROM review
         WHERE rev_bno = #{revBno}
     </select>
 
-    <insert id="write">
+    <insert id="revWrite">
         INSERT INTO review
             (rev_bno,user_id,rest_no,rev_star,rev_content)
         VALUE(rev_bno,#{userId},#{restNo},#{revStar},#{revContent})
     </insert>
 
-    <update id="update">
+    <!-- 포토 첨부 처리 -->
+    <select id="addRevPhoto">
+        INSERT INTO photo_upload
+        (rev_photo,rev_bno)
+        VALUES (#{revPhoto},rev_bno)
+    </select>
+    
+    <!-- 포토명 조회 -->
+    <select id="findRevPhoto" resultType="string">
+        SELECT rev_photo
+        FROM photo_upload
+        WHERE rev_bno = #{revBno}
+    </select>
+
+    <update id="revUpdate">
         UPDATE review
         SET
             user_id = #{userId},
@@ -48,15 +120,22 @@
         WHERE rev_bno = #{revBno}
     </update>
 
-    <delete id="delete">
-        DELETE FROM reviw
+    <delete id="revDelete">
+        DELETE FROM review
         WHERE rev_bno = #{revBno};
     </delete>
 
-    <!-- 댓글 수 증가 -->
-    <update id="increaseReplyCount">
+    <!-- 리뷰 댓글 수 증가 -->
+    <update id="revIncreaseReplyCount">
         UPDATE review
         SET rev_reply_cnt(SELECT COUNT(*) FROM rev_reply WHERE rev_bno = #{revBno})
+        WHERE rev_bno = #{revBno}
+    </update>
+
+    <!-- 리뷰 신고 수 증가 -->
+    <update id="revIncreaseReportCount">
+        UPDATE review
+        SET report_cnt(SELECT COUNT(*) FROM report WHERE rev_bno = #{revBno})
         WHERE rev_bno = #{revBno}
     </update>
 

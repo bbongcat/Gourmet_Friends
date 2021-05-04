@@ -5,10 +5,44 @@
 <mapper namespace="com.gourmetfriends.gourmet_friends_prj.rev_reply.mapper.RevReplyMapper">
 
     <resultMap id="revReplyMap" type="com.gourmetfriends.gourmet_friends_prj.rev_reply.domain.RevReply">
-        <result property="revRno" column="rev_bno"/>
+        <result property="revRno" column="rev_rno"/>
         <result property="revBno" column="rev_bno"/>
         <result property="userId" column="user_id"/>
         <result property="revReply" column="rev_reply"/>
         <result property="revDate" column="rev_date"/>
     </resultMap>
+    
+    <insert id="revInsert">
+        INSERT INTO rev_reply (rev_rno, rev_bno, rev_reply, user_id)
+        VALUES (rev_rno, #{revBno}, #{revReply}, #{userId})
+    </insert>
+
+    <select id="revRead" resultMap="revReplyMap">
+        SELECT * FROM rev_reply
+        WHERE rev_rno = #{revRno}
+    </select>
+
+    <delete id="revDelete">
+        DELETE FROM rev_reply
+        WHERE rev_rno = #{revRno}
+    </delete>
+
+    <update id="revUpdate">
+        UPDATE rev_reply
+        SET rev_reply = #{revReply}
+        WHERE rev_rno = #{revRno}
+    </update>
+
+    <select id="revGetCount" resultType="int">
+        SELECT COUNT(*)
+        FROM rev_reply
+        WHERE rev_bno = #{revBno}
+    </select>
+
+    <select id="revGetList" resultMap="revReplyMap">
+        SELECT rev_rno, rev_bno, rev_reply, user_id, rev_date
+        FROM rev_reply
+        WHERE rev_bno = #{revBno} AND rev_rno > 0
+        LIMIT #{cri.startIndex}, #{cri.amount}
+    </select>
 </mapper>

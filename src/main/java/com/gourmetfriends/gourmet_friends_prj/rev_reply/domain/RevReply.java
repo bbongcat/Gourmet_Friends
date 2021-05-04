@@ -8,8 +8,8 @@ import java.util.Date;
 
 @Getter @Setter @ToString
 public class RevReply {
-    private int revRno;//리뷰 댓글 번호
-    private int revBno;//원본 리뷰 번호
+    private Long revRno;//리뷰 댓글 번호
+    private Long revBno;//원본 리뷰 번호
     private String userId;//회원 ID
     private String revReply;//리뷰 댓글 내용
     private Date revDate;//리뷰 댓글 시간

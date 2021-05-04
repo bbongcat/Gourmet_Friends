@@ -10,41 +10,46 @@ import java.util.List;
 public interface ReviewMapper {
 
     //글 전체 목록 조회
-    List<Review> getList();
+    List<Review> revGetList();
 
     //글 목록 조회(페이징처리)
-    List<Review> getListWithPaging(Criteria cri);
+    List<Review> revGetListWithPaging(Criteria cri);
 
     //총 리뷰 수 조회
-    int getTotalCount();
+    int revGetTotalCount();
 
     //음식점 코드로 조회
-    List<Review> getListByRestNo(Criteria cri);
+    List<Review> revGetListByRestNo(Review review);
     //음식점 코드로 검색 게시물 조회
-    int getTotalCountByRestNo(Criteria cri);
+    int revGetTotalCountByRestNo(Review review);
 
     //검색 처리 통합 조회(음식점 코드, 회원id)
-    List<Review> getSearchList(Criteria cri);
-    int getSearchTotal(Criteria cri);
+    List<Review> revGetSearchList(Review review,Criteria cri);
+    int revGetSearchTotal(Review review,Criteria cri);
 
     //글 상세 조회
-    Review findByBno(Long revBno);
+    Review revFindByBno(Long revBno);
 
     //글 상세조회시 첨부파일명들 조회
     List<String> findRevPhoto(Long revBno);
 
     //글 쓰기 기능
-    void write(Review review);
+    void revWrite(Review review);
 
     //사진 첨부 기능
     void addRevPhoto(String revPhoto);
 
     //글 수정 기능
-    int update(Review review);
+    int revUpdate(Review review);
 
     //글 삭제 기능
-    int delete(Long revBno);
+    int revDelete(Long revBno);
 
     //리뷰 댓글 수 증가
-    void increaseReplyCount(Long revBno);
+    void revIncreaseReplyCount(Long revBno);
+
+    //리뷰 신고 수 증가
+    void revIncreaseReportCount(Long revBno);
+
+
 }

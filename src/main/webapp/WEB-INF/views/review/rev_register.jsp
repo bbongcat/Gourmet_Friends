@@ -4,9 +4,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
+<style>
+  .fileDrop {
+      width: 800px;
+      height: 400px;
+      border: 1px dashed gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+  }
+  .uploaded-list{
+      display: flex;
+  }
+  .img-sizing{
+      display: block;
+      width: 100px;
+      height: 100px;
+  }
+</style>
+
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">Board Register</h1>
+    <h1 class="page-header">Review Register</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -16,30 +36,34 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
 
-      <div class="panel-heading">Board Register</div>
+      <div class="panel-heading">Review Register</div>
       <!-- /.panel-heading -->
       <div class="panel-body">
 
-        <form role="form" action="/board/register" method="post">
+        <form role="form" action="/review/register" method="post">
           <div class="form-group">
-            <label>Title</label> <input class="form-control" name='title'>
+            <label>음식점 번호</label> <input class="form-control" name='restNo' value="${restaurant.restName}">
           </div>
 
           <div class="form-group">
-            <label>Text area</label>
-            <textarea class="form-control" rows="5" name='content'></textarea>
+            <label>리뷰 내용</label>
+            <textarea class="form-control" rows="5" name='revContent'></textarea>
+          </div>
+
+          <!-- 리뷰 평점 api생성하기 -->
+          <div class="form-group">
+            <label>리뷰 평점</label> <input class="form-control" name='restStar'>
           </div>
 
           <div class="form-group">
-            <label>Writer</label> <input class="form-control" name='writer'>
+            <label>회원ID</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
           </div>
 
           <!-- 첨부파일 드래그 앤 드롭 영역 -->
           <div class="form-group">
-            <form action="/upload" method="post" enctype="multipart/form-data">
-              <input type="file" name="file" multiple>
-              <button type="submit">업로드</button>
-            </form>
+            <div class="fileDrop">
+              <span>사진을 드래그 하세요.</span>
+            </div>
             <div class="uploadDiv">
               <input type="file" name="files" id="ajax-file" style="display: none;">
             </div>
@@ -47,8 +71,7 @@
             <div class="uploaded-list"></div>
           </div>
           
-          <button type="submit" class="btn btn-default">Submit
-            Button</button>
+          <button type="submit" class="btn btn-default">Submit Button</button>
           <button type="reset" class="btn btn-default">Reset Button</button>
         </form>
 
@@ -64,21 +87,26 @@
 <script>
   $(document).ready(function() {
 
-     //이미지 파일인지 확인하는 함수
+     const $dropBox = $('.fileDrop');
+     
+     $dropBox.on('dragover dragenter',e => {
+         e.preventDefault();
+         $dropBox.css('border-color','red').css('background','lightgray');
+     });
+     $dropBox.on('dragleave',e => {
+         e.preventDefault();
+         $dropBox.css('border-color','gray').css('background','transparent');
+     });
+
      function isImageFile(originFileName){
-         //정규 표현식
          const pattern = /jpg$|gif$|png$/i;
          return originFileName.match(pattern);
      }
       
 
-     //확장자 판별 후 태그처리 함수 
      function checkExtType(fileName){
-         //fileName:/2021/04/23 ~~~~~~.확장자
-         //sfdagsgdggdsgds_haha.docx -> haha.docx
          let originFileName = fileName.substring(fileName.indexOf("_") + 1);
 
-         //input과 이미지를 감싸는 li
          const $li = document.createElement('li');
          const $input = document.createElement('input');
          $input.setAttribute('type','hidden');
@@ -86,7 +114,6 @@
          $input.setAttribute('value',fileName);
          $li.appendChild($input);
 
-         //이미지인지 확인
          if(isImageFile(originFileName)){
              originFileName = fileName.substring(fileName.indexOf("_") + 1);
 
@@ -100,15 +127,40 @@
          }
      }
 
-     //드롭한 파일의 형식에 따라 태그를 보여주는 함수 
      function showFileData(fileNameList){
          for(let fileName of fileNameList){
 
-             //이미지인지 이미지가 아닌지 구분하여 따로 처리 
              checkExtType(fileName);
 
          }
      }
+
+     $dropBox.on('drop',e => {
+         e.preventDefault();
+
+         const files = e.originalEvent.dataTransfer.files;
+
+         const $fileInput = $('#ajax-file');
+         $fileInput.prop('files',files);
+
+         const formData = new FormData();
+         const sendFiles = $fileInput[0].files;
+
+         for(let file of sendFiles){
+             formData.append('files',file);
+         }
+         
+         const reqInfo = {
+             method: 'POST',
+             body: formData 
+         }
+         fetch('/ajaxUpload',reqInfo)
+             .then(res => res.json())
+             .then(fileNameList => {
+                 showFileData(fileNameList);
+             });
+
+     });
   });
 </script>
 <%@include file="../includes/footer.jsp"%>

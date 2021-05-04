@@ -7,7 +7,7 @@
 <%@include file="../includes/header.jsp"%>
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">Tables</h1>
+      <h1 class="page-header">Review Tables</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -17,8 +17,8 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-            Board List Page
-            <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">게시글 등록</button>
+            Review List Page
+            <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">리뷰 등록</button>
          </div>
 
          <!-- /.panel-heading -->
@@ -26,27 +26,27 @@
             <table class="table table-striped table-bordered table-hover">
 
                     <tr>
-                        <th>#번호</th>
+                        <th>#리뷰 번호</th>
                         <th>음식점 번호</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>수정일</th>
+                        <th>리뷰 내용</th>
+                        <th>리뷰 평점</th>
+                        <th>회원</th>
                     </tr>
 
 
-               <c:forEach var="board" items="${list}">
+               <c:forEach var="review" items="${rev_list}">
                   <tr>
-                     <td>${board.bno}</td>
+                     <td>${review.revBno}</td>
 
                      <td>
-                        <a class='move' href="/board/get${pageInfo.makeParam(pageInfo.cri.page)}&bno=${board.bno}">
-                            ${board.title} [${board.replyCnt}]
+                        <a class='move' href="/review/rev_get${pageInfo.makeParam(pageInfo.cri.page)}&bno=${review.revBno}">
+                            ${review.restNo} [${review.revReplyCnt}]
                         </a>
                      </td>
 
-                     <td>${board.writer}</td>
-                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${board.regDate}" /></td>
-                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${board.updateDate}" /></td>
+                     <td>${review.revContent}</td>
+                     <td>${review.restStar}</td>
+                     <td>${review.userId}</td>
                   </tr>
                </c:forEach>
             </table>
@@ -55,13 +55,12 @@
             <div class='row'>
                 <div class="col-lg-12">
  
-                   <form id='searchForm' action="/board/list" method='get'>
+                   <form id='searchForm' action="/review/rev_list" method='get'>
                     <select name='type'>
                         <option value="">--</option>
-                        <option value="title" ${pageInfo.cri.type == 'title' ? 'selected' : ''}>제목</option>
-                        <option value="content" ${pageInfo.cri.type == 'content' ? 'selected' : ''}>내용</option>
-                        <option value="writer" ${pageInfo.cri.type == 'writer' ? 'selected' : ''}>작성자</option>
-                        <option value="titleContent" ${pageInfo.cri.type == 'titleContent' ? 'selected' : ''}>제목 or 내용</option>   
+                        <option value="restNo" ${pageInfo.cri.type == 'restNo' ? 'selected' : ''}>음식점 번호</option>
+                        <option value="revContent" ${pageInfo.cri.type == 'revContent' ? 'selected' : ''}>리뷰 내용</option>
+                        <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
                      </select>  
                       <input type='text' name='keyword' value="${pageInfo.cri.keyword}" /> 
                          
@@ -76,17 +75,17 @@
                 <ul class="pagination">
                     <c:if test = "${pageInfo.prev}">
                         <li class="paginate_button previous">
-                            <a href="/board/list${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
+                            <a href="/review/rev_list${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
                         </li>
                     </c:if>
                         
                     <c:forEach var= "num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                        <li class="paginate_button"><a href="/board/list${pageInfo.makeParam(num)}">${num}</a></li>
+                        <li class="paginate_button"><a href="/review/rev_list${pageInfo.makeParam(num)}">${num}</a></li>
                     </c:forEach>
 
                     <c:if test = "${pageInfo.next}">
                         <li class="paginate_button next">
-                            <a href="/board/list${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
+                            <a href="/review/rev_list${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
                         </li>
                     </c:if>
 
@@ -127,7 +126,7 @@ $(document).ready(function() {
     //게시글 등록 버튼 이벤트
     document.getElementById('regBtn').addEventListener('click', e => {
         //링크 이동
-        location.href='/board/register';
+        location.href='/review/rev_register';
     });
 
     const resultMessage = '${msg}';
@@ -163,8 +162,7 @@ $(document).ready(function() {
             }
         }
 
-       
-
+    
     }
 
     (function () {

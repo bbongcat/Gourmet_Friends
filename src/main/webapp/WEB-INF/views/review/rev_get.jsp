@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">Board Read</h1>
+    <h1 class="page-header">Review Read</h1>
   </div>
   <!-- /.col-lg-12 -->
 </div>
@@ -17,34 +17,35 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
 
-      <div class="panel-heading">Board Read Page</div>
+      <div class="panel-heading">Review Read Page</div>
       <!-- /.panel-heading -->
       <div class="panel-body">
 
         <div class="form-group">
-          <label>Bno</label> <input class="form-control" name='bno' value="${board.bno}" readonly>
+          <label>리뷰 번호</label> <input class="form-control" name='revBno' value="${review.revBno}" readonly>
         </div>
 
         <div class="form-group">
-          <label>Title</label> <input class="form-control" name='restNo' value="${board.restNo}" readonly>
+          <label>음식점 번호</label> <input class="form-control" name='restNo' value="${review.restNo}" readonly>
         </div>
 
         <div class="form-group">
-          <label>Text area</label>
-          <textarea class="form-control" rows="3" name='content' readonly>${board.content}</textarea>
+          <label>리뷰 내용</label>
+          <textarea class="form-control" rows="3" name='revContent' readonly>${review.revContent}</textarea>
         </div>
 
         <div class="form-group">
-          <label>Writer</label> <input class="form-control" name='writer' value="${board.writer}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${review.userId}" readonly>
         </div>
 
         <div class="form-group">
           <div class="uploaded-list"></div>
         </div>
 
-
-        <button id='modify-btn' class="btn btn-default">수정</button>
-        <button id='list-btn' class="btn btn-info">목록</button>
+        <c:if test="${loginUser.userNick == review.userId}">
+          <button id='modify-btn' class="btn btn-default">수정</button>
+        </c:if>
+          <button id='list-btn' class="btn btn-info">목록</button>
 
 
       </div>
@@ -67,8 +68,11 @@
 
 
       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> 댓글 (<span class="replyCnt"></span>)
-        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록</button>
+        <i class="fa fa-comments fa-fw"></i> 댓글 (<span class="revReplyCnt"></span>)
+
+        <c:if test="${loginUser != null}">
+          <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록</button>
+        </c:if>
       </div>
 
 
@@ -76,6 +80,7 @@
       <div class="panel-body">
 
         <ul class="chat">
+          <!-- 실제 댓글이 들어갈 부분 -->
         </ul>
         <!-- ./ end ul -->
       </div>
@@ -98,20 +103,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+        <h4 class="modal-title" id="myModalLabel">리뷰 댓글 등록</h4>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Reply</label>
-          <input class="form-control" name='reply' value='New Reply!!!!'>
+          <label>리뷰 댓글 내용</label>
+          <input class="form-control" name='revReply' value='NEW 댓글'>
         </div>
         <div class="form-group">
-          <label>Replyer</label>
-          <input class="form-control" name='replyer' value='replyer'>
+          <label>회원</label>
+          <input class="form-control" name='userId' value='${loginUser.userNick}'>
         </div>
         <div class="form-group">
-          <label>Reply Date</label>
-          <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
+          <label>리뷰 댓글 시간</label>
+          <input class="form-control" name='revDate' value='2018-01-01 13:13'>
         </div>
 
       </div>
@@ -133,23 +138,18 @@
 
 <!-- 댓글 관련 스크립트 -->
 <script>
-  let bno = '${board.bno}'; //원본 글 번호
+  let bno = '${review.revBno}'; 
 
-  //현재 댓글 페이지 정보
   let curPageNum = 1;
 
-  //날짜 포맷 변환 함수
   function formatDate(datetime) {
-    //문자열 날짜 데이터를 날짜 객체로 변환 
     const dateObj = new Date(datetime);
-    //날짜 객체를 통해 각 날짜 정보 얻기
     let year = dateObj.getFullYear();
     let month = dateObj.getMonth() + 1;
     let day = dateObj.getDate();
     let hour = dateObj.getHours();
     let minute = dateObj.getMinutes();
 
-    //오전 오후 체크 
     let ampm = '';
     if (hour < 12 && hour >= 6) {
       ampm = '오전';
@@ -164,7 +164,6 @@
     } else {
       ampm = '새벽';
     }
-
     (month < 10) ? month = '0' + month: month;
     (day < 10) ? day = '0' + day: day;
     (hour < 10) ? hour = '0' + hour: hour;
@@ -173,9 +172,7 @@
     return year + "-" + month + "-" + day + "-" + ampm + " " + hour + ":" + minute;
   }
 
-  //댓글 페이지 목록을 만들어주는 함수
   function showReplyPage(count) {
-
     let pageNum = curPageNum;
     const $pageFooter = document.querySelector('.panel-footer');
 
@@ -223,7 +220,6 @@
     });
   }
 
-  //댓글 목록 DOM을 만드는 함수
   function makeReplyListDOM({
     replies,
     count
@@ -234,34 +230,30 @@
     let data = '';
 
     for (let reply of replies) {
-      data += '<li class="left clearfix" data-rno = "' + reply.rno + '">';
+      data += '<li class="left clearfix" data-rno = "' + revReply.revRno + '">';
       data += '   <div>';
       data += '     <div class="header">';
-      data += '         <strong class="primary-font">' + reply.replyer + '</strong>';
-      data += '     <small class="pull-right text-muted">' + formatDate(reply.replyDate) + '</small>';
+      data += '         <strong class="primary-font">' + revReply.userId + '</strong>';
+      data += '     <small class="pull-right text-muted">' + formatDate(revReply.revDate) + '</small>';
       data += '    </div>';
-      data += '    <p>' + reply.reply + '</p>';
+      data += '    <p>' + revReply.revReply + '</p>';
       data += '   </div>';
       data += '</li>';
     }
     document.querySelector('.chat').innerHTML = data;
-    //페이지 화면을 그려주는 함수
     showReplyPage(count);
   }
 
 
-  //댓글 목록을 비동기로 불러오는 함수
   function showReplyList(page) {
-    fetch('/api/v1/replies/' + bno + '/' + page)
+    fetch('/api/v1/rev_replies/' + revBno + '/' + page)
       .then(res => res.json())
       .then(replyMap => {
-        // console.log(replyList);
         makeReplyListDOM(replyMap);
-        document.querySelector('.replyCnt').textContent = replyMap.count;
+        document.querySelector('.revReplyCnt').textContent = replyMap.count;
       });
   }
 
-  //JQuery영역
   $(document).ready(function () {
 
     const $modal = $('#replyModal');
@@ -270,7 +262,7 @@
 
       $modal.find('input').val('');
 
-      $modal.find('input[name=replyDate]').parent().hide();
+      $modal.find('input[name=revDate]').parent().hide();
 
       $modal.find('button[id != modalRegisterBtn]').hide();
 
@@ -280,19 +272,16 @@
 
     });
 
-    //모달 close이벤트
     $('#modalCloseBtn').on('click', e => {
       $modal.modal('hide');
     });
 
-    //게시물 등록 서버요청 비동기 처리 이벤트 
     $('#modalRegisterBtn').on('click', e => {
 
-      //서버로 전송할 데이터 - 디버깅 
       const replyObj = {
-        bno: bno,
-        reply: $('input[name=reply]').val(),
-        replyer: $('input[name=replyer]').val()
+        bno: revBno,
+        reply: $('input[name=revReply]').val(),
+        replyer: $('input[name=userId]').val()
       };
 
       console.log(replyObj);
@@ -304,7 +293,7 @@
         },
         body: JSON.stringify(replyObj)
       };
-      fetch('/api/v1/replies/', reqInfo)
+      fetch('/api/v1/rev_replies/', reqInfo)
         .then(res => res.text())
         .then(msg => {
           if (msg === 'regSuccess') {
@@ -318,39 +307,32 @@
 
     });
 
-    //댓글 li를 눌렀을 때 댓글 상세보기 모달이 뜨는 이벤트
     $('ul.chat').on('click', 'li', e => {
-      // console.log(e.currentTarget);
       $modal.find('button[id=modalRegisterBtn]').hide();
       $modal.find('button[id != modalRegisterBtn]').show();
-      $modal.find('input[name=replyDate]').parent().show();
+      $modal.find('input[name=revDate]').parent().show();
 
-      //서버에 댓글 개별 조회 비동기 요청
       const rno = e.currentTarget.dataset.rno;
 
-      fetch('/api/v1/replies/' + rno)
+      fetch('/api/v1/rev_replies/' + revRno)
         .then(res => res.json())
         .then(reply => {
-          // console.log(reply);
-          $('input[name=reply]').val(reply.reply);
-          $('input[name=replyer]').val(reply.replyer);
-          $('input[name=replyDate]').val(formatDate(reply.replyDate));
-          $('input[name=replyDate]').attr('redaonly', 'readonly');
+          $('input[name=revReply]').val(revReply.revReply);
+          $('input[name=userId]').val(revReply.userId);
+          $('input[name=revDate]').val(formatDate(revReply.revDate));
+          $('input[name=revDate]').attr('redaonly', 'readonly');
 
-          //모달에다가 rno를 붙여놓자 
-          $modal.data('rno', rno);
+          $modal.data('revRno', revRno);
         });
 
       $modal.modal('show');
     });
 
-    //댓글 수정 버튼 클릭 이벤트 
     $('#modalModBtn').on('click', e => {
       const modDataObj = {
-        rno: $modal.data('rno'),
-        reply: $('input[name=reply]').val()
+        rno: $modal.data('revRno'),
+        reply: $('input[name=revReply]').val()
       }
-      // console.log(modDataObj);
       const reqInfo = {
         method: 'PUT',
         headers: {
@@ -359,7 +341,7 @@
         body: JSON.stringify(modDataObj)
       }
 
-      fetch('/api/v1/replies/' + modDataObj.rno, reqInfo)
+      fetch('/api/v1/rev_replies/' + modDataObj.revRno, reqInfo)
         .then(res => res.text())
         .then(msg => {
           if (msg === 'modSuccess') {
@@ -371,15 +353,12 @@
         });
     });
 
-    //댓글 삭제 버튼 클릭 이벤트 
     $('#modalRemoveBtn').on('click', e => {
       const reqInfo = {
         method: 'DELETE'
       };
 
-      // const url = '/api/v1/replies/'+bno + '/'+ $modal.data('rno');
-      // console.log(url);
-      fetch('/api/v1/replies/' + bno + '/' + $modal.data('rno'), reqInfo)
+      fetch('/api/v1/rev_replies/' + revBno + '/' + $modal.data('revRno'), reqInfo)
         .then(res => res.text())
         .then(msg => {
           if (msg === 'delSuccess') {
@@ -392,15 +371,12 @@
     });
 
     function isImageFile(originFileName) {
-      //정규 표현식
       const pattern = /jpg$|gif$|png$/i;
       return originFileName.match(pattern);
     }
 
     function checkExtType(fileName) {
-
       let originFileName = fileName.substring(fileName.indexOf("_") + 1);
-
 
       const $li = document.createElement('li');
       const $input = document.createElement('input');
@@ -420,6 +396,7 @@
         $li.appendChild($img);
         $('.uploaded-list').append($li);
       }
+
     }
 
     function showFileData(fileNameList) {
@@ -432,9 +409,8 @@
     }
 
 
-    //파일 목록 불러오기
     function showFileList() {
-      fetch('/board/file/' + bno)
+      fetch('/review/photo/' + revBno)
         .then(res => res.json())
         .then(fileNameList => {
           showFileData(fileNameList);
@@ -459,13 +435,13 @@
 
     //목록 버튼 이벤트
     document.getElementById('list-btn').addEventListener('click', e => {
-      location.href = '/board/list?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}';
+      location.href = '/review/rev_list?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}';
     });
 
     //수정 버튼 이벤트
     document.getElementById('modify-btn').addEventListener('click', e => {
       location.href =
-        '/board/modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&bno=${board.bno}';
+        '/review/rev_modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&revBno=${review.revBno}';
     });
 
   });
