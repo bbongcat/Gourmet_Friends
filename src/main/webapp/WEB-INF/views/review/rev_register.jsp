@@ -5,6 +5,7 @@
 <%@include file="../includes/header.jsp"%>
 
 <style>
+
   .fileDrop {
       width: 800px;
       height: 400px;
@@ -22,6 +23,46 @@
       width: 100px;
       height: 100px;
   }
+  .rating .rate-radio {
+    position: relative;
+    display: inline-block;
+    z-index: 20;
+    opacity: 0.001;
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: top;
+    display: none;
+  }
+  .rating .rate-radio+label{
+    position: relative;
+    display: inline-block;
+    margin-left: -4px;
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    background-image: url('/views/starrate.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+  .rating .rate-radio:checked+label {
+      background-color: #ff8;
+  }
+  /* .warning-msg {
+      display: block;
+      position: relative;
+      text-align: center;
+      background: #ffffff;
+      line-height: 26px;
+      width: 100%;
+      color: red;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #e0e0e0;
+   } */
 </style>
 
 <div class="row">
@@ -50,9 +91,21 @@
             <textarea class="form-control" rows="5" name='revContent'></textarea>
           </div>
 
-          <!-- 리뷰 평점 api생성하기 -->
-          <div class="form-group">
-            <label>리뷰 평점</label> <input class="form-control" name='restStar'>
+          <!-- 별정 기능 구현 -->
+          <div class="review-rating">
+            <div class="warning-msg">별점을 선택해주세요</div>
+            <div class="rating">
+              <input type="checkbox" name="revStar" id="rating1" value="${review.revStar}" class="rate-radio" title="1점">
+              <label for="rating1"></label>
+              <input type="checkbox" name="revStar" id="rating2" value="${review.revStar}" class="rate-radio" title="2점">
+              <label for="rating2"></label>
+              <input type="checkbox" name="revStar" id="rating3" value="${review.revStar}" class="rate-radio" title="3점">
+              <label for="rating3"></label>
+              <input type="checkbox" name="revStar" id="rating4" value="${review.revStar}" class="rate-radio" title="4점">
+              <label for="rating4"></label>
+              <input type="checkbox" name="revStar" id="rating5" value="${review.revStar}" class="rate-radio" title="5점">
+              <label for="rating5"></label>
+            </div>
           </div>
 
           <div class="form-group">
@@ -162,5 +215,33 @@
 
      });
   });
+
+  //별점 마킹 모듈 프로토타입으로 생성
+function Rating(){};
+Rating.prototype.rate = 0;
+Rating.prototype.setRate = function(newrate){
+    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+    this.rate = newrate;
+    let items = document.querySelectorAll('.rate-radio');
+    items.forEach(function(item, idx){
+        if(idx < newrate){
+            item.checked = true;
+        }else{
+            item.checked = false;
+        }
+    });
+}
+let rating = new Rating();//별점 인스턴스 생성
+
+document.addEventListener('DOMContentLoaded', function(){
+    //별점선택 이벤트 리스너
+    document.querySelector('.rating').addEventListener('click',function(e){
+        let elem = e.target;
+        // console.log(elem);
+        if(elem.classList.contains('.rate-radio')){
+            rating.setRate(parseInt(elem.value));
+        }
+    })
+});
 </script>
 <%@include file="../includes/footer.jsp"%>

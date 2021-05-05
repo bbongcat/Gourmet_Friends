@@ -19,13 +19,13 @@ public interface ReviewMapper {
     int revGetTotalCount();
 
     //음식점 코드로 조회
-    List<Review> revGetListByRestNo(Review review);
+    List<Review> revGetListByRestNo(Criteria cri);
     //음식점 코드로 검색 게시물 조회
-    int revGetTotalCountByRestNo(Review review);
+    int revGetTotalCountByRestNo(Criteria cri);
 
     //검색 처리 통합 조회(음식점 코드, 회원id)
-    List<Review> revGetSearchList(Review review,Criteria cri);
-    int revGetSearchTotal(Review review,Criteria cri);
+    List<Review> revGetSearchList(Criteria cri);
+    int revGetSearchTotal(Criteria cri);
 
     //글 상세 조회
     Review revFindByBno(Long revBno);

@@ -102,11 +102,10 @@ class ReviewMapperTest {
     @Test
     @DisplayName("음식점 코드번호로 검색 수행")
     void revSearchByRestNoTest(){
-        Review restReview = new Review();
+        Criteria cri = new Criteria();
+        cri.setKeyword("1");
 
-        restReview.setRestNo(1L);
-
-        List<Review> reviewList = reviewMapper.revGetListByRestNo(restReview);
+        List<Review> reviewList = reviewMapper.revGetListByRestNo(cri);
         for (Review review : reviewList) {
             System.out.println(review);
         }

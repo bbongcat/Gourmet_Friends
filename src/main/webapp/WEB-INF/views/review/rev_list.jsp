@@ -39,13 +39,13 @@
                      <td>${review.revBno}</td>
 
                      <td>
-                        <a class='move' href="/review/rev_get${pageInfo.makeParam(pageInfo.cri.page)}&bno=${review.revBno}">
+                        <a class='move' href="/review/rev_get${pageInfo.makeParam(pageInfo.cri.page)}&revBno=${review.revBno}">
                             ${review.restNo} [${review.revReplyCnt}]
                         </a>
                      </td>
 
                      <td>${review.revContent}</td>
-                     <td>${review.restStar}</td>
+                     <td>${review.revStar}</td>
                      <td>${review.userId}</td>
                   </tr>
                </c:forEach>
@@ -177,9 +177,6 @@ $(document).ready(function() {
 
 
 </script>
-
-
-
 
 
 <%@include file="../includes/footer.jsp"%>
