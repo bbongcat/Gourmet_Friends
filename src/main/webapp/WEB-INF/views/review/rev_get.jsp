@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-          <label>회원</label> <input class="form-control" name='userId' value="${review.userId}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userNick}" readonly>
         </div>
 
         <div class="form-group">
@@ -72,6 +72,7 @@
 
         <c:if test="${loginUser != null}">
           <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록</button>
+          <button id='addReportBtn' class='btn btn-primary btn-xs pull-right'>신고 하기</button>
         </c:if>
       </div>
 
@@ -97,7 +98,7 @@
 
 
 
-<!-- Modal -->
+<!--review reply Modal -->
 <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -133,8 +134,7 @@
 </div>
 <!-- /.modal -->
 
-<!-- //댓글 영역 끝 -->
-
+<!-- //리뷰 댓글 영역 끝 -->
 
 <!-- 댓글 관련 스크립트 -->
 <script>
@@ -256,6 +256,7 @@
 
   $(document).ready(function () {
 
+    //리뷰 댓글 등록 
     const $modal = $('#replyModal');
 
     document.getElementById('addReplyBtn').addEventListener('click', () => {
@@ -284,8 +285,6 @@
         replyer: $('input[name=userId]').val()
       };
 
-      console.log(replyObj);
-
       const reqInfo = {
         method: 'POST',
         headers: {
@@ -303,9 +302,9 @@
           } else {
             alert('댓글 등록 실패');
           }
-        });
-
+     });
     });
+    
 
     $('ul.chat').on('click', 'li', e => {
       $modal.find('button[id=modalRegisterBtn]').hide();
@@ -446,6 +445,5 @@
 
   });
 </script>
-
 
 <%@include file="../includes/footer.jsp"%>

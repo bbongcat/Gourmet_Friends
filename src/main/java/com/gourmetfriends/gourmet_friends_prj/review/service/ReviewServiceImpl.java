@@ -55,12 +55,12 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public int revGetTotal(Review review, Criteria cri) {
+    public int revGetTotal( Criteria cri) {
         return reviewMapper.revGetSearchTotal(cri);
     }
 
     @Override
-    public List<Review> revSearchList(Review review, Criteria cri) {
+    public List<Review> revSearchList(Criteria cri) {
         return reviewMapper.revGetSearchList(cri);
     }
 

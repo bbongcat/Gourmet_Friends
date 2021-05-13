@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gourmetfriends.gourmet_friends_prj.report.mapper.ReportMapper">
+
+    <resultMap id="reportMap" type="com.gourmetfriends.gourmet_friends_prj.report.domain.Report">
+        <result property="reportNo" column="report_no"/>
+        <result property="revBno" column="rev_bno"/>
+        <result property="userId" column="user_id"/>
+        <result property="reportContent" column="report_content"/>
+        <result property="reportDate" column="report_date"/>
+    </resultMap>
+
+    <select id="reportGetList" resultMap="reportMap">
+        SELECT * FROM report
+        WHERE report_no > 0
+        ORDER BY report_no DESC
+    </select>
+
+    <select id="reportGetListWithPaging" resultMap="reportMap">
+        SELECT * FROM report
+        ORDER BY report_no DESC
+        LIMIT #{startIndex}, #{amount}
+    </select>
+
+    <select id="reportGetTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM report
+    </select>
+
+    <select id="reportFindByNo" resultMap="reportMap">
+        SELECT * FROM report
+        WHERE report_no = #{reportNo}
+    </select>
+
+    <insert id="reportWrite">
+        INSERT INTO report (report_no,report_content,user_id)
+        VALUE(#{reportNo},#{reportContent},#{userId})
+    </insert>
+
+    <delete id="reportDelete">
+        DELETE FROM report
+        WHERE report_no = #{reportNo}
+    </delete>
+</mapper>

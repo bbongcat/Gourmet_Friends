@@ -48,7 +48,7 @@
     <select id="revGetTotalCountByRestNo" resultType="int">
         SELECT COUNT(*)
         FROM review
-        WHERE rest_no LIKE CONCAT('%',#{keyword},'%')
+        WHERE rest_no LIKE CONCAT('%',#{restNo},'%')
     </select>
 
     <!-- 목록 조회 통합 검색(음식점 코드, 회원id)-->
@@ -56,16 +56,15 @@
         <![CDATA[
             SELECT rev_bno,user_id,rest_no,rev_star,rev_content,rev_reply_cnt
             FROM review
-            WHERE rest_no
         ]]>
             <if test="type == 'restNo'">
-                rest_no LIKE CONCAT('%',#{keyword},'%')AND
+               WHERE rest_no LIKE CONCAT('%',#{keyword},'%')
             </if>
             <if test="type == 'revContent'">
-                rev_content LIKE CONCAT('%',#{keyword},'%') AND
+               WHERE rev_content LIKE CONCAT('%',#{keyword},'%')
             </if>
             <if test="type == 'userId'">
-                uesr_id LIKE CONCAT('%',#{keyword},'%')
+               WHERE user_id LIKE CONCAT('%',#{keyword},'%')
             </if>
         <![CDATA[
             ORDER BY rev_bno DESC
@@ -77,13 +76,13 @@
         SELECT COUNT(*)
         FROM review
         <if test="type == 'restNo'">
-            rest_no LIKE CONCAT('%',#{keyword},'%')
+            WHERE rest_no LIKE CONCAT('%',#{keyword},'%')
         </if>
         <if test="type == 'revContent'">
-            rev_content LIKE CONCAT('%',#{keyword},'%')
+            WHERE rev_content LIKE CONCAT('%',#{keyword},'%')
         </if>
         <if test="type == 'userId'">
-            uesr_id LIKE CONCAT('%',#{keyword},'%')
+            WHERE user_id LIKE CONCAT('%',#{keyword},'%')
         </if>
     </select>
 

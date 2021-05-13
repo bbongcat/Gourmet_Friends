@@ -6,7 +6,7 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@Getter @Setter @ToString
+@Setter @Getter @ToString
 public class Report {
 
     private Long reportNo;//리뷰 신고 번호

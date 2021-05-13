@@ -7,7 +7,7 @@
 <%@include file="../includes/header.jsp"%>
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">게시판</h1>
+      <h1 class="page-header">밥친구 게시판</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -17,7 +17,7 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-            foodFriends List Page
+            FoodFriends List Page
             <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">게시글 등록</button>
          </div>
 
@@ -26,7 +26,7 @@
             <table class="table table-striped table-bordered table-hover">
 
                     <tr>
-                        <th>#번호</th>
+                        <th>번호</th>
                         <th>제목</th>
                         <th>회원</th>
                         <th>작성일</th>
@@ -86,7 +86,7 @@
 
                     <c:if test = "${pageInfo.next}">
                         <li class="paginate_button next">
-                            <a href="/foodFriends/ff_list${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
+                            <a href="/food_friends/ff_list${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
                         </li>
                     </c:if>
 

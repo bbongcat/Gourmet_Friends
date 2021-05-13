@@ -24,7 +24,7 @@ class FoodFriendsMapperTest {
     void findAllTest(){
         List<FoodFriends> foodFriendsList = foodFriendsMapper.getList();
 
-        assertTrue(foodFriendsList.size() == 105);
+        assertTrue(foodFriendsList.size() == 308);
 
         for (FoodFriends foodFriends : foodFriendsList) {
             System.out.println(foodFriends);

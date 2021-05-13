@@ -26,8 +26,8 @@ public interface ReviewService {
     List<Review> revGetList(Criteria cri);
 
     //총 리뷰 수 조회
-    int revGetTotal(Review review,Criteria cri);
+    int revGetTotal(Criteria cri);
 
     //리뷰 검색조회 과정
-    List<Review> revSearchList(Review review,Criteria cri);
+    List<Review> revSearchList(Criteria cri);
 }

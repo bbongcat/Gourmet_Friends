@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-          <label>회원ID</label> <input class="form-control" name='userId' value="${foodFriends.userId}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userNick}" readonly>
         </div>
 
         <c:if test="${loginUser.userNick == foodFriends.userId}">
@@ -106,7 +106,7 @@
             <div class="modal-body">
               <div class="form-group">
                 <label>댓글내용</label> 
-                <input class="form-control" name='ffContent' value='New Reply!!!!'>
+                <input class="form-control" name='ffContent' value='New Reply'>
               </div>      
               <div class="form-group">
                 <label>회원ID</label> 

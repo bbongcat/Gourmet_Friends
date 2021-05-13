@@ -26,11 +26,12 @@ public class ReviewController {
 
     //리뷰 게시물 목록 요청 처리
     @GetMapping("/rev_list")
-    public String revList(Review review,Criteria cri, Model model){
+    public String revList(Criteria cri, Model model){
         log.info("/review/rev_list GET요청: " + cri);
-        List<Review> reviewList = reviewService.revSearchList(review,cri);
+        List<Review> reviewList = reviewService.revSearchList(cri);
+        System.out.println("reviewList = " + reviewList);
         model.addAttribute("rev_list",reviewList);
-        model.addAttribute("pageInfo", new PageMaker(cri,reviewService.revGetTotal(review,cri)));
+        model.addAttribute("pageInfo", new PageMaker(cri,reviewService.revGetTotal(cri)));
 
         return "review/rev_list";
     }

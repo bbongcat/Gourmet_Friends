@@ -29,20 +29,17 @@
 
     <!-- 총 페이지 수-->
     <select id="getTotalCount" resultType="int">
-        SELECT
-            COUNT(*)
+        SELECT COUNT(*)
         FROM food_friends
     </select>
 
     <!-- 제목으로 게시물 검색 기능 -->
     <select id="getListByTitle" resultMap="foodFriendsMap">
-        <![CDATA[
-            SELECT ff_bno,title,content,user_id, reg_date, update_date
-            FROM food_friends
-            WHERE title LIKE CONCAT('%',#{keyword},'%')
-            ORDER BY ff_bno DESC
-            LIMIT #{startIndex}, #{amount}
-        ]]>
+        SELECT ff_bno,title,content,user_id, reg_date, update_date
+        FROM food_friends
+        WHERE title LIKE CONCAT('%',#{keyword},'%')
+        ORDER BY ff_bno DESC
+        LIMIT #{startIndex}, #{amount}
     </select>
 
     <!-- 제목으로 검색 게시물 조회 -->
@@ -57,21 +54,20 @@
         <![CDATA[
             SELECT ff_bno,title,content,user_id, reg_date, update_date,ff_reply_cnt
             FROM food_friends
-            WHERE title
         ]]>
-          <if test="type == 'title'">
-             title LIKE CONCAT('%',#{keyword},'%') AND
-          </if>
-          <if test="type == 'content'">
-            content LIKE CONCAT('%',#{keyword},'%') AND
-          </if>
-          <if test="type == 'userId'">
-            uesr_id LIKE CONCAT('%',#{keyword},'%') AND
-          </if>
-          <if test="type == 'titleContent'">
-            (title LIKE CONCAT('%',#{keyword},'%') OR
-              content LIKE CONCAT('%',#{keyword},'%'))
-          </if>
+            <if test="type == 'title'">
+                WHERE  title LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'content'">
+                WHERE content LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'userId'">
+                WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'titleContent'">
+                WHERE  (title LIKE CONCAT('%',#{keyword},'%') OR
+                content LIKE CONCAT('%',#{keyword},'%'))
+            </if>
         <![CDATA[
             ORDER BY ff_bno DESC
             LIMIT #{startIndex}, #{amount}
@@ -82,13 +78,13 @@
         SELECT COUNT(*)
         FROM food_friends
         <if test="type == 'title'">
-            WHERE itlet LIKE CONCAT('%',#{keyword},'%')
+            WHERE title LIKE CONCAT('%',#{keyword},'%')
         </if>
         <if test="type == 'content'">
             WHERE content LIKE CONCAT('%',#{keyword},'%')
         </if>
         <if test="type == 'userId'">
-            WHERE uesr_id LIKE CONCAT('%',#{keyword},'%')
+            WHERE user_id LIKE CONCAT('%',#{keyword},'%')
         </if>
         <if test="type == 'titleContent'">
             WHERE (title LIKE CONCAT('%',#{keyword},'%') OR
@@ -128,7 +124,5 @@
         SET ff_reply_cnt = (SELECT COUNT(*) FROM ff_reply WHERE ff_bno = #{ffBno})
         WHERE ff_bno = #{ffBno}
     </update>
-
-
 
 </mapper>

@@ -29,6 +29,7 @@ public class FoodFriendsController {
     public String list(Criteria cri, Model model){
         log.info("/food_friends/ff_list GET요청: " + cri);
         List<FoodFriends> list = foodFriendsService.searchList(cri);
+        System.out.println("list = " + list);
         model.addAttribute("ff_list",list);
         model.addAttribute("pageInfo",new PageMaker(cri,foodFriendsService.getTotal(cri)));
 

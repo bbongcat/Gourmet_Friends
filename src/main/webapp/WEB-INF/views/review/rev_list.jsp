@@ -7,7 +7,7 @@
 <%@include file="../includes/header.jsp"%>
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">Review Tables</h1>
+      <h1 class="page-header">리뷰 게시판</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -26,11 +26,12 @@
             <table class="table table-striped table-bordered table-hover">
 
                     <tr>
-                        <th>#리뷰 번호</th>
+                        <th>리뷰 번호</th>
                         <th>음식점 번호</th>
                         <th>리뷰 내용</th>
                         <th>리뷰 평점</th>
                         <th>회원</th>
+                        <th>신고</th>
                     </tr>
 
 
@@ -47,6 +48,7 @@
                      <td>${review.revContent}</td>
                      <td>${review.revStar}</td>
                      <td>${review.userId}</td>
+                     <td><button id='reportBtn' type="button" class="btn btn-primary btn-xs pull-right">신고</button></td>   
                   </tr>
                </c:forEach>
             </table>
@@ -129,6 +131,11 @@ $(document).ready(function() {
         location.href='/review/rev_register';
     });
 
+    document.getElementById('reportBtn').addEventListener('click', e => {
+        //링크 이동
+        location.href='/report/report-register';
+    });
+
     const resultMessage = '${msg}';
     // console.log(resultMessage);
 
@@ -142,11 +149,13 @@ $(document).ready(function() {
         }
 
         if (msg === 'regSuccess') {
-            $modalBody.textContent = '게시글이 등록되었습니다.';
+            $modalBody.textContent = '리뷰가 등록되었습니다.';
         }else if(msg === 'modSuccess'){
-            $modalBody.textContent = '게시글이 수정되었습니다.';
+            $modalBody.textContent = '리뷰가 수정되었습니다.';
         }else if(msg === 'delSuccess'){
-            $modalBody.textContent = '게시글이 삭제되었습니다.';
+            $modalBody.textContent = '리뷰가 삭제되었습니다.';
+        }else if(msg === 'reportSuccess'){
+            $modalBody.textContent = '리뷰가 신고되었습니다.';
         }
 
         //모달창 오픈

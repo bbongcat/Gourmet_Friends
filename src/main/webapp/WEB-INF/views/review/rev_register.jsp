@@ -42,7 +42,7 @@
     z-index: 10;
     width: 60px;
     height: 60px;
-    background-image: url('/views/starrate.png');
+    background-image: url('img/staratte.png');
     background-repeat: no-repeat;
     background-size: 60px 60px;
     cursor: pointer;
@@ -109,7 +109,7 @@
           </div>
 
           <div class="form-group">
-            <label>회원ID</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
+            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
           </div>
 
           <!-- 첨부파일 드래그 앤 드롭 영역 -->
@@ -217,31 +217,31 @@
   });
 
   //별점 마킹 모듈 프로토타입으로 생성
-function Rating(){};
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function(newrate){
-    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
-    this.rate = newrate;
-    let items = document.querySelectorAll('.rate-radio');
-    items.forEach(function(item, idx){
-        if(idx < newrate){
-            item.checked = true;
-        }else{
-            item.checked = false;
-        }
-    });
-}
-let rating = new Rating();//별점 인스턴스 생성
+    function Rating(){};
+    Rating.prototype.rate = 0;
+    Rating.prototype.setRate = function(newrate){
+        //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+        this.rate = newrate;
+        let items = document.querySelectorAll('.rate-radio');
+        items.forEach(function(item, idx){
+            if(idx < newrate){
+                item.checked = true;
+            }else{
+                item.checked = false;
+            }
+        });
+    }
+    let rating = new Rating();//별점 인스턴스 생성
 
-document.addEventListener('DOMContentLoaded', function(){
-    //별점선택 이벤트 리스너
-    document.querySelector('.rating').addEventListener('click',function(e){
-        let elem = e.target;
-        // console.log(elem);
-        if(elem.classList.contains('.rate-radio')){
-            rating.setRate(parseInt(elem.value));
-        }
-    })
-});
+    document.addEventListener('DOMContentLoaded', function(){
+        //별점선택 이벤트 리스너
+        document.querySelector('.rating').addEventListener('click',function(e){
+            let elem = e.target;
+            // console.log(elem);
+            if(elem.classList.contains('.rate-radio')){
+                rating.setRate(parseInt(elem.value));
+            }
+        })
+    });
 </script>
 <%@include file="../includes/footer.jsp"%>
