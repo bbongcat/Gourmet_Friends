@@ -17,7 +17,7 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-            report List Page
+            Report List Page
          </div>
 
          <!-- /.panel-heading -->
@@ -25,7 +25,7 @@
             <table class="table table-striped table-bordered table-hover">
 
                     <tr>
-                        <th>#번호</th>
+                        <th>번호</th>
                         <th>리뷰 번호</th>
                         <th>신고내용</th>
                         <th>회원</th>

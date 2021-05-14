@@ -18,6 +18,10 @@ public interface ReportMapper {
     //총 리뷰 신고 수 조회
     int reportGetTotalCount();
 
+    //검색 처리 통합 조회
+    List<Report> reportGetSearchList(Criteria cri);
+    int reportGetSearchTotal(Criteria cri);
+
     //리뷰 신고 글 상세 조회
     Report reportFindByNo(Long reportNo);
 

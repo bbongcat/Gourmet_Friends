@@ -29,6 +29,40 @@
         FROM report
     </select>
 
+    <select id="reportGetSearchList" resultMap="reportMap">
+        <![CDATA[
+            SELECT report_no, rev_bno, user_id,report_content,report_date
+            FROM report
+        ]]>
+            <if test="type == 'reportNo'">
+                WHERE report_no LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'reportContent'">
+                WHERE report_content LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'userId'">
+                WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+            </if>
+        <![CDATA[
+            ORDER BY report_no DESC
+            LIMIT #{startIndex}, #{amount}
+        ]]>
+    </select>
+
+    <select id="reportGetSearchTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM report
+        <if test="type == 'reportNo'">
+            WHERE report_no LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'reportContent'">
+            WHERE report_content LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'userId'">
+            WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+        </if>
+    </select>
+
     <select id="reportFindByNo" resultMap="reportMap">
         SELECT * FROM report
         WHERE report_no = #{reportNo}
@@ -36,7 +70,7 @@
 
     <insert id="reportWrite">
         INSERT INTO report (report_no,report_content,user_id)
-        VALUE(#{reportNo},#{reportContent},#{userId})
+        VALUE(report_no,#{reportContent},#{userId})
     </insert>
 
     <delete id="reportDelete">

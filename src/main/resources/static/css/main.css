@@ -167,7 +167,7 @@ section.visual .slide li .scroll {
 .slick-arrow:hover {
     cursor: pointer;
     background: #cccccc;
-    transform: all .5s;
+    transform: all 0.5s;
 }
 
 .slick-arrow:hover::after {
@@ -486,3 +486,4 @@ footer .go-top{
     color: #fff;
     font-size: 50px;
 }
+
