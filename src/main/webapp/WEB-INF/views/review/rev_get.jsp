@@ -4,6 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
+<style>
+  .star-rating{
+    font-size: 0;
+    letter-spacing: -4px;
+  }
+  .star-rating a {
+    font-size: 22px;
+    letter-spacing: 0;
+    display: inline-block;
+    margin-left: 5px;
+    color: #ccc;
+    text-decoration: none;
+  }
+  .star-rating a:first-child {
+    margin-left: 0;
+  }
+  .star-rating a.on {
+    color: #FFFF00;
+  }
+</style>
 
 <div class="row">
   <div class="col-lg-12">
@@ -35,6 +55,18 @@
         </div>
 
         <div class="form-group">
+          <label>리뷰 평점</label>
+          <div class="star-rating">
+            <a href="#" class="on" id="1">★</a>
+            <a href="#" id="2">★</a>
+            <a href="#" id="3">★</a>
+            <a href="#" id="4">★</a>
+            <a href="#" id="5">★</a>
+            <input type="hidden" id="revStar" name="revStar" value="${review.revStar}" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userNick}" readonly>
         </div>
 
@@ -44,9 +76,28 @@
 
         <c:if test="${loginUser.userNick == review.userId}">
           <button id='modify-btn' class="btn btn-default">수정</button>
+          <button id='report-Btn' class="btn btn-default">신고</button>
         </c:if>
           <button id='list-btn' class="btn btn-info">목록</button>
 
+          <!-- Modal  추가 -->
+         <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">처리가 완료되었습니다.</div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default"
+                          data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+              <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
       </div>
       <!--  end panel-body -->
@@ -72,7 +123,6 @@
 
         <c:if test="${loginUser != null}">
           <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록</button>
-          <button id='addReportBtn' class='btn btn-primary btn-xs pull-right'>신고 하기</button>
         </c:if>
       </div>
 
@@ -443,6 +493,28 @@
         '/review/rev_modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&revBno=${review.revBno}';
     });
 
+
+    document.getElementById('repor-tBtn').addEventListener('click', e => {
+        //링크 이동
+        location.href='/report/report-register';
+    });
+
+    function checkModal(msg) {
+
+    const $modalBody = document.querySelector('.modal-body');
+
+    if (msg === '') {
+        return;
+    }
+
+    if (msg === 'reportSuccess') {
+        $modalBody.textContent = '리뷰가 신고되었습니다.';
+    }
+
+    //모달창 오픈
+    $('#myModal').modal('show');
+    }
+  
   });
 </script>
 

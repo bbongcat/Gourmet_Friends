@@ -29,9 +29,9 @@
                         <th>리뷰 번호</th>
                         <th>음식점 번호</th>
                         <th>리뷰 내용</th>
+                        <th>댓글 수</th>
                         <th>리뷰 평점</th>
                         <th>회원</th>
-                        <th>신고</th>
                     </tr>
 
 
@@ -41,14 +41,14 @@
 
                      <td>
                         <a class='move' href="/review/rev_get${pageInfo.makeParam(pageInfo.cri.page)}&revBno=${review.revBno}">
-                            ${review.restNo} [${review.revReplyCnt}]
+                            ${review.restNo}
                         </a>
                      </td>
 
                      <td>${review.revContent}</td>
+                     <td>${review.revReplyCnt}</td>
                      <td>${review.revStar}</td>
                      <td>${review.userId}</td>
-                     <td><button id='reportBtn' type="button" class="btn btn-primary btn-xs pull-right">신고</button></td>   
                   </tr>
                </c:forEach>
             </table>
@@ -131,10 +131,6 @@ $(document).ready(function() {
         location.href='/review/rev_register';
     });
 
-    document.getElementById('reportBtn').addEventListener('click', e => {
-        //링크 이동
-        location.href='/report/report-register';
-    });
 
     const resultMessage = '${msg}';
     // console.log(resultMessage);
@@ -154,10 +150,7 @@ $(document).ready(function() {
             $modalBody.textContent = '리뷰가 수정되었습니다.';
         }else if(msg === 'delSuccess'){
             $modalBody.textContent = '리뷰가 삭제되었습니다.';
-        }else if(msg === 'reportSuccess'){
-            $modalBody.textContent = '리뷰가 신고되었습니다.';
         }
-
         //모달창 오픈
         $('#myModal').modal('show');
     }

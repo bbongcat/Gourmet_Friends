@@ -47,7 +47,7 @@ public class ReportController {
         log.info("/report/report-register POST요청: " + report);
         reportService.reportRegister(report);
         ra.addFlashAttribute("msg","regSuccess");
-        return "redirect:review/review_list";
+        return "redirect:report/report-get";
     }
 
     //리뷰 신고 글 상세 보기 요청
@@ -66,7 +66,7 @@ public class ReportController {
         if (reportRemove){
             ra.addFlashAttribute("msg","delSuccess");
         }
-        return "redirect:/review/review_list";
+        return "redirect:/report/report-get";
     }
 
 

@@ -66,6 +66,7 @@
 
           <!-- 별정 기능 구현 -->
          <div class="form-group">
+           <label>리뷰 평점</label>
            <div class="star-rating">
              <a href="#" class="on" id="1">★</a>
              <a href="#" class="on" id="2">★</a>
@@ -78,7 +79,9 @@
 
           <div class="form-group">
             <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
-          </>
+          </div>
+
+          <br>
 
           <!-- 첨부파일 드래그 앤 드롭 영역 -->
           <div class="form-group">
@@ -95,6 +98,7 @@
           <button type="submit" class="btn btn-default">Submit Button</button>
           <button type="reset" class="btn btn-default">Reset Button</button>
         </form>
+
 
       </div>
       <!--  end panel-body -->
@@ -182,13 +186,14 @@
              });
      });
 
-     $('.star_rating( a').click(function(){
+     $('.star-rating a').click(function(){
        $(this).parent().children('a').removeClass('on');
        $(this).addClass('on').prevAll('a').addClass('on');
        let starRate = $(this).attr('id');
        $('#revStar').val(starRate);
        return false;
-     })
+     });
+
 
   });
 
