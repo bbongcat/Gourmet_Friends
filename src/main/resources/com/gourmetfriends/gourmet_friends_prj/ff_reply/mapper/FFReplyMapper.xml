@@ -14,7 +14,7 @@
 
     <insert id="insert">
         INSERT INTO ff_reply (ff_rno, ff_bno, user_id , ff_content)
-        VALUES (ff_rno, #{ffBno}, #{userId}, #{ffContent})
+        VALUES (seq_ff_reply.nextval, #{ffBno}, #{userId}, #{ffContent})
     </insert>
 
     <select id="read" resultMap="ffReplyMap">
@@ -43,7 +43,7 @@
             SELECT ff_rno, ff_bno, ff_content, user_id, ff_date
             FROM ff_reply
             WHERE ff_bno = #{ffBno} AND ff_rno > 0
-            LIMIT #{cri.startIndex}, #{cri.amount}
+            LIMIT #{cri.startIndex} offset #{cri.amount}
     </select>
 
 </mapper>

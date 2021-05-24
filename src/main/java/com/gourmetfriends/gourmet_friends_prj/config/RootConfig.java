@@ -17,8 +17,10 @@ public class RootConfig {
     @Bean
     public DataSource dataSource(){
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/gourmet_friends?serverTimeZone=Asia/Seoul&characterEncoding=UTF-8");
+//        hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        hikariConfig.setDriverClassName("org.h2.Driver");
+//        hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/gourmet_friends?serverTimeZone=Asia/Seoul&characterEncoding=UTF-8");
+        hikariConfig.setJdbcUrl("jdbc:h2:tcp://localhost/~/gourmet_friends");
         hikariConfig.setUsername("gourmet");
         hikariConfig.setPassword("1234");
 

@@ -21,7 +21,7 @@
     <select id="reportGetListWithPaging" resultMap="reportMap">
         SELECT * FROM report
         ORDER BY report_no DESC
-        LIMIT #{startIndex}, #{amount}
+        LIMIT #{startIndex} offset #{amount}
     </select>
 
     <select id="reportGetTotalCount" resultType="int">
@@ -45,7 +45,7 @@
             </if>
         <![CDATA[
             ORDER BY report_no DESC
-            LIMIT #{startIndex}, #{amount}
+            LIMIT #{startIndex} offset #{amount}
         ]]>
     </select>
 
@@ -69,8 +69,8 @@
     </select>
 
     <insert id="reportWrite">
-        INSERT INTO report (report_no,report_content,user_id)
-        VALUE(report_no,#{reportContent},#{userId})
+        INSERT INTO report (report_no,rev_bno,report_content,user_id)
+        VALUES(seq_report.nextval,#{revBno},#{reportContent},#{userId})
     </insert>
 
     <delete id="reportDelete">

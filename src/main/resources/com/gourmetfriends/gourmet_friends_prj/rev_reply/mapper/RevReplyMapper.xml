@@ -14,7 +14,7 @@
     
     <insert id="revInsert">
         INSERT INTO rev_reply (rev_rno, rev_bno, rev_reply, user_id)
-        VALUES (rev_rno, #{revBno}, #{revReply}, #{userId})
+        VALUES (seq_rev_reply.nextval, #{revBno}, #{revReply}, #{userId})
     </insert>
 
     <select id="revRead" resultMap="revReplyMap">
@@ -43,6 +43,6 @@
         SELECT rev_rno, rev_bno, rev_reply, user_id, rev_date
         FROM rev_reply
         WHERE rev_bno = #{revBno} AND rev_rno > 0
-        LIMIT #{cri.startIndex}, #{cri.amount}
+        LIMIT #{cri.startIndex} offset #{cri.amount}
     </select>
 </mapper>

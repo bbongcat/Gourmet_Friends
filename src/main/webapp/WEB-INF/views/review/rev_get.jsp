@@ -4,26 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
-<style>
-  .star-rating{
-    font-size: 0;
-    letter-spacing: -4px;
-  }
-  .star-rating a {
-    font-size: 22px;
-    letter-spacing: 0;
-    display: inline-block;
-    margin-left: 5px;
-    color: #ccc;
-    text-decoration: none;
-  }
-  .star-rating a:first-child {
-    margin-left: 0;
-  }
-  .star-rating a.on {
-    color: #FFFF00;
-  }
-</style>
+
 
 <div class="row">
   <div class="col-lg-12">
@@ -57,12 +38,7 @@
         <div class="form-group">
           <label>리뷰 평점</label>
           <div class="star-rating">
-            <a href="#" class="on" id="1">★</a>
-            <a href="#" id="2">★</a>
-            <a href="#" id="3">★</a>
-            <a href="#" id="4">★</a>
-            <a href="#" id="5">★</a>
-            <input type="hidden" id="revStar" name="revStar" value="${review.revStar}" readonly>
+            <c:forEach var="review" begin="1" end="${review.revStar}">★</c:forEach>
           </div>
         </div>
 
