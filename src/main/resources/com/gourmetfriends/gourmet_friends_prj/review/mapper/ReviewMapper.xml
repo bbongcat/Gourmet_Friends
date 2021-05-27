@@ -68,7 +68,7 @@
             </if>
         <![CDATA[
             ORDER BY rev_bno DESC
-            LIMIT #{startIndex} offset #{amount}
+            LIMIT #{startIndex} , #{amount}
         ]]>
     </select>
 

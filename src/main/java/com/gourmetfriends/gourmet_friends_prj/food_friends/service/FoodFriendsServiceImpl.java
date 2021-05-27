@@ -1,12 +1,16 @@
 package com.gourmetfriends.gourmet_friends_prj.food_friends.service;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
+import com.gourmetfriends.gourmet_friends_prj.food_friends.domain.CateNotice;
 import com.gourmetfriends.gourmet_friends_prj.food_friends.domain.FoodFriends;
 import com.gourmetfriends.gourmet_friends_prj.food_friends.mapper.FoodFriendsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +49,21 @@ public class FoodFriendsServiceImpl implements FoodFriendsService{
     }
 
     @Override
-    public List<FoodFriends> searchList(Criteria cri) {
-        return foodFriendsMapper.getSearchList(cri);
+    public Map<String, List<FoodFriends>> searchList(Criteria cri) {
+        List<FoodFriends> searchList = foodFriendsMapper.getSearchList(cri);
+        List<FoodFriends> noticeList = new ArrayList<>();
+        List<FoodFriends> commonList = new ArrayList<>();
+        for (FoodFriends ff : searchList) {
+            if (ff.getCateNotice() == CateNotice.GENERAL) {
+                commonList.add(ff);
+            } else {
+                noticeList.add(ff);
+            }
+        }
+        Map<String, List<FoodFriends>> searchDataMap = new HashMap<>();
+        searchDataMap.put("commonList", commonList);
+        searchDataMap.put("noticeList", noticeList);
+
+        return searchDataMap;
     }
 }

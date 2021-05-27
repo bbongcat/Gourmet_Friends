@@ -25,7 +25,14 @@
 
           <div class="form-group">
             <label>신고내용</label>
-            <textarea class="form-control" rows="5" name='reportContent'></textarea>
+            <br>
+            <input type="text" list="report-content" name='reportContent'>
+            <datalist id="report-content">
+              <option>부정한 의미를 갖는 글이기 때문에</option>
+              <option>욕설을 포함하고 있기 때문에</option>
+              <option>게시판의 취지와 맞지 않는 글이기 때문에</option>
+              <option>기타</option>
+           </datalist>
           </div>
 
           <div class="form-group">

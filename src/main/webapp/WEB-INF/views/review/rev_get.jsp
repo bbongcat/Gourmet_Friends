@@ -52,8 +52,8 @@
 
         <c:if test="${loginUser.userNick == review.userId}">
           <button id='modify-btn' class="btn btn-default">수정</button>
-          <button id='report-Btn' class="btn btn-default">신고</button>
         </c:if>
+          <button id='report-Btn' class="btn btn-info">신고</button>
           <button id='list-btn' class="btn btn-info">목록</button>
 
           <!-- Modal  추가 -->
@@ -470,7 +470,7 @@
     });
 
 
-    document.getElementById('repor-tBtn').addEventListener('click', e => {
+    document.getElementById('report-Btn').addEventListener('click', e => {
         //링크 이동
         location.href='/report/report-register';
     });

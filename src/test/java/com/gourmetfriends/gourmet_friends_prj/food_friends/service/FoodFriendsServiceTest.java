@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -20,9 +21,9 @@ class FoodFriendsServiceTest {
     void searchListTest(){
 
         Criteria cri = new Criteria();
-        List<FoodFriends> foodFriendsList = foodFriendsService.searchList(cri);
+        Map<String, List<FoodFriends>> listMap = foodFriendsService.searchList(cri);
 
-        System.out.println("foodFriendsList = " + foodFriendsList);
+        System.out.println("listMap = " + listMap);
     }
 
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,9 +29,10 @@ public class FoodFriendsController {
     @GetMapping("/ff_list")
     public String list(Criteria cri, Model model){
         log.info("/food_friends/ff_list GET요청: " + cri);
-        List<FoodFriends> list = foodFriendsService.searchList(cri);
-        System.out.println("list = " + list);
-        model.addAttribute("ff_list",list);
+        Map<String, List<FoodFriends>> listMap = foodFriendsService.searchList(cri);
+        System.out.println("list = " + listMap);
+        model.addAttribute("commonList",listMap.get("commonList"));
+        model.addAttribute("noticeList",listMap.get("noticeList"));
         model.addAttribute("pageInfo",new PageMaker(cri,foodFriendsService.getTotal(cri)));
 
         return "food_friends/ff_list";

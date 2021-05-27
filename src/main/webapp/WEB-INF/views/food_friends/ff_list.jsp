@@ -33,8 +33,23 @@
                         <th>수정일</th>
                     </tr>
 
+                <c:forEach var="foodFriends" items="${noticeList}">
+                    <tr>
+                        <td>${foodFriends.ffBno}</td>
 
-               <c:forEach var="foodFriends" items="${ff_list}">
+                        <td>
+                            <a class='move' href="/food_friends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
+                                ${foodFriends.title} [${foodFriends.ffReplyCnt}]
+                            </a>
+                        </td>
+
+                        <td>${foodFriends.userId}</td>
+                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}" /></td>
+                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}" /></td>
+                    </tr>
+                </c:forEach>
+
+                <c:forEach var="foodFriends" items="${commonList}">
                   <tr>
                      <td>${foodFriends.ffBno}</td>
 
@@ -48,7 +63,7 @@
                      <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}" /></td>
                      <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}" /></td>
                   </tr>
-               </c:forEach>
+                </c:forEach>
             </table>
 
             <!-- search -->

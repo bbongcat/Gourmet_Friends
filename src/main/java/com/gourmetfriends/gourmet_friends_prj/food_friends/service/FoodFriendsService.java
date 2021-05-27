@@ -4,6 +4,7 @@ import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.food_friends.domain.FoodFriends;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FoodFriendsService {
 
@@ -26,6 +27,6 @@ public interface FoodFriendsService {
     int getTotal(Criteria cri);
 
     //게시물 검색 조회 과정
-    List<FoodFriends> searchList(Criteria cri);
+    Map<String, List<FoodFriends>> searchList(Criteria cri);
 
 }
