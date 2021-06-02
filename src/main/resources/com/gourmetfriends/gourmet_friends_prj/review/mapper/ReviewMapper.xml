@@ -26,7 +26,7 @@
         SELECT rev_bno,user_id,rest_no,rev_star,rev_content
         FROM review
         ORDER BY rev_bno DESC
-        LIMIT #{startIndex} offset #{amount}
+        LIMIT #{startIndex}, #{amount}
     </select>
 
     <!-- 총 페이지 수 -->
@@ -41,7 +41,7 @@
         FROM review
         WHERE rest_no LIKE CONCAT('%',#{keyword},'%')
         ORDER BY rev_bno DESC
-        LIMIT #{startIndex} offset #{amount}
+        LIMIT #{startIndex} , #{amount}
     </select>
 
     <!-- 음식점 코드번호로 검색 게시물 조회 -->

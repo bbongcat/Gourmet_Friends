@@ -5,9 +5,20 @@
 
 
 <%@include file="../includes/header.jsp"%>
+
+<style>
+ tr.noticeList td{
+    color: red;
+    font-weight: bold;
+ }
+ tr.commonList td{
+     color: blue;
+ }
+</style>
+
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">밥친구 게시판</h1>
+      <h1 class="page-header">FoodFriends List</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -34,8 +45,9 @@
                     </tr>
 
                 <c:forEach var="foodFriends" items="${noticeList}">
-                    <tr>
-                        <td>${foodFriends.ffBno}</td>
+                    <tr class="noticeList" value="SPECIFIC">
+                        <td><span class="lnr lnr-bullhorn"></span>
+                            ${foodFriends.ffBno}</td>
 
                         <td>
                             <a class='move' href="/food_friends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
@@ -50,7 +62,7 @@
                 </c:forEach>
 
                 <c:forEach var="foodFriends" items="${commonList}">
-                  <tr>
+                  <tr class="commonList" value="GENERAL">
                      <td>${foodFriends.ffBno}</td>
 
                      <td>

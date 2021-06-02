@@ -58,7 +58,7 @@ public class FoodFriendsController {
     @GetMapping("/ff_get")
     public String get(Long ffBno, @ModelAttribute("pageInfo") Criteria cri,Model model){
         log.info("/food_friends/ff_get GET요청: " + ffBno);
-        model.addAttribute("food_friends",foodFriendsService.get(ffBno));
+        model.addAttribute("foodFriends",foodFriendsService.get(ffBno));
         return "food_friends/ff_get";
     }
 

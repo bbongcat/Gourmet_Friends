@@ -5,6 +5,13 @@
 
 
 <%@include file="../includes/header.jsp"%>
+
+<style>
+    .star-rating {
+      color: #FFFF00;
+    }
+</style>
+
 <div class="row">
    <div class="col-lg-12">
       <h1 class="page-header">리뷰 게시판</h1>
@@ -47,7 +54,10 @@
 
                      <td>${review.revContent}</td>
                      <td>${review.revReplyCnt}</td>
-                     <td>${review.revStar}</td>
+                     <td>
+                      <div class="star-rating">
+                        <c:forEach var="review" begin="1" end="${review.revStar}">★</c:forEach>
+                      </div></td>
                      <td>${review.userId}</td>
                   </tr>
                </c:forEach>

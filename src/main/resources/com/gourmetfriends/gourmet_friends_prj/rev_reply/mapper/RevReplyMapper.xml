@@ -43,6 +43,6 @@
         SELECT rev_rno, rev_bno, rev_reply, user_id, rev_date
         FROM rev_reply
         WHERE rev_bno = #{revBno} AND rev_rno > 0
-        LIMIT #{cri.startIndex} offset #{cri.amount}
+        LIMIT #{cri.startIndex} , #{cri.amount}
     </select>
 </mapper>

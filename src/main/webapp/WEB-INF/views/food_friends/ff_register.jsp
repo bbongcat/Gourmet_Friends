@@ -23,6 +23,15 @@
 
         <form role="form" action="/food_friends/ff_register" method="post">
           <div class="form-group">
+            <label>카테고리</label> 
+            <select name="cateNotice">
+            <c:if test="${loginUser.admin == 'ADMIN'}">
+              <option value="SPECIFIC">공지</option>
+            </c:if>
+              <option value="GENERAL">일반</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label>제목</label> <input class="form-control" name='title'>
           </div>
 

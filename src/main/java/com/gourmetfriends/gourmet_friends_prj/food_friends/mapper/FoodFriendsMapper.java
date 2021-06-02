@@ -29,7 +29,7 @@ public interface FoodFriendsMapper {
     int getSearchTotal(Criteria cri);
 
     //글 상세 조회
-    FoodFriends findByBno(long ffBno);
+    FoodFriends findByBno(Long ffBno);
 
     //글 쓰기 기능
     void write(FoodFriends foodFriends);

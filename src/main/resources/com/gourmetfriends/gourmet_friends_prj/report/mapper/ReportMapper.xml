@@ -21,7 +21,7 @@
     <select id="reportGetListWithPaging" resultMap="reportMap">
         SELECT * FROM report
         ORDER BY report_no DESC
-        LIMIT #{startIndex} offset #{amount}
+        LIMIT #{startIndex} , #{amount}
     </select>
 
     <select id="reportGetTotalCount" resultType="int">
@@ -45,7 +45,7 @@
             </if>
         <![CDATA[
             ORDER BY report_no DESC
-            LIMIT #{startIndex} offset #{amount}
+            LIMIT #{startIndex} , #{amount}
         ]]>
     </select>
 

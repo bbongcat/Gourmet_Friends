@@ -43,7 +43,7 @@
         SELECT ff_rno, ff_bno, ff_content, user_id, ff_date
         FROM ff_reply
         WHERE ff_bno = #{ffBno} AND ff_rno > 0
-        LIMIT #{cri.startIndex} offset #{cri.amount}
+        LIMIT #{cri.startIndex} , #{cri.amount}
     </select>
 
 </mapper>

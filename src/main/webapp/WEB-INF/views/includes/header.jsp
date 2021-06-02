@@ -13,6 +13,9 @@
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
+    <!-- linear icons css -->
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 

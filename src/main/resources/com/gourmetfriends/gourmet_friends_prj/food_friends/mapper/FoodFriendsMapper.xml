@@ -24,7 +24,7 @@
         SELECT ff_bno,title,content,user_id,reg_date,update_date
         FROM food_friends
         ORDER BY ff_bno DESC
-        LIMIT #{startIndex} offset #{amount}
+        LIMIT #{startIndex} , #{amount}
     </select>
 
     <!-- 총 페이지 수-->
@@ -39,7 +39,7 @@
         FROM food_friends
         WHERE title LIKE CONCAT('%',#{keyword},'%')
         ORDER BY ff_bno DESC
-        LIMIT #{startIndex} offset #{amount}
+        LIMIT #{startIndex} , #{amount}
     </select>
 
     <!-- 제목으로 검색 게시물 조회 -->
@@ -70,7 +70,7 @@
             </if>
         <![CDATA[
             ORDER BY ff_bno DESC
-            LIMIT #{startIndex} offset #{amount}
+            LIMIT #{startIndex} , #{amount}
         ]]>
     </select>
 
