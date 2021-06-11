@@ -44,3 +44,24 @@ CREATE SEQUENCE SEQ_REV_REPLY;
 CREATE SEQUENCE SEQ_REPORT;
 CREATE SEQUENCE SEQ_FOOD_FRIENDS;
 CREATE SEQUENCE SEQ_FF_REPLY;
+
+
+drop table USER_ADDR;
+drop table USER;
+
+#user 테이블 다시 생성
+CREATE TABLE USER(
+                     user_id varchar(100) PRIMARY KEY ,
+                     user_pw VARCHAR(100) ,
+                     user_name VARCHAR(100) ,
+                     user_nick VARCHAR(100) UNIQUE ,
+                     user_birth VARCHAR(100) ,
+                     user_email VARCHAR(100) ,
+                     user_phone VARCHAR(100),
+                     user_gender VARCHAR(100),
+                     user_oaddress VARCHAR(100),
+                     user_address varchar(100),
+                     user_detailaddress varchar(200),
+                     user_rank varchar(100) default 'COMMON',
+                     user_auth varchar(100) default 'BRONZE'
+);

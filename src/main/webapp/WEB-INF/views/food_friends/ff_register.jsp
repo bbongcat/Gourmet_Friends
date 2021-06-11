@@ -41,7 +41,7 @@
           </div>
 
           <div class="form-group">
-            <label>회원ID</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
+            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
           </div>
           <button type="submit" class="btn btn-default">Submit Button</button>
           <button type="reset" class="btn btn-default">Reset Button</button>

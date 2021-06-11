@@ -179,3 +179,4 @@ create table `report`
     `report_date` datetime DEFAULT now()
 ) ENGINE = InnoDB
   default charset = utf8;
+

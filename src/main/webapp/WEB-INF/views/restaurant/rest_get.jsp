@@ -4,6 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
+<style>
+    .star-rating {
+      color: #FFFF00;
+    }
+    </style>
+    
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Restaurant Read</h1>
@@ -21,11 +27,11 @@
             <div class="panel-body">
 
                 <div class="form-group">
-                    <label>음식점 번호</label> <input class="form-control" name='rest_no' value="${restaurant.restNo}" readonly>
+                    <label>음식점 번호</label> <input class="form-control" name='restNo' value="${restaurant.restNo}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label>음식점 이름</label> <input class="form-control" name='rest_name' value="${restaurant.restName}" readonly>
+                    <label>음식점 이름</label> <input class="form-control" name='restName' value="${restaurant.restName}" readonly>
                 </div>
 
                 <div class="form-group">
@@ -34,15 +40,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label>전화번호</label> <input class="form-control" name='phone_number' value="${restaurant.restPh}" readonly>
+                    <label>전화번호</label> <input class="form-control" name='restPh' value="${restaurant.restPh}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label>별점</label> <input class="form-control" name='star' value="${restaurant.restStar}" readonly>
+                    <label>별점</label> 
+                    <div class="star-rating">
+                        <c:forEach var="review" begin="1" end="${review.revStar}">★</c:forEach>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>영업 시간</label> <input class="form-control" name='time' value="${restaurant.restTime}" readonly>
+                    <label>영업 시간</label> <input class="form-control" name='restTime' value="${restaurant.restTime}" readonly>
                 </div>
 
                 <div class="form-group">
@@ -486,13 +495,13 @@
 
         //목록 버튼 이벤트
         document.getElementById('list-btn').addEventListener('click', e => {
-            location.href = '/restaurant/list?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}';
+            location.href = '/restaurant/rest_list?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}';
         });
 
         //수정 버튼 이벤트
         document.getElementById('modify-btn').addEventListener('click', e => {
             location.href =
-                '/restaurant/modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&restNo=${restaurant.restNo}';
+                '/restaurant/rest_modify?page=${pageInfo.page}&type=${pageInfo.type}&keyword=${pageInfo.keyword}&restNo=${restaurant.restNo}';
         });
 
     });

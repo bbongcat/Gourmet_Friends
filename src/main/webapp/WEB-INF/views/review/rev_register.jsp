@@ -56,7 +56,7 @@
 
         <form role="form" action="/review/rev_register" method="post">
           <div class="form-group">
-            <label>음식점 번호</label> <input class="form-control" name='restNo' value="${restaurant.restName}">
+            <label>음식점 번호</label> <input class="form-control" name='restNo' value="${review.restNo}">
           </div>
 
           <div class="form-group">

@@ -18,16 +18,20 @@ public interface RestMapper {
     // 음식점 이름으로 검색
     List<Rest> getListByRestName(Criteria cri);
 
-    // 검색처리 통합 조회
-    List<Rest> getSearchList(Criteria cri);
+    int restGetTotalCount();
 
-    int getSearchTotalCount(Criteria cri);
+    List<Rest> restGetListByRestName(Criteria cri);
+    int restGetTotalCountByRestName(Criteria cri);
+
+    // 검색처리 통합 조회
+    List<Rest> restGetSearchList(Criteria cri);
+    int restGetSearchTotalCount(Criteria cri);
 
     // 음식점 상세 조회
     Rest findByRestNo(int restNo);
 
     // 음식점 추가 기능
-    void restSave(Rest Rest);
+    void restWrite(Rest Rest);
 
     // 음식점 수정 기능
     int restUpdate(Rest Rest);
@@ -36,5 +40,7 @@ public interface RestMapper {
     int restDelete(int restNo);
 
     // 사진 첨부 기능
-    void addPhoto(String restPhoto);
+    void addRestPhoto(String restPhoto);
+
+    List<String> FindRestPhoto(Long restNo);
 }

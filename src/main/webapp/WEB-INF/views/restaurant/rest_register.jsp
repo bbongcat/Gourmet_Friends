@@ -23,19 +23,19 @@
 
                 <form role="form" action="/restaurant/register" method="post">
                     <div class="form-group">
-                        <label>음식점 이름</label> <input class="form-control" name='name'>
+                        <label>음식점 이름</label> <input class="form-control" name='restName'>
                     </div>
 
                     <div class="form-group">
-                        <label>카테고리</label> <input class="form-control" name="category">
+                        <label>카테고리</label> <input class="form-control" name="cateNo">
                     </div>
 
                     <div class="form-group">
-                        <label>음식점 번호</label> <input class="form-control" name='phone_number'>
+                        <label>음식점 전화번호</label> <input class="form-control" name='restPh'>
                     </div>
 
                     <div class="form-group">
-                        <label>음식점 시간</label> <input class="form-control" name='time'>
+                        <label>음식점 시간</label> <input class="form-control" name='restTime'>
                     </div>
                     <button type="submit" class="btn btn-default">Submit Button</button>
                     <button type="reset" class="btn btn-default">Reset Button</button>

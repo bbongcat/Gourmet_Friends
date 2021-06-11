@@ -21,36 +21,36 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
 
-                <form role="form" action="/restaurant/modify" method="post">
+                <form role="form" action="/restaurant/rest_modify" method="post">
 
                     <div class="form-group">
                         <label>음식점 번호</label>
-                        <input class="form-control" name='rest_no' value='${restaurant.restNo}' readonly>
+                        <input class="form-control" name='restNo' value='${restaurant.restNo}' readonly>
                     </div>
 
                     <div class="form-group">
                         <label>음식점 이름</label>
-                        <input class="form-control" name='name' value='${restaurant.restName}'>
+                        <input class="form-control" name='restName' value='${restaurant.restName}'>
                     </div>
 
                     <div class="form-group">
                         <label>카테고리</label>
-                        <textarea class="form-control" rows="5" name='category'>${restaurant.cateNo}</textarea>
+                        <textarea class="form-control" rows="5" name='cateNo'>${restaurant.cateNo}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label>전화번호</label>
-                        <input class="form-control" name='phone_number' value='${restaurant.restPh}' readonly>
+                        <input class="form-control" name='restPh' value='${restaurant.restPh}' readonly>
                     </div>
 
                     <div class="form-group">
                         <label>별점</label>
-                        <input class="form-control" name='star' value='${restaurant.restStar}' readonly>
+                        <input class="form-control" name='restStar' value='${restaurant.restStar}' readonly>
                     </div>
 
                     <div class="form-group">
                         <label>영업시간</label>
-                        <input class="form-control" name='time'
+                        <input class="form-control" name='restTime'
                                value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${restaurant.restTime}" />' readonly>
                     </div>
 
@@ -87,11 +87,11 @@
 
         if (oper === 'list') {
             // form의 action을 /restaurant/list로 변경, method를 get으로 변경
-            $actionForm.setAttribute('action', '/restaurant/list');
+            $actionForm.setAttribute('action', '/restaurant/rest_list');
             $actionForm.setAttribute('method', 'get');
         } else if (oper === 'remove') {
             // form의 action을 /restaurant/remove로 변경
-            $actionForm.setAttribute('action', '/restaurant/remove');
+            $actionForm.setAttribute('action', '/restaurant/rest_remove');
         }
         // form을 submit
         $actionForm.submit();

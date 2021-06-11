@@ -57,7 +57,8 @@
                      <td>
                       <div class="star-rating">
                         <c:forEach var="review" begin="1" end="${review.revStar}">★</c:forEach>
-                      </div></td>
+                      </div>
+                    </td>
                      <td>${review.userId}</td>
                   </tr>
                </c:forEach>

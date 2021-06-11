@@ -3,8 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <%@include file="../includes/header.jsp" %>
+
+
+<style>
+    .star-rating {
+      color: #FFFF00;
+    }
+</style>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Tables</h1>
@@ -37,20 +44,24 @@
                     </tr>
 
 
-                    <c:forEach var="restaurant" items="${restList}">
+                    <c:forEach var="restaurant" items="${rest_list}">
                         <tr>
-                            <td>${restaurant.restNo}</td>
+                            <td>${restaurant.restName}</td>
 
                             <td>
                                 <a class='move'
-                                   href="/restaurant/get${pageInfo.makeParam(pageInfo.cri.page)}&restNo=${restaurant.restNo}">
-                                        ${restaurant.restName}
+                                   href="/restaurant/rest_get${pageInfo.makeParam(pageInfo.cri.page)}&restNo=${restaurant.restNo}">
+                                        ${restaurant.restNo}
                                 </a>
                             </td>
 
                             <td>${restaurant.cateNo}</td>
                             <td>${restaurant.restPh}</td>
-                            <td>${restaurant.restStar}</td>
+                            <td>
+                            <div class="star-rating">
+                                <c:forEach var="review" begin="1" end="${review.revStar}">★</c:forEach>
+                            </div>
+                            </td>
                             <td>
                                 <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${restaurant.restTime}"/>
                             </td>
@@ -91,7 +102,7 @@
         //게시글 등록 버튼 이벤트
         document.getElementById('regBtn').addEventListener('click', e => {
             //링크 이동
-            location.href = '/restaurant/register';
+            location.href = '/restaurant/rest_register';
         });
         const resultMessage = '${msg}';
         // console.log(resultMessage);
