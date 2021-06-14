@@ -11,7 +11,6 @@ public class User {
     private String userId; //회원 id
     private String userPw; //회원 pw
     private String userName; //회원 이름
-    private String userNick; //회원 이름
     private String userBirth; //회원 생일
     private String userEmail; //회원 이메일
     private String userPhone; //회원 전화번호

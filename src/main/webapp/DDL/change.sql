@@ -54,7 +54,6 @@ CREATE TABLE USER(
                      user_id varchar(100) PRIMARY KEY ,
                      user_pw VARCHAR(100) ,
                      user_name VARCHAR(100) ,
-                     user_nick VARCHAR(100) UNIQUE ,
                      user_birth VARCHAR(100) ,
                      user_email VARCHAR(100) ,
                      user_phone VARCHAR(100),

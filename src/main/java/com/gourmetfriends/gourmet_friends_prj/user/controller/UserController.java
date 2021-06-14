@@ -74,7 +74,7 @@ public class UserController {
             return "redirect:/food_friends/ff_list";
         }
 
-        return "user/login_result";
+        return "user/login-result";
     }
 
     //로그아웃 요청

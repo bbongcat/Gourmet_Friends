@@ -7,7 +7,6 @@
         <result property="userId" column="user_id"/>
         <result property="userPw" column="user_pw"/>
         <result property="userName" column="user_name"/>
-        <result property="userNick" column="user_nick"/>
         <result property="userBirth" column="user_birth"/>
         <result property="userEmail" column="user_email"/>
         <result property="userPhone" column="user_phone"/>
@@ -22,9 +21,9 @@
     <!-- 회원 가입 기능 -->
     <insert id="userRegister">
         INSERT INTO user
-            (user_id, user_pw, user_name, user_nick, user_birth,user_email
+            (user_id, user_pw, user_name, user_birth,user_email
             user_phone, user_gender, user_oaddress, user_address, user_detailaddress)
-        VALUES (#{userId},#{userPw},#{userName},#{userNick},#{userBirth},#{userEmail},#{userPhone},
+        VALUES (#{userId},#{userPw},#{userName},#{userBirth},#{userEmail},#{userPhone},
                 #{userGender},#{userOaddresss},#{userAddress},#{userDetailaddress})
     </insert>
 
