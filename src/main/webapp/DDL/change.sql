@@ -44,6 +44,7 @@ CREATE SEQUENCE SEQ_REV_REPLY;
 CREATE SEQUENCE SEQ_REPORT;
 CREATE SEQUENCE SEQ_FOOD_FRIENDS;
 CREATE SEQUENCE SEQ_FF_REPLY;
+CREATE SEQUENCE SEQ_RESTAURANT;
 
 
 drop table USER_ADDR;
@@ -63,4 +64,20 @@ CREATE TABLE USER(
                      user_detailaddress varchar(200),
                      user_rank varchar(100) default 'COMMON',
                      user_auth varchar(100) default 'BRONZE'
+);
+
+#restaurant 테이블 다시 생성
+create table RESTAURANT
+(
+    rest_no    int primary key,
+    cate_no    int ,
+    rest_name  varchar(100) ,
+    rest_ph    varchar(100) ,
+    rest_star  int ,
+    rest_time  datetime ,
+    rest_photo varchar(1000),
+    rev_cnt    int,
+    rest_oaddress varchar(100),
+    rest_address VARCHAR(100),
+    rest_detailaddress varchar(100)
 );

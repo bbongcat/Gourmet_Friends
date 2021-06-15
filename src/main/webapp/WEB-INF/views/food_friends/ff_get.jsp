@@ -35,10 +35,10 @@
         </div>
 
         <div class="form-group">
-          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userNick}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userId}" readonly>
         </div>
 
-        <c:if test="${loginUser.userNick == foodFriends.userId}">
+        <c:if test="${loginUser.userId == foodFriends.userId}">
           <button id='modify-btn' class="btn btn-default">수정</button>
         </c:if>
           <button id='list-btn' class="btn btn-info">목록</button>

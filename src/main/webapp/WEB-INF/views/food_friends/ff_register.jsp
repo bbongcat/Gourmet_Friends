@@ -25,7 +25,7 @@
           <div class="form-group">
             <label>카테고리</label> 
             <select name="cateNotice">
-            <c:if test="${loginUser.admin == 'ADMIN'}">
+            <c:if test="${loginUser.userAuth == 'ADMIN'}">
               <option value="SPECIFIC">공지</option>
             </c:if>
               <option value="GENERAL">일반</option>
@@ -41,7 +41,7 @@
           </div>
 
           <div class="form-group">
-            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
+            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userId}">
           </div>
           <button type="submit" class="btn btn-default">Submit Button</button>
           <button type="reset" class="btn btn-default">Reset Button</button>

@@ -47,14 +47,14 @@
         </div>
 
         <div class="form-group">
-          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userNick}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userId}" readonly>
         </div>
 
         <div class="form-group">
           <div class="uploaded-list"></div>
         </div>
 
-        <c:if test="${loginUser.userNick == review.userId}">
+        <c:if test="${loginUser.userId == review.userId}">
           <button id='modify-btn' class="btn btn-default">수정</button>
         </c:if>
           <button id='report-Btn' class="btn btn-info">신고</button>

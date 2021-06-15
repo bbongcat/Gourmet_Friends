@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,9 +13,6 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-    <!-- linear icons css -->
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
     <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,9 +41,6 @@
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery.min.js"></script>
-
-    <!-- daum 도로명주소 찾기 api --> 
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
 </head>
 
@@ -261,16 +256,32 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
+
+                    <c:if test="${sessionScope.loginUser == null}">
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="/user/login"><i class="fa fa-gear fa-fw"></i> Login </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="/user/sign_up"><i class="fa fa-sign-out fa-fw"></i> sign-up </a>
+                            </li>
+                        </ul>
+                    </c:if>
+
+                    <c:if test="${sessionScope.loginUser != null}">
+                        <ul class="dropdown-menu dropdown-user">
+                            <c:if test="${loginUser.userAuth == 'ADMIN'}">
+                                <li><a href="/admin/manager">관리자 페이지</a></li>
+                            </c:if>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> ${loginUser.name} Profile</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </c:if>
+                        <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>

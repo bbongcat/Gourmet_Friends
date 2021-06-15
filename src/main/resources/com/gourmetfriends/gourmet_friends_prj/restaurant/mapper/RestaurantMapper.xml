@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gourmetfriends.gourmet_friends_prj.restaurant.mapper.RestaurantMapper">
+    <resultMap id="restaurantMap" type="com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant">
+        <result property="restNo" column="rest_no"/>
+        <result property="restName" column="rest_name"/>
+        <result property="restPh" column="rest_ph"/>
+        <result property="restStar" column="rest_star"/>
+        <result property="restTime" column="rest_time"/>
+        <result property="restPhoto" column="rest_photo"/>
+        <result property="restOaddress" column="rest_oaddress"/>
+        <result property="restAddress" column="rest_address"/>
+        <result property="restDetailaddress" column="rest_detailaddress"/>
+    </resultMap>
+
+    <!-- 음식점 등록 -->
+    <insert id="restInsert">
+        INSERT INTO restaurant
+        (rest_no,rest_name,rest_ph,rest_star,rest_time,
+         rest_oaddress,rest_address,rest_detailaddress)
+        VALUES(seq_restaurant.nextval, #{restName}, #{restPh}, #{restStar},#{restTime},
+               #{restOaddress},#{restAddress}, #{restDetailaddress})
+    </insert>
+</mapper>
