@@ -11,26 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/admin/*")
 @RequiredArgsConstructor
-@RequestMapping("/restaurant/*")
 @Log4j2
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
 
-    //음식적 등록 화면 요청 처리
-    @GetMapping("/rest_register")
-    public String restRegister(){
-        log.info("/restaurant/rest_register GET요청");
-        return "restaurant/rest_register";
-    }
-
-    //음식점 데이터베이스 저장 요청
-    @PostMapping("/rest_register")
-    public String restRegister(Restaurant restaurant, RedirectAttributes ra){
-        log.info("/restaurant/rest_register POST요청: " + restaurant);
+    //음식점 등록
+    @PostMapping("/rest_insert")
+    public String restInsert(Restaurant restaurant, RedirectAttributes ra){
+        log.info("/admin/rest_insert POST요청: " + restaurant);
         restaurantService.restRegister(restaurant);
-        ra.addFlashAttribute("register_result",restaurant.getRestName());
-        return "redirect:/restaurant/rest_list";
+
+        ra.addFlashAttribute("insert_result",restaurant.getRestName());
+
+        return "redirect:/admin/rest_manage";
     }
 }

@@ -7,7 +7,6 @@
         <result property="restNo" column="rest_no"/>
         <result property="restName" column="rest_name"/>
         <result property="restPh" column="rest_ph"/>
-        <result property="restStar" column="rest_star"/>
         <result property="restTime" column="rest_time"/>
         <result property="restPhoto" column="rest_photo"/>
         <result property="restOaddress" column="rest_oaddress"/>
@@ -18,9 +17,28 @@
     <!-- 음식점 등록 -->
     <insert id="restInsert">
         INSERT INTO restaurant
-        (rest_no,rest_name,rest_ph,rest_star,rest_time,
+        (rest_no,rest_name,rest_ph,rest_time,
          rest_oaddress,rest_address,rest_detailaddress)
-        VALUES(seq_restaurant.nextval, #{restName}, #{restPh}, #{restStar},#{restTime},
+        VALUES(seq_restaurant.nextval, #{restName}, #{restPh},#{restTime},
                #{restOaddress},#{restAddress}, #{restDetailaddress})
     </insert>
+
+    <select id="restList" resultMap="restaurantMap">
+        SELECT rest_no,rest_name,rest_ph,rest_time,
+               rest_oaddress,rest_address,rest_detailaddress
+        FROM restaurant
+        <if test="keyword != null">
+            WHERE rest_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY rest_no DESC
+        LIMIT #{startIndex}, #{amount}
+    </select>
+
+    <select id="restGetTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM restaurant
+        <if test="keyword != null">
+            WHERE rest_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+    </select>
 </mapper>
