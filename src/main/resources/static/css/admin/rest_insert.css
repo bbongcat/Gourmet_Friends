@@ -132,12 +132,7 @@ ul{
     font-size: 20px;
     padding: 5px 1%;
 }
-.form_section_content select{
-    width: 98%;
-    height: 35px;
-    font-size: 20px;
-    text-align-last: center;
-}
+
 
 /* 입력란 공란 경고 태그 */
 .form_section_content span{
@@ -148,6 +143,18 @@ ul{
     font-weight: 300;
 }
 
+.form_section_content select{
+    width: 92%;
+    height: 35px;
+    font-size: 20px;
+    text-align-last: center;
+}
+.cate_wrap span{
+    font-weight: 600;
+}
+.cate_wrap:not(:first-child){
+    margin-top: 20px;
+}
 
 /* 버튼 영역 */
 .btn_section{
@@ -161,7 +168,7 @@ ul{
     font-weight: 600;
     line-height: 40px;
 }
-.enroll_btn{
+.insert_btn{
     background-color: #dbdde2;
     margin-left:15px;
 }

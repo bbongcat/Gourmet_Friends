@@ -1,4 +1,6 @@
 package com.gourmetfriends.gourmet_friends_prj.restaurant.controller;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.common.PageMaker;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.service.RestaurantService;
@@ -61,8 +63,17 @@ public class AdminController {
 
     //음식점 등록 페이지 접속
     @GetMapping("/rest_insert")
-    public String restInsert(){
+    public String restInsert(Model model) throws Exception {
         log.info("/admin/rest_insert 음식점 등록 페이지 이동");
+
+        ObjectMapper objm = new ObjectMapper();
+
+        List list = restaurantService.cateList();
+
+        String cateList = objm.writeValueAsString(list);
+
+        model.addAttribute("cateList",cateList);
+
         return "admin/rest_insert";
     }
 

@@ -6,6 +6,7 @@
     <resultMap id="restaurantMap" type="com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant">
         <result property="restNo" column="rest_no"/>
         <result property="restName" column="rest_name"/>
+        <result property="cateCode" column="cate_code"/>
         <result property="restPh" column="rest_ph"/>
         <result property="restTime" column="rest_time"/>
         <result property="restPhoto" column="rest_photo"/>
@@ -13,18 +14,23 @@
         <result property="restAddress" column="rest_address"/>
         <result property="restDetailaddress" column="rest_detailaddress"/>
     </resultMap>
+    <resultMap id="cateMap" type="com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Category">
+        <result property="cateCode" column="cate_code"/>
+        <result property="cateName" column="cate_name"/>
+        <result property="cateParent" column="cate_parent"/>
+    </resultMap>
 
     <!-- 음식점 등록 -->
     <insert id="restInsert">
         INSERT INTO restaurant
-        (rest_no,rest_name,rest_ph,rest_time,
+        (rest_no,rest_name,rest_ph,rest_time,cate_code
          rest_oaddress,rest_address,rest_detailaddress)
-        VALUES(seq_restaurant.nextval, #{restName}, #{restPh},#{restTime},
+        VALUES(seq_restaurant.nextval, #{restName}, #{restPh},#{restTime},#{cateCode},
                #{restOaddress},#{restAddress}, #{restDetailaddress})
     </insert>
 
     <select id="restList" resultMap="restaurantMap">
-        SELECT rest_no,rest_name,rest_ph,rest_time,
+        SELECT rest_no,rest_name,rest_ph,rest_time,cate_code
                rest_oaddress,rest_address,rest_detailaddress
         FROM restaurant
         <if test="keyword != null">
@@ -40,5 +46,29 @@
         <if test="keyword != null">
             WHERE rest_name LIKE CONCAT('%', #{keyword}, '%')
         </if>
+    </select>
+
+    <select id="restGetDetail" resultMap="restaurantMap">
+        SELECT *
+        FROM restaurant
+        WHERE rest_no = #{restNo}
+    </select>
+
+    <update id="restModify">
+        UPDATE restaurant
+        SET
+            rest_name = #{restName},
+            rest_ph = #{restPh},
+            rest_time = #{restTime},
+            rest_oaddress = #{restOaddress},
+            rest_address = #{restAddress},
+            rest_detailaddress = #{restDetailaddress}
+        WHERE rest_no = #{restNo}
+    </update>
+
+    <select id="cateList" resultMap="cateMap">
+        SELECT *
+        FROM category
+        ORDER BY cate_code
     </select>
 </mapper>

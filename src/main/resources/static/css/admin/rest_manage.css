@@ -132,12 +132,6 @@ ul{
     font-size: 20px;
     padding: 5px 1%;
 }
-.form_section_content select{
-    width: 98%;
-    height: 35px;
-    font-size: 20px;
-    text-align-last: center;
-}
 
 /* 입력란 공란 경고 태그 */
 .form_section_content span{
@@ -224,7 +218,7 @@ ul{
     width: 110px;
 }
 .th_coloumn_3{
-    width: 120px;
+    width: 110px;
 }
 .th_coloumn_4{
     width: 120px;
@@ -233,9 +227,12 @@ ul{
     width: 120px;
 }
 .th_coloumn_6{
-    width: 140px;
+    width: 120px;
 }
 .th_coloumn_7{
+    width: 140px;
+}
+.th_coloumn_8{
     width: 140px;
 }
 
@@ -279,7 +276,7 @@ ul{
     position: relative;
     text-align: center;
 }
-search_input input[neme='keyword']{
+.search_input input[neme='keyword']{
     padding: 4px 10px;
     font-size: 15px;
     height: 20px;
@@ -300,4 +297,10 @@ search_input input[neme='keyword']{
     text-align: center;
     margin: 200px 0 215px 0px;
     font-size: 25px;
+}
+
+/* 작가 상세 페이지 이동 태그 */
+.rest_table a{
+    color: #1088ed;
+    font-weight: 500;
 }

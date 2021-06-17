@@ -27,17 +27,23 @@
                                     <tr>
                                         <td class="th_coloumn_1">음식점 번호</td>
                                         <td class="th_coloumn_2">음식점 이름</td>
-                                        <td class="th_coloumn_3">음식점 전화번호</td>
-                                        <td class="th_coloumn_4">음식점 영업시간</td>
-                                        <td class="th_coloumn_5">음식점 우편주소</td>
-                                        <td class="th_coloumn_6">음식점 도로명주소</td>
-                                        <td class="th_coloumn_7">음식점 상세주소</td>
+                                        <td class="th coloumn_3">음식점 카테고리</td>
+                                        <td class="th_coloumn_4">음식점 전화번호</td>
+                                        <td class="th_coloumn_5">음식점 영업시간</td>
+                                        <td class="th_coloumn_6">음식점 우편주소</td>
+                                        <td class="th_coloumn_7">음식점 도로명주소</td>
+                                        <td class="th_coloumn_8">음식점 상세주소</td>
                                     </tr>
                                 </th>
                                 
                                 <c:forEach items="${restList}" var="restList">
                                     <td><c:out value="${restList.restNo}"></c:out></td>
-                                    <td><c:out value="${restList.restName}"></c:out></td>
+                                    <td>
+                                        <a class="move" href='<c:out value="${restList.restNo}"/>'>
+                                            <c:out value="${restList.restName}"></c:out>
+                                        </a>
+                                    </td>
+                                    <td><c:out value="${restList.cateCode}"></c:out></td>     
                                     <td><c:out value="${restList.restPh}"></c:out></td>
                                     <td><c:out value="${restList.restTime}"></c:out></td>
                                     <td><c:out value="${restList.restOaddress}"></c:out></td>
@@ -100,8 +106,10 @@
     <script>
         $(document).ready(function(){
             let result = '<c:out value="${insert_result}"/>';
+            let mresult = '<c:out value="${modify_result}"/>';
 
             checkResult(result);
+            checkmResult(mresult);
 
             function checkResult(result){
 
@@ -109,6 +117,15 @@
                     return;
                 }
                 alert("음식점'${insert_result}'을 등록하였습니다.");
+            }
+
+            function checkResult(result){
+
+                if(mresult === '1'){
+                    alert('음식점 정보 수정을 완료하였습니다.');
+                }else if(mresult === '0'){
+                    alert('음식점 정보 수정을 하지 못하였습니다.');
+                }
             }
         });
 
@@ -134,6 +151,14 @@
             searchForm.find("input[name='page']").val("1");
 
             searchForm.submit();
+        });
+
+        //작가 상세 페이지 이동 
+        $('.move').on('click',function(e){
+            e.preventDefault();
+            moveForm.append("<input type='hidden' name='restNo' value='"+ $(this).attr("href") + "'>");
+            moveForm.attr("action","/admin/rest_detail");
+            moveForm.submit();
         });
     </script>
 

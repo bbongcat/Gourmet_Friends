@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 public class Restaurant {
     private Long restNo; //음식점 번호
-//    private  Long cateNo; //카테고리 번호
+    private String cateCode; //카테고리 번호
     private String restName; //음식점 이름
     private String restPh; //음식점 전화번호
 //    private Long restStar; //음식점 별점

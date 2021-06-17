@@ -73,10 +73,11 @@
             <div class="form-group">
                 <label for="userGender">성별</label>
                 <input type="checkbox" id="userGender" name="userGender" value="남">남
-                <input type="checkbox" id="userGender" name="userGender" value="남">여
+                <input type="checkbox" id="userGender" name="userGender" value="여">여
             </div>
 
             <div class="form-group">
+                <label for="userAddress">주소</label>
                 <input type="text" class="form-control" placeholder="우편번호" name="userOaddress" id="userOaddress" readonly>
                 <button type="button" class="btn btn-default" onclick='execPostCode();'><i class="fa fa-search"></i>우편번호 찾기</button>
             </div>
