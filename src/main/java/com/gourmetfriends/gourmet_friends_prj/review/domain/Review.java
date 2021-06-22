@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
-
 @Getter @Setter @ToString
 public class Review {
 
@@ -15,7 +13,7 @@ public class Review {
     private Long restNo;//음식점 코드 번호
     private Long revStar;//리뷰 평점
     private String reportCnt;//리뷰 신고 수
-
-    private List<String> revPhotos; //리뷰 사진
     private int revReplyCnt;//리뷰 댓글 수
-}
+    private String reviewImg; //리뷰 메인 이미지
+    private String reviewThumbImg; //리뷰 썸네일 이미지
+ }

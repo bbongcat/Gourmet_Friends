@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../includes/header.jsp"%>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 <div class="row">
   <div class="col-lg-12">
@@ -25,18 +26,11 @@
 
           <div class="form-group">
             <label>신고내용</label>
-            <br>
-            <input type="text" list="report-content" name='reportContent'>
-            <datalist id="report-content">
-              <option>부정한 의미를 갖는 글이기 때문에</option>
-              <option>욕설을 포함하고 있기 때문에</option>
-              <option>게시판의 취지와 맞지 않는 글이기 때문에</option>
-              <option>기타</option>
-           </datalist>
+            <textarea class="form-control" name="reportContent" id="reportContent_textarea"></textarea>
           </div>
 
           <div class="form-group">
-            <label>회원</label> <input class="form-control" name='userId' readonly value="${report.userId}">
+            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userId}">
           </div>
 
           <button type="submit" class="btn btn-default">Submit Button</button>
@@ -52,4 +46,15 @@
   <!-- end panel -->
 </div>
 <!-- /.row -->
+
+<script>
+
+          //위지윅 적용 
+          ClassicEditor
+                .create(document.querySelector('#reportContent_textarea'),config)
+                .catch(error => {
+                    console.error(error);
+                });               
+
+</script>
 <%@include file="../includes/footer.jsp"%>

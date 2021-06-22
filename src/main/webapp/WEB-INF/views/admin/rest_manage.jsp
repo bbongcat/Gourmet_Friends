@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="ko">
   <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +43,7 @@
                                             <c:out value="${restList.restName}"></c:out>
                                         </a>
                                     </td>
-                                    <td><c:out value="${restList.cateCode}"></c:out></td>     
+                                    <td><c:out value="${restList.cateName}"></c:out></td>     
                                     <td><c:out value="${restList.restPh}"></c:out></td>
                                     <td><c:out value="${restList.restTime}"></c:out></td>
                                     <td><c:out value="${restList.restOaddress}"></c:out></td>
@@ -71,29 +71,28 @@
                         </div>
                     </form>
                 </div>
+                      <!-- pagination  -->
+            <div class="pull-right">
+                <ul class="pagination">
+                    <c:if test = "${pageInfo.prev}">
+                        <li class="paginate_button previous">
+                            <a href="/admin/rest_manage${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
+                        </li>
+                    </c:if>
+                        
+                    <c:forEach var= "num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+                        <li class="paginate_button"><a href="/admin/rest_manage${pageInfo.makeParam(num)}">${num}</a></li>
+                    </c:forEach>
 
-                <!-- pagination  -->
-                <div class="pageMaker_wrap">
-                    <ul class="pageMaker">
-                        <c:if test="${pageInfo.prev}">
-                            <li class="pageMaker_btn prev">
-                                <a href="${pageInfo.startPage - 1}">이전</a>
-                            </li>
-                        </c:if>
-                        <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="num">
-                            <li class="pageMaker_btn ${pageInfo.cri.page == num ?}"active":""}">
-                                <a href="${num}">${num}</a>
-                            </li>
-                        </c:forEach>
-                        <c:if test="${pageInfo.next}">
-                            <li class="pageMaker_btn next">
-                                <a href="${pageInfo.endPage + 1}">다음</a>
-                            </li>
-                        </c:if>
-                    </ul>
-                </div>
+                    <c:if test = "${pageInfo.next}">
+                        <li class="paginate_button next">
+                            <a href="/admin/rest_manage${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
+                        </li>
+                    </c:if>
+
+                </ul>
+            </div>
                 <!-- end pagination  -->
-
                 <form id="moveForm" action="/admin/rest_manage" method="GET">
                     <input type="hidden" name="page" value="${pageInfo.cri.page}">
                     <input type="hidden" name="amount" value="${pageInfo.cri.amount}">
@@ -127,20 +126,38 @@
                     alert('음식점 정보 수정을 하지 못하였습니다.');
                 }
             }
+
+            let delete_result = '${delete_result}';
+
+            if(delete_result == 1){
+                alert('삭제 완료');
+            }else if(delete_result == 2){
+                alert('해당 음식점 데이터를 사용하고 있는 데이터가 있어서 삭제할 수 없습니다.');
+            }
+
+            function appendPageActive(currentPage){
+         
+                const $pageLiList = document.querySelectorAll('.paginate_button');
+                for($li of $pageLiList){
+                        if($li.textContent === currentPage){
+                            $li.classList.add('active');
+                        }
+                    }
+
+            }
+
+            (function () {
+
+                appendPageActive("${pageInfo.cri.page}");
+
+            }());
         });
 
         let moveForm = $('#moveForm');
         let searchForm = $('#searchForm');
 
-        // 페이지 이동 
-        $('.pageMaker_btn a').on('click', function(e){
-            e.preventDefault();
-            moveForm.find("input[name='page']").val($(this).attr("href"));
-            moveForm.submit();
-        });
-
         //음식점 검색 버튼 
-        $('#searchForm button').on(function(e){
+        $('#searchForm button').on('click',function(e){
             e.preventDefault();
 
             if(!searchForm.find("input[name='keyword']").val()){
@@ -153,7 +170,7 @@
             searchForm.submit();
         });
 
-        //작가 상세 페이지 이동 
+        //음식점 상세 페이지 이동 
         $('.move').on('click',function(e){
             e.preventDefault();
             moveForm.append("<input type='hidden' name='restNo' value='"+ $(this).attr("href") + "'>");

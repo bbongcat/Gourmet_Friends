@@ -6,36 +6,10 @@
 
 <style>
 
-  .fileDrop {
-      width: 800px;
-      height: 400px;
-      border: 1px dashed gray;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5em;
-  }
-  .uploaded-list{
-      display: flex;
-  }
-  .star-rating{
-    font-size: 0;
-    letter-spacing: -4px;
-  }
-  .star-rating a {
-    font-size: 22px;
-    letter-spacing: 0;
-    display: inline-block;
-    margin-left: 5px;
-    color: #ccc;
-    text-decoration: none;
-  }
-  .star-rating a:first-child {
-    margin-left: 0;
-  }
-  .star-rating a.on {
-    color: #FFFF00;
-  }
+.select_img img {
+    margin: 20px 0;
+}
+
 </style>
 
 <div class="row">
@@ -54,7 +28,7 @@
       <!-- /.panel-heading -->
       <div class="panel-body">
 
-        <form role="form" action="/review/rev_register" method="post">
+        <form role="form" action="/review/rev_register" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label>음식점 번호</label> <input class="form-control" name='restNo' value="${review.restNo}">
           </div>
@@ -78,21 +52,15 @@
          </div>
 
           <div class="form-group">
-            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userNick}">
+            <label>회원</label> <input class="form-control" name='userId' readonly value="${loginUser.userId}">
           </div>
 
           <br>
 
-          <!-- 첨부파일 드래그 앤 드롭 영역 -->
-          <div class="form-group">
-            <div class="fileDrop">
-              <span>사진을 드래그 하세요.</span>
-            </div>
-            <div class="uploadDiv">
-              <input type="file" name="files" id="ajax-file" style="display: none;">
-            </div>
-            <!-- 업로드된 파일의 썸네일을 보여줄 영역 -->
-            <div class="uploaded-list"></div>
+          <div class="form_group">
+            <label for="review">메뉴 이미지</label>
+            <input type="file" id="reviewImg" name="file">
+            <div class="select_img"><img src=""></div>
           </div>
           
           <button type="submit" class="btn btn-default">Submit Button</button>
@@ -110,92 +78,30 @@
 </div>
 <!-- /.row -->
 <script>
-  $(document).ready(function() {
+        $(document).ready(function() {
 
-     const $dropBox = $('.fileDrop');
-     
-     $dropBox.on('dragover dragenter',e => {
-         e.preventDefault();
-         $dropBox.css('border-color','red').css('background','lightgray');
-     });
-     $dropBox.on('dragleave',e => {
-         e.preventDefault();
-         $dropBox.css('border-color','gray').css('background','transparent');
-     });
+          $('.star-rating a').click(function(){
+            $(this).parent().children('a').removeClass('on');
+            $(this).addClass('on').prevAll('a').addClass('on');
+            let starRate = $(this).attr('id');
+            $('#revStar').val(starRate);
+            return false;
+          });
 
-     function isImageFile(originFileName){
-         const pattern = /jpg$|gif$|png$/i;
-         return originFileName.match(pattern);
-     }
-      
+        });
 
-     function checkExtType(fileName){
-         let originFileName = fileName.substring(fileName.indexOf("_") + 1);
+        
+        //리뷰 이미지 
+        $("#reviewImg").change(function(){
+            if(this.files && this.files[0]){
+                let reader = new FileReader;
+                reader.onload = function(data){
+                    $(".select_ img img").attr("src",data.target.result).width(500);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
 
-         const $li = document.createElement('li');
-         const $input = document.createElement('input');
-         $input.setAttribute('type','hidden');
-         $input.setAttribute('name','fileNames');
-         $input.setAttribute('value',fileName);
-         $li.appendChild($input);
-
-         if(isImageFile(originFileName)){
-             originFileName = fileName.substring(fileName.indexOf("_") + 1);
-
-             const $img = document.createElement('img');
-             $img.classList.add('img-sizing');
-             $img.setAttribute('src','/loadFile?fileName='+fileName);
-             $img.setAttribute('alt',originFileName);
-             
-             $li.appendChild($img);
-             $('.uploaded-list').append($li);
-         }
-     }
-
-     function showFileData(fileNameList){
-         for(let fileName of fileNameList){
-
-             checkExtType(fileName);
-
-         }
-     }
-
-     $dropBox.on('drop',e => {
-         e.preventDefault();
-
-         const files = e.originalEvent.dataTransfer.files;
-
-         const $fileInput = $('#ajax-file');
-         $fileInput.prop('files',files);
-
-         const formData = new FormData();
-         const sendFiles = $fileInput[0].files;
-
-         for(let file of sendFiles){
-             formData.append('files',file);
-         }
-         
-         const reqInfo = {
-             method: 'POST',
-             body: formData 
-         }
-         fetch('/ajaxUpload',reqInfo)
-             .then(res => res.json())
-             .then(fileNameList => {
-                 showFileData(fileNameList);
-             });
-     });
-
-     $('.star-rating a').click(function(){
-       $(this).parent().children('a').removeClass('on');
-       $(this).addClass('on').prevAll('a').addClass('on');
-       let starRate = $(this).attr('id');
-       $('#revStar').val(starRate);
-       return false;
-     });
-
-
-  });
 
 </script>
 <%@include file="../includes/footer.jsp"%>

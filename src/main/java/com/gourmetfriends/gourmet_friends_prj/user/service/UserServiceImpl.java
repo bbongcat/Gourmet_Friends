@@ -47,15 +47,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(User inputData, User dbData) {
-        if (dbData != null) {
+        if(dbData != null){
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            if (encoder.matches(inputData.getUserPw(), dbData.getUserPw())) {
+            if(encoder.matches(inputData.getUserPw(), dbData.getUserPw())){
                 return "loginSuccess";
-            } else {
+            }else {
                 return "pwFail";
             }
-        } else {
+        }else {
             return "idFail";
         }
     }
+
 }

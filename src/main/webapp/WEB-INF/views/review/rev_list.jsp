@@ -35,6 +35,7 @@
                     <tr>
                         <th>리뷰 번호</th>
                         <th>음식점 번호</th>
+                        <th>음식점 이름</th>
                         <th>리뷰 내용</th>
                         <th>댓글 수</th>
                         <th>리뷰 평점</th>
@@ -52,6 +53,7 @@
                         </a>
                      </td>
 
+                     <td>${restaurant.restName}</td>
                      <td>${review.revContent}</td>
                      <td>${review.revReplyCnt}</td>
                      <td>

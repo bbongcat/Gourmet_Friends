@@ -18,11 +18,17 @@ public interface RestaurantService {
     int restGetTotal(Criteria cri);
 
     //음식점 상세 페이지
-    Restaurant restGetDetail(int restNo);
+    Restaurant restGetDetail(Long restNo);
 
     //음식점 정보 수정
     int restModify(Restaurant restaurant);
 
     //카테고리 리스트
     List<Category> cateList();
+
+    //음식점 삭제
+    int restDelete(Long restNo);
+
+    //카테고리별 음식점 리스트
+    List<Restaurant> restCateList(String cateCode, Long tier);
 }

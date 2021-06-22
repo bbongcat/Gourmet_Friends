@@ -13,9 +13,6 @@ public interface ReviewService {
     //리뷰 상세 조회
     Review revGet(Long revBno);
 
-    //첨부파일명 조회
-    List<String> getRevPhoto(Long revBno);
-
     //리뷰 수정 과정
     boolean revModify(Review review);
 

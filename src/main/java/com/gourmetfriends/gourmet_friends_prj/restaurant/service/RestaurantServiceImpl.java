@@ -32,7 +32,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant restGetDetail(int restNo) {
+    public Restaurant restGetDetail(Long restNo) {
         return restaurantMapper.restGetDetail((restNo));
     }
 
@@ -45,4 +45,27 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<Category> cateList() {
         return restaurantMapper.cateList();
     }
+
+    @Override
+    public int restDelete(Long restNo) {
+        return restaurantMapper.restDelete(restNo);
+    }
+
+    @Override
+    public List<Restaurant> restCateList(String cateCode, Long tier) {
+
+        String cateParent = null;
+
+        if(tier == 1){
+            cateParent = cateCode;
+            return restaurantMapper.restCateList1(cateCode,cateParent);
+        }else if(tier == 2){
+            cateParent = cateCode;
+            return restaurantMapper.restCateList2(cateCode,cateParent);
+        }else {
+            return restaurantMapper.restCateList3(cateCode);
+        }
+    }
+
+
 }

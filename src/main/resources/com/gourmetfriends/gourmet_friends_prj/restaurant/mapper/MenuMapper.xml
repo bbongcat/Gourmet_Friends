@@ -9,11 +9,62 @@
         <result property="restNo" column="rest_no"/>
         <result property="menuIntro" column="menu_intro"/>
         <result property="menuPrice" column="menu_price"/>
+        <result property="menuImg" column="menu_img"/>
+        <result property="menuThumbImg" column="menu_thumb_img"/>
+    </resultMap>
+
+    <resultMap id="restaurantMap" type="com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant">
+        <result property="restNo" column="rest_no"/>
+        <result property="restName" column="rest_name"/>
     </resultMap>
 
     <insert id="menuInsert">
-        INSERT INTO menu(menu_no,menu_name,rest_no,menu_intro,menu_price)
-        VALUES (seq_menu.nextval,#{menuName},#{restNo},#{menuIntro},#{menuPrice})
+        INSERT INTO menu(menu_no,menu_name,rest_no,menu_intro,menu_price,menu_img,menu_thumb_img)
+        VALUES (seq_menu.nextval,#{menuName},#{restNo},#{menuIntro},#{menuPrice},#{menuImg},#{menuThumbImg})
     </insert>
+
+    <!-- 메뉴 리스트 -->
+    <select id="menuList" resultMap="menuMap">
+        SELECT menu_no, menu_name, b.rest_name, menu_price,
+               menu_img, menu_thumb_img
+        FROM menu a
+        LEFT OUTER JOIN restaurant b ON a.rest_no = b.rest_no
+        <if test="keyword != null">
+            WHERE (rest_name LIKE CONCAT('%', #{keyword},'%'))
+        </if>
+        ORDER BY menu_no DESC
+        LIMIT #{startIndex}, #{amount}
+    </select>
+
+    <!-- 메뉴 총 개수 -->
+    <select id="menuGetTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM menu
+        <if test="keyword != null">
+            WHERE menu_name LIKE CONCAT('%',#{keyword},'%')
+        </if>
+    </select>
+
+    <select id="menuGetDetail" resultType="int">
+        SELECT menu_no, menu_name,(SELECT rest_name FROM restaurant WHERE rest_no = menu.rest_no)
+               rest_no, menu_intro, menu_price, menu_img, menu_thumb_img
+        FROM menu WHERE menu_no = #{menuNo}
+    </select>
+
+    <update id="menuModify">
+        UPDATE menu
+        SET menu_name = #{menuName},
+            rest_no = #{restNo},
+            menu_price = #{menuPrice},
+            menu_intro = #{menuIntro},
+            menu_img = #{menuImg},
+            menu_thumb_img = #{menuThumbImg}
+        WHERE menu_no = #{menuNo}
+    </update>
+
+    <delete id="menuDelete">
+        DELETE FROM menu WHERE menu_no = #{menuNo}
+    </delete>
+
 
 </mapper>

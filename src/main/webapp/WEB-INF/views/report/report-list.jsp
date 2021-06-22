@@ -81,5 +81,27 @@
 </div>
 <!-- /.row -->
 
+<script>
+
+   $(document).ready(function(){
+      function appendPageActive(currentPage){
+
+      const $pageLiList = document.querySelectorAll('.paginate_button');
+            for($li of $pageLiList){
+               if($li.textContent === currentPage){
+                  $li.classList.add('active');
+               }
+            }
+
+      }
+
+      (function () {
+
+         appendPageActive("${pageInfo.cri.page}");
+
+      }());
+   });
+</script>
+
 
 <%@include file="../includes/footer.jsp"%>

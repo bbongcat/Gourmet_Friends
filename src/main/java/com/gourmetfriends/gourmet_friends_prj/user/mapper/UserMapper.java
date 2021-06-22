@@ -16,4 +16,5 @@ public interface UserMapper {
 
     //회원 정보 조회 기능
     User getUserInfo(String userId);
+
 }

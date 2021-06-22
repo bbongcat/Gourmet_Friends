@@ -30,14 +30,8 @@ public interface ReviewMapper {
     //글 상세 조회
     Review revFindByBno(Long revBno);
 
-    //글 상세조회시 첨부파일명들 조회
-    List<String> findRevPhoto(Long revBno);
-
     //글 쓰기 기능
     void revWrite(Review review);
-
-    //사진 첨부 기능
-    void addRevPhoto(String revPhoto);
 
     //글 수정 기능
     int revUpdate(Review review);
@@ -50,6 +44,5 @@ public interface ReviewMapper {
 
     //리뷰 신고 수 증가
     void revIncreaseReportCount(Long revBno);
-
 
 }

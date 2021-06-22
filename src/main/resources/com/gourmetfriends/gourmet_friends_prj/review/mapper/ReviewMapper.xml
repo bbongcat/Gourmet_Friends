@@ -13,7 +13,10 @@
         <result property="revPhoto" column="rev_photo"/>
         <result property="reportCnt" column="report_cnt"/>
         <result property="revReplyCnt" column="rev_reply_cnt"/>
+        <result property="reviewImg" column="review_img"/>
+        <result property="reviewThumbImg" column="review_thumb_img"/>
     </resultMap>
+
 
     <select id="revGetList" resultMap="reviewMap">
         SELECT * FROM review
@@ -93,23 +96,9 @@
 
     <insert id="revWrite">
         INSERT INTO review
-            (rev_bno,user_id,rest_no,rev_star,rev_content)
-        VALUES(seq_review.nextval,#{userId},#{restNo},#{revStar},#{revContent})
+            (rev_bno,user_id,rest_no,rev_star,rev_content,review_img,review_thumb_img)
+        VALUES(seq_review.nextval,#{userId},#{restNo},#{revStar},#{revContent},#{reviewImg},#{reviewThumbImg})
     </insert>
-
-    <!-- 포토 첨부 처리 -->
-    <select id="addRevPhoto">
-        INSERT INTO photo_upload
-        (rev_photo,rev_bno)
-        VALUES (#{revPhoto},seq_review.nextval)
-    </select>
-    
-    <!-- 포토명 조회 -->
-    <select id="findRevPhoto" resultType="string">
-        SELECT rev_photo
-        FROM photo_upload
-        WHERE rev_bno = #{revBno}
-    </select>
 
     <update id="revUpdate">
         UPDATE review
@@ -117,7 +106,9 @@
             user_id = #{userId},
             rest_no = #{restNo},
             rev_star = #{revStar},
-            rev_content = #{revContent}
+            rev_content = #{revContent},
+            review_img = #{reviewImg},
+            review_thumb_img = #{reviewThumbImg}
         WHERE rev_bno = #{revBno}
     </update>
 

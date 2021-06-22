@@ -45,6 +45,10 @@
       box-sizing: border-box;
       border: 1px solid #e0e0e0;
    }
+   .select_img img {
+       width: 500px;
+       margin: 20px 0;
+   }
 </style>
 
 <div class="row">
@@ -63,7 +67,7 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
 
-                <form role="form" action="/review/rev_modify" method="post">
+                <form role="form" action="/review/rev_modify" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label>리뷰 번호</label>
@@ -100,6 +104,16 @@
                     <div class="form-group">
                         <label>회원</label>
                         <input class="form-control" name='userId' value='${review.userId}' readonly>
+                    </div>
+
+                    <div class="form_group">                       
+                            <label for="reviewImg">리뷰 이미지</label>
+                            <input type="file" id="reviewImg" name="file">
+                        <div class="select_img">
+                            <img src="${review.reviewImg}">
+                            <input type="hidden" name="reviewImg" value="${review.reviewImg}">
+                            <input type="hidden" name="reviewThumbImg" value="${review.reviewThumbImg}">
+                        </div>
                     </div>
 
                     <input type="hidden" name="page" value="${pageInfo.page}">
@@ -143,32 +157,43 @@
         $actionForm.submit();
     });
 
-//별점 마킹 모듈 프로토타입으로 생성
-function Rating(){};
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function(newrate){
-    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
-    this.rate = newrate;
-    let items = document.querySelectorAll('.rate-radio');
-    items.forEach(function(item, idx){
-        if(idx < newrate){
-            item.checked = true;
-        }else{
-            item.checked = false;
+    //별점 마킹 모듈 프로토타입으로 생성
+    function Rating(){};
+    Rating.prototype.rate = 0;
+    Rating.prototype.setRate = function(newrate){
+        //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+        this.rate = newrate;
+        let items = document.querySelectorAll('.rate-radio');
+        items.forEach(function(item, idx){
+            if(idx < newrate){
+                item.checked = true;
+            }else{
+                item.checked = false;
+            }
+        });
+    }
+    let rating = new Rating();//별점 인스턴스 생성
+
+    document.addEventListener('DOMContentLoaded', function(){
+        //별점선택 이벤트 리스너
+        document.querySelector('.rating').addEventListener('click',function(e){
+            let elem = e.target;
+            if(elem.classList.contains('.rate-radio')){
+                rating.setRate(parseInt(elem.value));
+            }
+        })
+    });
+
+    //리뷰 이미지 
+    $("#reviewImg").change(function(){
+        if(this.files && this.files[0]){
+            let reader = new FileReader;
+            reader.onload = function(data){
+                $(".select_img img").attr("src",data.target.result).width(500);
+            }
+            reader.readAsDataURL(this.files[0]);
         }
     });
-}
-let rating = new Rating();//별점 인스턴스 생성
-
-document.addEventListener('DOMContentLoaded', function(){
-    //별점선택 이벤트 리스너
-    document.querySelector('.rating').addEventListener('click',function(e){
-        let elem = e.target;
-        if(elem.classList.contains('.rate-radio')){
-            rating.setRate(parseInt(elem.value));
-        }
-    })
-});
 </script>
 
 

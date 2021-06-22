@@ -19,24 +19,11 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void revRegister(Review review) {
         reviewMapper.revWrite(review);
-
-        //첨부파일이 있는 경우
-        List<String> revPhotos = review.getRevPhotos();
-        if(revPhotos != null){
-            for (String photo : revPhotos) {
-                reviewMapper.addRevPhoto(photo);
-            }
-        }
     }
 
     @Override
     public Review revGet(Long revBno) {
         return reviewMapper.revFindByBno(revBno);
-    }
-
-    @Override
-    public List<String> getRevPhoto(Long revBno) {
-        return reviewMapper.findRevPhoto(revBno);
     }
 
     @Override

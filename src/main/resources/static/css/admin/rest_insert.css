@@ -156,6 +156,10 @@ ul{
     margin-top: 20px;
 }
 
+.select_img img {
+    margin: 20px 0;
+}
+
 /* 버튼 영역 */
 .btn_section{
     text-align: center;

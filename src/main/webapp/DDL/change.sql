@@ -122,3 +122,13 @@ insert into CATEGORY(tier, cate_Name, cate_code, cate_parent) values (3, '기타
 
 insert into CATEGORY(tier, cate_Name, cate_code, cate_parent) values (2, '비알콜음료점업', '202000','200000');
 insert into CATEGORY(tier, cate_Name, cate_code, cate_parent) values (3, '카페', '202001','202000');
+
+
+alter table RESTAURANT add(rest_thumb_img varchar(200));
+alter table RESTAURANT add(rest_img varchar(200));
+
+alter table MENU add(menu_thumb_img varchar(200));
+alter table MENU add(menu_img varchar(200));
+
+alter table REVIEW add(review_thumb_img varchar(200));
+alter table REVIEW add(review_img varchar(200));

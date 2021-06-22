@@ -8,6 +8,10 @@
 .star-rating {
   color: #FFFF00;
 }
+.oriImg{
+  width: 500px;
+  height: auto;
+}
 </style>
 
 <div class="row">
@@ -50,8 +54,13 @@
           <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userId}" readonly>
         </div>
 
-        <div class="form-group">
-          <div class="uploaded-list"></div>
+        <div class="form_group">         
+          <label for="reviewImg">리뷰 이미지</label>
+          <p>원본 이미지</p>
+          <img src="${review.reviewImg}" class="oriImg">
+
+          <p>썸네일</p>
+          <img src="${review.reviewThumbImg}" class="thumbImg">
         </div>
 
         <c:if test="${loginUser.userId == review.userId}">
@@ -69,8 +78,7 @@
                   </div>
                   <div class="modal-body">처리가 완료되었습니다.</div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-default"
-                          data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
               </div>
               <!-- /.modal-content -->
@@ -398,56 +406,6 @@
           }
         });
     });
-
-    function isImageFile(originFileName) {
-      const pattern = /jpg$|gif$|png$/i;
-      return originFileName.match(pattern);
-    }
-
-    function checkExtType(fileName) {
-      let originFileName = fileName.substring(fileName.indexOf("_") + 1);
-
-      const $li = document.createElement('li');
-      const $input = document.createElement('input');
-      $input.setAttribute('type', 'hidden');
-      $input.setAttribute('name', 'fileNames');
-      $input.setAttribute('value', fileName);
-      $li.appendChild($input);
-
-      if (isImageFile(originFileName)) {
-        originFileName = fileName.substring(fileName.indexOf("_") + 1);
-
-        const $img = document.createElement('img');
-        $img.classList.add('img-sizing');
-        $img.setAttribute('src', '/loadFile?fileName=' + fileName);
-        $img.setAttribute('alt', originFileName);
-
-        $li.appendChild($img);
-        $('.uploaded-list').append($li);
-      }
-
-    }
-
-    function showFileData(fileNameList) {
-
-      for (let fileName of fileNameList) {
-
-        checkExtType(fileName);
-
-      }
-    }
-
-
-    function showFileList() {
-      fetch('/review/photo/' + revBno)
-        .then(res => res.json())
-        .then(fileNameList => {
-          showFileData(fileNameList);
-        });
-
-    }
-
-    showFileList();
 
   }); //JQuery영역 
 

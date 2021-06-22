@@ -28,6 +28,9 @@
     </div>
     <div class="col-sm-6 col-md-offset-3">
         <form action="/user/sign_up" method="post" role="form" id="userCheck" name="user">
+
+            <input type="hidden" name="userAuth" value="COMMON">
+
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" class="form-control" id="userId" name="userId" placeholder="ID">

@@ -163,6 +163,17 @@ ul{
    background-color: #b8d3e8;
    margin-left:15px;
 }
+.delete_btn{
+   background-color: #b8d3e8;
+   margin-left: 15px;
+}
+.delete_btn:hover{
+   background-color: #e4a7a7;
+}
+.select_img img {
+   width: 500px;
+   margin: 20px 0;
+}
 
 /* footer navai 영역 */
 .footer_nav{

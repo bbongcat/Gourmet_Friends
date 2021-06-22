@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="ko">
   <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +11,7 @@
       <title>Document</title>
       <link rel="stylesheet" href="/css/admin/rest_insert.css">
       <script src="/vendor/jquery/jquery.min.js"></script>
+
 
   </head>
   <body>
@@ -20,7 +21,7 @@
                 <div class="admin_content_subject"><span>음식점 등록</span></div>
 
                 <div class="admin_content_main">
-                    <form action="/admin/rest_insert" method="POST" id="insertForm">
+                    <form action="/admin/rest_insert" method="POST" id="insertForm" enctype="multipart/form-data">
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -78,9 +79,7 @@
                                 <span id="warn_restTime">음식점 영업시간을 입력해주세요.</span>
                             </div>
                         </div>
-
-                        <!-- 음식점 메인사진 첨부 영역 -->
-
+                   
                         <div class="form_section">
                             <div class="form_section_title">
                                 <label>음식점 주소</label>
@@ -102,7 +101,15 @@
                                 <input type="text" class="form-control" placeholder="상세주소" name="restDetailaddress" id="restDetailaddress">
                                 <span id="warn_restDetailaddress">음식점 상세주소를 입력해주세요.</span>
                             </div>
-                        </div>           
+                        </div>  
+                        
+                        <div class="form_section">
+                            <div class="form_section_title">
+                                <label for="restImg">음식점 메인 이미지</label>
+                                <input type="file" id="restImg" name="file">
+                            </div>
+                            <div class="select_img"><img src=""></div>
+                        </div>
                     </form>
 
                     <div class="btn_section">
@@ -323,7 +330,21 @@
                 }
             }// for		
             
-        });		
+        });
+
+        //음식점 메인 이미지 
+        $("#restImg").change(function(){
+            if(this.files && this.files[0]){
+                let reader = new FileReader;
+                reader.onload = function(data){
+                    $(".select_img img").attr("src",data.target.result).width(500);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+
+            
     </script>
 
   </body>

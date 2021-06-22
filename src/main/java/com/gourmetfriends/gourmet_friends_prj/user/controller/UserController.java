@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -71,7 +72,7 @@ public class UserController {
             //로그인 성공 처리
             //세션에 로그인한 유저정보를 기록
             session.setAttribute("loginUser", dbUser);
-            return "redirect:/food_friends/ff_list";
+            return "redirect:/main";
         }
 
         return "user/login-result";
