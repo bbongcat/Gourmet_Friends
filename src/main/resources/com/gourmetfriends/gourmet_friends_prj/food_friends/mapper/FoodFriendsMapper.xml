@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gourmetfriends.gourmet_friends_prj.food_friends.mapper.FoodFriendsMapper">
+
+    <resultMap id="foodFriendsMap" type="com.gourmetfriends.gourmet_friends_prj.food_friends.domain.FoodFriends">
+        <result property="ffBno" column="ff_bno"/>
+        <result property="userId" column="user_id"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="ffReplyCnt" column="ff_reply_cnt"/>
+        <result property="cateNotice" column="cate_notice"/>
+    </resultMap>
+
+    <select id="getList" resultMap="foodFriendsMap">
+        SELECT * FROM food_friends
+        WHERE ff_bno > 0
+        ORDER BY ff_bno DESC
+    </select>
+
+    <!-- 페이징 처리 -->
+    <select id="getListWithPaging" resultMap="foodFriendsMap">
+        SELECT ff_bno,title,content,user_id,reg_date,update_date
+        FROM food_friends
+        ORDER BY ff_bno DESC
+        LIMIT #{startIndex} , #{amount}
+    </select>
+
+    <!-- 총 페이지 수-->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM food_friends
+    </select>
+
+    <!-- 제목으로 게시물 검색 기능 -->
+    <select id="getListByTitle" resultMap="foodFriendsMap">
+        SELECT ff_bno,title,content,user_id, reg_date, update_date
+        FROM food_friends
+        WHERE title LIKE CONCAT('%',#{keyword},'%')
+        ORDER BY ff_bno DESC
+        LIMIT #{startIndex} , #{amount}
+    </select>
+
+    <!-- 제목으로 검색 게시물 조회 -->
+    <select id="getTotalCountByTitle" resultType="int">
+        SELECT COUNT(*)
+        FROM food_friends
+        WHERE title LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <!-- 목록 조회 통합 검색 -->
+    <select id="getSearchList" resultMap="foodFriendsMap">
+        <![CDATA[
+            SELECT ff_bno,title,content,user_id, reg_date, update_date,ff_reply_cnt
+            FROM food_friends
+        ]]>
+            <if test="type == 'title'">
+                WHERE  title LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'content'">
+                WHERE content LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'userId'">
+                WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+            </if>
+            <if test="type == 'titleContent'">
+                WHERE  (title LIKE CONCAT('%',#{keyword},'%') OR
+                content LIKE CONCAT('%',#{keyword},'%'))
+            </if>
+        <![CDATA[
+            ORDER BY ff_bno DESC
+            LIMIT #{startIndex} , #{amount}
+        ]]>
+    </select>
+
+    <select id="getSearchTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM food_friends
+        <if test="type == 'title'">
+            WHERE title LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'userId'">
+            WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        <if test="type == 'titleContent'">
+            WHERE (title LIKE CONCAT('%',#{keyword},'%') OR
+                    content LIKE CONCAT('%',#{keyword},'%'))
+        </if>
+    </select>
+
+    <select id="findByBno" resultMap="foodFriendsMap">
+        SELECT * FROM food_friends
+        WHERE ff_bno = #{ffBno}
+    </select>
+    
+    <insert id="write">
+        INSERT INTO food_friends
+            (ff_bno,title, content, user_id)
+        VALUES(seq_food_friends.nextval,#{title},#{content},#{userId})
+    </insert>
+
+    <update id="update">
+        UPDATE food_friends
+        SET
+            title = #{title},
+            content = #{content},
+            user_id = #{userId},
+            update_date = now()
+        WHERE ff_bno = #{ffBno}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM food_friends
+        WHERE ff_bno = #{ffBno}
+    </delete>
+
+    <!-- 댓글 수 증가 -->
+    <update id="increaseFfReplyCnt">
+        UPDATE food_friends
+        SET ff_reply_cnt = (SELECT COUNT(*) FROM ff_reply WHERE ff_bno = #{ffBno})
+        WHERE ff_bno = #{ffBno}
+    </update>
+
+</mapper>
