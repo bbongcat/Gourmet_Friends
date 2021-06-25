@@ -35,5 +35,5 @@ public class RestaurantController {
 
        model.addAttribute("restCateList",restCateList);
     }
-    
+
 }

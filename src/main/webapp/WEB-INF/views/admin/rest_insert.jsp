@@ -158,11 +158,11 @@
                     console.log(data.zonecode);
                     console.log(fullRoadAddr);
                     
-                    $('[name=userOaddress]').val(data.zonecode);
-                    $('[name=userAddress]').val(fullRoadAddr);
+                    $('[name=restOaddress]').val(data.zonecode);
+                    $('[name=restAddress]').val(fullRoadAddr);
         
-                    document.getElementById('userOaddress').value = data.zonecode; //5자리 새우편번호 사용
-                    document.getElementById('userAddress').value = fullRoadAddr;
+                    document.getElementById('restOaddress').value = data.zonecode; //5자리 새우편번호 사용
+                    document.getElementById('restAddress').value = fullRoadAddr;
         
                     }
                 }).open();

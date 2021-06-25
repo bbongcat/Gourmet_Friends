@@ -102,6 +102,8 @@
 
 <script>
 
+    const birthCheck = false;
+
     $(document).ready(function(){
 
         //모든 공백 체크 정규식 
@@ -118,7 +120,6 @@
         const phoneCheck = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/); 
             
         const address = $('#userDetailaddress');
-        
 
         //아이디 중복 확인 
         $('#userId').blur(function(){
@@ -303,7 +304,7 @@
         });
 
         //생일 유효성 검사
-        const birthCheck = false;
+        let birthCheck = false;
         
         $('#userBirth').blur(function(){
             const dateStr = $(this).val();
@@ -359,7 +360,8 @@
         });
     });
    
-        //우편번호 찾기 버튼 클릭 시 발생 이벤트 
+        
+        //우편번호 찾기
         function execPostCode(){
             daum.postcode.load(function(){
         

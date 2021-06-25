@@ -33,12 +33,12 @@
                             </th>
                             <c:forEach items="{menuList}" var="menuList">
                                 <tr>
+                                    <td><c:out value="${menuList.menuNo}"></c:out></td>
                                     <td>
                                         <a class="move" href='<c:out value="${menuList.menuNo}"/>'>
                                             <c:out value="${menuList.menuName}"></c:out>
                                         </a>
                                     </td>     
-                                    <td><c:out value="${menuList.menuName}"></c:out></td>
                                     <td><c:out value="${menuList.restName}"></c:out></td>
                                     <td><c:out value="${menuList.menuPrice}"></c:out></td>
                                 </tr>

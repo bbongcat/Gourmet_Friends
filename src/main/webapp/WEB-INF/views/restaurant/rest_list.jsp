@@ -47,7 +47,7 @@
                                     <img src="${restCateList.restThumbImg}">
                                 </div>
                                 <div class="restName">
-                                    <a href="/restaurant/rest_list?n=${restCateList.restNo}">${restCateList.restName}</a>
+                                    <a href="/restaurant/rest_list?restNo=${restCateList.restNo}">${restCateList.restName}</a>
                                 </div>
                             </li>
                         </C:ForEach>

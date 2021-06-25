@@ -21,10 +21,10 @@
     <!-- 회원 가입 기능 -->
     <insert id="userRegister">
         INSERT INTO user
-            (user_id, user_pw, user_name, user_birth,user_email
+            (user_id, user_pw, user_name, user_birth,user_email,
             user_phone, user_gender, user_oaddress, user_address, user_detailaddress)
         VALUES (#{userId},#{userPw},#{userName},#{userBirth},#{userEmail},#{userPhone},
-                #{userGender},#{userOaddresss},#{userAddress},#{userDetailaddress})
+                #{userGender},#{userOaddress},#{userAddress},#{userDetailaddress})
     </insert>
 
     <!-- 회원 정보 조회 -->
