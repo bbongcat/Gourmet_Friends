@@ -1,4 +1,4 @@
-use gourmet_friends;
+-- use gourmet_friends;
 
 create table `food_friends`
 (
@@ -52,7 +52,7 @@ create table MENU
     menu_thumb_img varchar(200)
 );
 
-#restaurant 테이블 다시 생성
+-- #restaurant 테이블 다시 생성
 create table RESTAURANT
 (
     rest_no            bigint primary key,
@@ -70,7 +70,7 @@ create table RESTAURANT
 );
 
 
-#user 테이블 다시 생성
+-- user 테이블 다시 생성
 CREATE TABLE USER
 (
     user_id            varchar(100) PRIMARY KEY,
@@ -105,8 +105,8 @@ CREATE SEQUENCE SEQ_MENU;
 CREATE SEQUENCE SEQ_CATEGORY;
 
 
-#report
-#테이블 생성
+-- #report
+-- #테이블 생성
 create table report
 (
     report_no      bigint primary key,
@@ -116,13 +116,13 @@ create table report
     report_date    datetime DEFAULT now()
 );
 
-alter table REVIEW
+alter table review
     add (review_thumb_img varchar(200));
-alter table REVIEW
+alter table review
     add (review_img varchar(200));
 
-#카테고리
-#완성
+-- #카테고리
+-- #완성
 insert into CATEGORY(tier, cate_Name, cate_code)
 values (1, '음식점업', '100000');
 insert into CATEGORY(tier, cate_Name, cate_code, cate_parent)
