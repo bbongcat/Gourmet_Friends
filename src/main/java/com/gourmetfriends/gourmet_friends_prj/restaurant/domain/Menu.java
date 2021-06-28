@@ -12,6 +12,7 @@ public class Menu {
     private Long menuNo; //메뉴 번호
     private String menuName; //메뉴 이름
     private Long restNo; //음식점 번호
+    private String restName; //음식점이름
     private String menuIntro; //메뉴 소개
     private Long menuPrice; //메뉴 가격
     private String menuImg; //메뉴 메인 이미지

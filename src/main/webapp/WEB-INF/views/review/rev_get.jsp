@@ -2,6 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <%@include file="../includes/header.jsp"%>
 
 <style>
@@ -35,7 +36,8 @@
         </div>
 
         <div class="form-group">
-          <label>음식점 번호</label> <input class="form-control" name='restNo' value="${review.restNo}" readonly>
+          <label>음식점</label> 
+          <input class="form-control" id="restName_input" value="${review.restName}" readonly>
         </div>
 
         <div class="form-group">

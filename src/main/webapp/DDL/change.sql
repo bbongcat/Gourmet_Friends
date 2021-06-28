@@ -170,3 +170,5 @@ alter table MENU add(menu_img varchar(200));
 
 alter table REVIEW add(review_thumb_img varchar(200));
 alter table REVIEW add(review_img varchar(200));
+
+

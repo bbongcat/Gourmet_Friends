@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 *{
    margin: 0;
    padding:0;
@@ -147,6 +147,11 @@ ul{
     font-weight: 300;    
 }
 
+
+.select_img img {
+   margin: 20px 0;
+}
+
 /* 버튼 영역 */
 .btn_section{
    text-align: center;
@@ -170,9 +175,18 @@ ul{
 .delete_btn:hover{
    background-color: #e4a7a7;
 }
-.select_img img {
-   width: 500px;
-   margin: 20px 0;
+
+.form_section_content select{
+   width: 92%;
+   height: 35px;
+   font-size: 20px;
+   text-align-last: center;
+}
+.cate_wrap span{
+   font-weight: 600;
+}
+.cate_wrap:not(:first-child){
+   margin-top: 20px;
 }
 
 /* footer navai 영역 */

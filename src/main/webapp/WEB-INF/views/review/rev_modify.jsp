@@ -5,7 +5,7 @@
 <%@include file="../includes/header.jsp"%>
 
 <style>
-    .rating .rate-radio {
+.rating .rate-radio {
     position: relative;
     display: inline-block;
     z-index: 20;
@@ -75,8 +75,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>음식점 이름</label>
-                        <input class="form-control" name='restNo' value='${restaurant.restName}' readonly>
+                        <label>음식점</label>
+                        <input id="restName_input" readonly value="${review.restName}">
+                        <input id="restNo_input" name="restNo" type="hidden" value="${review.restNo}">
+                        <button class="restNo_btn">음식점 선택</button>
                     </div>
 
                     <div class="form-group">

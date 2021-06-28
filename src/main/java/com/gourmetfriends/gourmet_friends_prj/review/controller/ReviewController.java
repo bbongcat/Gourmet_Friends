@@ -2,6 +2,7 @@ package com.gourmetfriends.gourmet_friends_prj.review.controller;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.common.PageMaker;
+import com.gourmetfriends.gourmet_friends_prj.restaurant.service.RestaurantService;
 import com.gourmetfriends.gourmet_friends_prj.review.domain.Review;
 import com.gourmetfriends.gourmet_friends_prj.review.service.ReviewService;
 import com.gourmetfriends.gourmet_friends_prj.utils.UploadFileUtils;
@@ -24,6 +25,7 @@ import java.util.List;
 public class ReviewController {
 
     private final ReviewService reviewService;
+    private final RestaurantService restaurantService;
 
     private static final String REVIEW_UPLOAD_PATH = "C:\\git-practice\\team_project\\upload\\review_upload";
 
@@ -115,6 +117,24 @@ public class ReviewController {
             ra.addFlashAttribute("msg","delSuccess");
         }
         return "redirect:/review/rev_list";
+    }
+
+    //음식점 검색 팝업창
+    @GetMapping("/review/rest_pop")
+    public void restPop(Criteria cri, Model model){
+        log.info("/review/rest_pop GET요청");
+
+        List restList1 = restaurantService.restList(cri);
+
+        if(!restList1.isEmpty()){
+            model.addAttribute("restList",restList1);
+        }else {
+            model.addAttribute("restListChk","empty");
+        }
+
+        int total = restaurantService.restGetTotal(cri);
+
+        model.addAttribute("pageInfo", new PageMaker(cri, restaurantService.restGetTotal(cri)));
     }
 
 }

@@ -88,7 +88,6 @@
 
         <script>
 
-            let insertForm = $("#insertForm");
 
             //취소 버튼 
             $("#cancelBtn").click(function(){
@@ -98,9 +97,7 @@
             });
 
             //등록 버튼
-            $("#insertBtn").on("click",function(e){
-
-                e.preventDefault();
+            $("#insertBtn").click(function(){
 
                 // 체크 변수 
                 let menuNameCk = false;
@@ -116,28 +113,28 @@
 
                 
                 //공란 체크 
-                if(menuName){
-                    $('.menuName_warn').css('dispaly','none');
-                    menuNameCk = true;
-                } else{
+                if(menuName === ''){
                     $('.menuName_warn').css('dispaly','block');
                     menuNameCk = false;
+                } else{
+                    $('.menuName_warn').css('dispaly','none');
+                    menuNameCk = true;
                 }
                 
-                if(restNo){
-                    $('.restNo_warn').css('dispaly','none');
-                    restNoCk = true;
-                } else{
+                if(restNo === ''){
                     $('.restNo_warn').css('dispaly','block');
                     restNoCk = false;
+                } else{
+                    $('.restNo_warn').css('dispaly','none');
+                    restNoCk = true;
                 }
 
                 if(menuPrice != 0){
                     $('.menuPrice_warn').css('dispaly','none');
-                    restNoCk = true;
+                    menuPriceCk = true;
                 } else{
                     $('.menuPrice_warn').css('dispaly','block');
-                    restNoCk = false;
+                    menuPriceCk = false;
                 }
                 
                 if(menuIntro != '<br data-cke-filler="true">'){
@@ -150,9 +147,9 @@
                 
                 
                 if(menuNameCk && restNoCk && menuPriceCk && menuIntroCk){
-                    insertForm.submit();
+                    $('#insertForm').submit();
                 }else{
-                    return false;
+                    return;
                 }
 
 
@@ -180,7 +177,7 @@
                 if(this.files && this.files[0]){
                     let reader = new FileReader;
                     reader.onload = function(data){
-                        $(".select_ img img").attr("src",data.target.result).width(500);
+                        $(".select_img img").attr("src",data.target.result).width(500);
                     }
                     reader.readAsDataURL(this.files[0]);
                 }

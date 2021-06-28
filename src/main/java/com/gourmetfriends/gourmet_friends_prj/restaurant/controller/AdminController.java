@@ -106,7 +106,7 @@ public class AdminController {
 
         menuService.menuInsert(menu);
         ra.addFlashAttribute("insert_result", menu.getMenuName());
-        return "redirect:/admin/menu_insert";
+        return "redirect:/admin/menu_manage";
     }
 
     //음식점 검색 팝업창

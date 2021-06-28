@@ -25,7 +25,7 @@
                         <label>음식점 번호</label>
                     </div>
                     <div class="form_section_content">
-                        <input class="input_block" name="restNo" readonly value="<c:out value=${restInfo.restNo}'></c:out>">
+                        <input class="input_block" name="restNo" readonly value="<c:out value='${restInfo.restNo}'></c:out>">
                     </div>
                 </div>
                 
@@ -146,7 +146,7 @@
         });
 
         $(document).ready(function(){
-            let cateList = JSON.parse('#{cateList}');
+            let cateList = JSON.parse('${cateList}');
 
             let cate1Array = new Array();
             let cate2Array = new Array();

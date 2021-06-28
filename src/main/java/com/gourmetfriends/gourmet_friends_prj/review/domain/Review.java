@@ -11,6 +11,7 @@ public class Review {
     private String userId;;//회원 ID
     private String revContent;//리뷰 내용
     private Long restNo;//음식점 코드 번호
+    private String restName;//음식점 이름
     private Long revStar;//리뷰 평점
     private String reportCnt;//리뷰 신고 수
     private int revReplyCnt;//리뷰 댓글 수

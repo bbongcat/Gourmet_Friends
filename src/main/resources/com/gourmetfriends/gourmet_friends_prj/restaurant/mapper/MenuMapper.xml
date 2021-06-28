@@ -11,6 +11,7 @@
         <result property="menuPrice" column="menu_price"/>
         <result property="menuImg" column="menu_img"/>
         <result property="menuThumbImg" column="menu_thumb_img"/>
+        <result property="restName" column="rest_name"/>
     </resultMap>
 
     <resultMap id="restaurantMap" type="com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant">
@@ -30,7 +31,7 @@
         FROM menu a
         LEFT OUTER JOIN restaurant b ON a.rest_no = b.rest_no
         <if test="keyword != null">
-            WHERE (rest_name LIKE CONCAT('%', #{keyword},'%'))
+            WHERE rest_name LIKE CONCAT('%', #{keyword},'%')
         </if>
         ORDER BY menu_no DESC
         LIMIT #{startIndex}, #{amount}
@@ -45,9 +46,9 @@
         </if>
     </select>
 
-    <select id="menuGetDetail" resultType="int">
+    <select id="menuGetDetail" resultMap="menuMap">
         SELECT menu_no, menu_name,(SELECT rest_name FROM restaurant WHERE rest_no = menu.rest_no)
-               rest_no, menu_intro, menu_price, menu_img, menu_thumb_img
+               rest_name,rest_no, menu_intro, menu_price, menu_img, menu_thumb_img
         FROM menu WHERE menu_no = #{menuNo}
     </select>
 

@@ -105,7 +105,7 @@ class ReviewMapperTest {
         Criteria cri = new Criteria();
         cri.setKeyword("1");
 
-        List<Review> reviewList = reviewMapper.revGetListByRestNo(cri);
+        List<Review> reviewList = reviewMapper.revGetListByRestName(cri);
         for (Review review : reviewList) {
             System.out.println(review);
         }
@@ -120,7 +120,6 @@ class ReviewMapperTest {
         review.setRevContent("사진리뷰");
         review.setRevStar(3L);
         review.setUserId("hhh9999");
-        review.setRevPhotos(Arrays.asList("dog.jpg","cat.jpg"));
 
         reviewService.revRegister(review);
     }

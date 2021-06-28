@@ -15,6 +15,7 @@
         <result property="restDetailaddress" column="rest_detailaddress"/>
         <result property="restImg" column="rest_img"/>
         <result property="restThumbImg" column="rest_thumb_img"/>
+        <result property="cateName" column="cate_name"/>
     </resultMap>
 
     <resultMap id="cateMap" type="com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Category">
@@ -26,19 +27,18 @@
     <!-- 음식점 등록 -->
     <insert id="restInsert">
         INSERT INTO restaurant
-        (rest_no,rest_name,rest_ph,rest_time,cate_code
+        (rest_no,rest_name,rest_ph,rest_time,cate_code,
          rest_oaddress,rest_address,rest_detailaddress,rest_img,rest_thumb_img)
         VALUES(seq_restaurant.nextval, #{restName}, #{restPh},#{restTime},#{cateCode},
                #{restOaddress},#{restAddress}, #{restDetailaddress},#{restImg},#{restThumbImg})
     </insert>
 
     <select id="restList" resultMap="restaurantMap">
-        SELECT a.rest_no,a.rest_name,a.rest_ph,a.rest_time,a.cate_code, b.cate_code, b.cate_parent,
-               b.cate_name,a.rest_oaddress,a.rest_address,a.rest_detailaddress,a.rest_img, a.rest_thumb_img
+        SELECT rest_no,rest_name,rest_ph,rest_time, b.cate_name,rest_oaddress,rest_address,rest_detailaddress
         FROM restaurant a
-        INNER JOIN category b ON a.cate_code = b.cate_code
+        LEFT OUTER JOIN category b ON a.cate_code = b.cate_code
         <if test="keyword != null">
-            WHERE a.rest_name LIKE CONCAT('%', #{keyword}, '%')
+            WHERE rest_name LIKE CONCAT('%', #{keyword}, '%')
         </if>
         ORDER BY rest_no DESC
         LIMIT #{startIndex}, #{amount}
@@ -53,12 +53,12 @@
     </select>
 
     <select id="restGetDetail" resultMap="restaurantMap">
-        SELECT a.rest_no, a.rest_name, a.cate_code, b.cate_parent, b.cate_name, a.rest_ph,
-               a.rest_time, a.rest_oaddress, a.rest_address, a.rest_detailaddress,
-               a.rest_img, a.rest_thumb_img
+        SELECT rest_no, rest_name, b.cate_name, a.cate_code,rest_ph,
+               rest_time, rest_oaddress, rest_address, rest_detailaddress,
+               rest_img, rest_thumb_img
         FROM restaurant a
-        INNER JOIN category b ON a.cate_code = b.cate_code
-        WHERE a.rest_no = #{restNo}
+        LEFT OUTER JOIN category b ON a.cate_code = b.cate_code
+        WHERE rest_no = #{restNo}
     </select>
 
     <update id="restModify">

@@ -37,18 +37,20 @@
                                 </th>
                                 
                                 <c:forEach items="${restList}" var="restList">
-                                    <td><c:out value="${restList.restNo}"></c:out></td>
-                                    <td>
-                                        <a class="move" href='<c:out value="${restList.restNo}"/>'>
-                                            <c:out value="${restList.restName}"></c:out>
-                                        </a>
-                                    </td>
-                                    <td><c:out value="${restList.cateName}"></c:out></td>     
-                                    <td><c:out value="${restList.restPh}"></c:out></td>
-                                    <td><c:out value="${restList.restTime}"></c:out></td>
-                                    <td><c:out value="${restList.restOaddress}"></c:out></td>
-                                    <td><c:out value="${restList.restAddress}"></c:out></td>
-                                    <td><c:out value="${restList.restDetailaddress}"></c:out></td>
+                                    <tr>
+                                            <td><c:out value="${restList.restNo}"></c:out></td>
+                                            <td>
+                                                <a class="move" href='<c:out value="${restList.restNo}"/>'>
+                                                <c:out value="${restList.restName}"></c:out>
+                                            </a>
+                                        </td>
+                                        <td><c:out value="${restList.cateName}"></c:out></td>     
+                                        <td><c:out value="${restList.restPh}"></c:out></td>
+                                        <td><c:out value="${restList.restTime}"></c:out></td>
+                                        <td><c:out value="${restList.restOaddress}"></c:out></td>
+                                        <td><c:out value="${restList.restAddress}"></c:out></td>
+                                        <td><c:out value="${restList.restDetailaddress}"></c:out></td>
+                                    </tr>
                                 </c:forEach>
                             </table>
                         </c:if>

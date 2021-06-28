@@ -9,6 +9,10 @@
 .select_img img {
     margin: 20px 0;
 }
+.star-rating .on {
+    font-size: 25px;
+    color: #FFFF00;
+}
 
 </style>
 
@@ -30,7 +34,10 @@
 
         <form role="form" action="/review/rev_register" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label>음식점 번호</label> <input class="form-control" name='restNo' value="${review.restNo}">
+            <label>음식점</label>
+            <input id="restName_input" readonly>
+            <input id="restNo_input" name="restNo" type="hidden">
+            <button class="restNo_btn">음식점 선택</button>
           </div>
 
           <div class="form-group">
@@ -102,6 +109,14 @@
             }
         });
 
+        $('.restNo_btn').on("click",function(e){
+            e.preventDefault();
+
+            let popUrl= "/review/rest_pop";
+            let popOption = "width=650px, height=550px, top=300px, left=300px, scrollbars=yes";
+
+            window.open(popUrl, "음식점 선택", popOption);
+        });
 
 </script>
 <%@include file="../includes/footer.jsp"%>

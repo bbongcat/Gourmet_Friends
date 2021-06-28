@@ -69,7 +69,7 @@
 
             <div class="form-group">
                 <label for="userPhone">휴대폰 번호('-'없이 번호만 입력해주세요)</label>
-                <input type="tel" class="form-control" id="userPhone" name="userphone" placeholder="Phone-Number">
+                <input type="tel" class="form-control" id="userPhone" name="userPhone" placeholder="Phone-Number">
                 <div class="eheck-font" id="phone-check"></div>
             </div>
 
@@ -102,24 +102,26 @@
 
 <script>
 
-    const birthCheck = false;
+    //모든 공백 체크 정규식 
+    let empCheck = RegExp(/\s/g); 
+    //아이디 정규식 
+    let idCheck = RegExp(/^[a-z0-9][a-z0-9_\-]{4,19}$/); 
+    // 비밀번호 정규식 
+    let pwCheck = RegExp(/^[A-Za-z0-9]{4,12}$/);
+    // 이름 정규식 
+    let nameCheck = RegExp(/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/); 
+    // 이메일 검사 정규식 
+    let mailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);      
+        
+    let address = $('#userDetailaddress');
+    // 휴대폰 번호 정규식
+    let phoneCheck = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/); 
 
+    let birthCheck = false;
+    
     $(document).ready(function(){
 
-        //모든 공백 체크 정규식 
-        const empCheck = RegExp(/\s/g); 
-        //아이디 정규식 
-        const idCheck = RegExp(/^[a-z0-9][a-z0-9_\-]{4,19}$/); 
-        // 비밀번호 정규식 
-        const pwCheck = RegExp(/^[A-Za-z0-9]{4,12}$/);
-        // 이름 정규식 
-        const nameCheck = RegExp(/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/); 
-        // 이메일 검사 정규식 
-        const mailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i); 
-        // 휴대폰 번호 정규식 
-        const phoneCheck = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/); 
-            
-        const address = $('#userDetailaddress');
+       
 
         //아이디 중복 확인 
         $('#userId').blur(function(){
@@ -134,15 +136,15 @@
 
                 const userId = $('#userId').val();
 
-                fetch('/check?kind=userId&info=', userId)
+                fetch('/check?kind=userId&info='+ userId)
                     .then(res => res.text())
                     .then(flag => {
                         if(flag === 'ture'){
                             $('#id-check').text('중복된 아이디입니다.');
                             $('#id-check').css('color','red');
                         }else{
-                            if(idCheck.test(uesrId)){
-                                $('#id-check').text('사용가능 한 아이디입니다.');
+                            if(idCheck.test(userId)){
+                                $('#id-check').text('사용가능한 아이디입니다.');
                                 $('#id-check').css('color','blue');
                                 $("#userCheck").attr("disabled", false);
                             }else if(userId == ''){
@@ -282,25 +284,37 @@
             if($('#userEmail').val() == ''){
                 $('#email-check').text('이메일을 입력하세요.');
                 $('#email-check').css('color','red');
-            }else if(emailCheck.test($('#userEmail').val()) != true){
-                $('#email-check').text('이메일 형식이 맞지 않습니다.');
+            }else if(mailCheck.test($('#userEmail').val()) != true){
+                $('#email-check').text('이메일 양식을 확인해주세요.');
                 $('#email-check').css('color','red');
             }else if($('#userEmail').val() != ''){
+
                 const userEmail = $('#userEmail').val();
+
                 fetch('/check?kind=userEmail&info=' + userEmail)
                     .then(res => res.text())
                     .then(flag => {
-                        if(flag === 'ture'){
+                        if(flag === 'true'){
                             $('#email-check').text('중복된 이메일입니다.');
                             $('#email-check').css('color','red');
-                            $('#userCheck').attr('disabled',true);
                         }else{
-                            $('#email-check').text('사용가능한 이메일입니다.');
-                            $('#email-check').css('color','blue');
-                            $('#userCheck').attr('disabled',false);
+                            if(mailCheck.test(userEmail)){
+                                $('#email-check').text('사용가능한 이메일입니다.');
+                                $('#email-check').css('color','blue');
+                                $('#userCheck').attr('disabled',false);
+                            }else if(userEmail == ''){
+                                $('#email-check').text('이메일을 입력해주세요.');
+                                $('#email-check').css('color','red');
+                                $('#userCheck').attr('disabled',true);
+                            }else{
+                                $('#email-check').text('이메일 양식을 확인해주세요.');
+                                $('#email-check').css('color','red');
+                                $('#userCheck').attr('disabled',true);
+                            }
                         }
                     });
             }
+            
         });
 
         //생일 유효성 검사
@@ -352,7 +366,7 @@
         //휴대폰 번호 
         $('#userPhone').blur(function(){
             if(phoneCheck.test($(this).val())){
-                $('#phon-check').text('');
+                $('#phone-check').text('');
             }else{
                 $('#phone-check').text('휴대폰 번호를 확인하세요.');
                 $('#phone-check').css('color','red');

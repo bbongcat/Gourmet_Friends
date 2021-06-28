@@ -88,7 +88,7 @@ public class UserController {
         if(loginUser != null){
             //로그인 한 사람은 세션을 무효화(전체 데이터 삭제)
             session.invalidate();
-            return "redirect:/food_friends/ff_list";
+            return "redirect:/main";
         }
         return "redirect:/user/login";
 

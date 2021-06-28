@@ -31,7 +31,7 @@
                                     <td class="th_column_4">메뉴 가격</td>
                                 </tr>
                             </th>
-                            <c:forEach items="{menuList}" var="menuList">
+                            <c:forEach items="${menuList}" var="menuList">
                                 <tr>
                                     <td><c:out value="${menuList.menuNo}"></c:out></td>
                                     <td>

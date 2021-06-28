@@ -97,7 +97,7 @@
     <script>
         $(document).ready(function(){
 
-            classicEditor
+            ClassicEditor
                     .create(document.querySelector('#menuIntro_textarea'))
                     .catch(error => {
                         console.error(error);
@@ -120,18 +120,19 @@
         });
 
         $("#modifyBtn").on("click",function(e){
-            e.preventDefault();
-
+            
             let menuNameCk = false;
             let restNoCk = false;
             let menuPriceCk = false;
             let menuIntroCk = false;
-
+            
             let menuName = $("input[name='menuName']").val();
             let restNo = $("input[name='restNo']").val();
             let menuPrice = $("input[name='menuPrice']").val();
-            let menuInro = $(".bit p").html();
-
+            let menuIntro = $(".bit p").html();
+            
+            e.preventDefault();
+            
             if(menuName){
                 $('.menuName_warn').css('display','none');
                 menuNameCk = true;
@@ -182,6 +183,15 @@
                 reader.readAsDataURL(this.files[0]);
             }
         });
+
+        $('.restNo_btn').on("click",function(e){
+                e.preventDefault();
+
+                let popUrl= "/admin/rest_pop";
+                let popOption = "width=650px, height=550px, top=300px, left=300px, scrollbars=yes";
+
+                window.open(popUrl, "음식점 선택", popOption);
+            });
     </script>
 
 </body>

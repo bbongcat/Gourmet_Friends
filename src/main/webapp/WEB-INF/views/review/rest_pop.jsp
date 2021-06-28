@@ -35,11 +35,11 @@
                                 <td><c:out value="${restList.restNo}"></c:out></td>
                                 <td>
                                     <a class="move" href='<c:out value="${restList.restNo}"/>' data-name='<c:out value="${restList.restName}"/>'>
-                                    <c:out value="${restList.restName}"></c:out>
-                                </a>
-                            </td>
-                            <td><c:out value="${restList.cateName}"></c:out></td>                     
-                        </tr>
+                                        <c:out value="${restList.restName}"></c:out>
+                                    </a>
+                                </td>
+                                <td><c:out value="${restList.cateCode}"></c:out></td>                     
+                            </tr>
                        </c:forEach>
                     </table>
                 </c:if>

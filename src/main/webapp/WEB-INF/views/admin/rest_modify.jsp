@@ -86,7 +86,6 @@
                     </div>
                 </div>
                 
-                <!-- 음식점 메인 사진 -->
                 
                 <div class="form_section">
                     <div class="form_section_title">
@@ -178,11 +177,11 @@
                 console.log(data.zonecode);
                 console.log(fullRoadAddr);
                 
-                $('[name=userOaddress]').val(data.zonecode);
-                $('[name=userAddress]').val(fullRoadAddr);
+                $('[name=restOaddress]').val(data.zonecode);
+                $('[name=restAddress]').val(fullRoadAddr);
     
-                document.getElementById('userOaddress').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('userAddress').value = fullRoadAddr;
+                document.getElementById('restOaddress').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('restAddress').value = fullRoadAddr;
     
                 }
             }).open();
@@ -227,37 +226,37 @@
         e.preventDefault();
 
         if(!restName){
-            $('warn_restName').css('display','block');
+            $('#warn_restName').css('display','block');
         }else{
-            $('warn_restName').css('display','none');
+            $('#warn_restName').css('display','none');
             nameCheck = true;
         }
 
         if(!restPh){
-            $('warn_restPh').css('display','block');
+            $('#warn_restPh').css('display','block');
         }else{
-            $('warn_restPh').css('display','none');
+            $('#warn_restPh').css('display','none');
             phCheck = true;
         }
 
         if(!restTime){
-            $('warn_restTime').css('display','block');
+            $('#warn_restTime').css('display','block');
         }else{
-            $('warn_restTime').css('display','none');
+            $('#warn_restTime').css('display','none');
             timeCheck = true;
         }
 
         if(!restAddress){
-            $('warn_restDetailaddress').css('display','block');
+            $('#warn_restDetailaddress').css('display','block');
         }else{
-            $('warn_restDetailaddress').css('display','none');
+            $('#warn_restDetailaddress').css('display','none');
             addressCheck = true;
         }
 
         if(!cateCode){
-            $('warn_cateCode').css('display','block');
+            $('#warn_cateCode').css('display','block');
         }else{
-            $('warn_cateCode').css('display','none');
+            $('#warn_cateCode').css('display','none');
             cateCodeCheck = true;
         }
 

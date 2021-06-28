@@ -53,7 +53,7 @@
                         </a>
                      </td>
 
-                     <td>${restaurant.restName}</td>
+                     <td>${review.restName}</td>
                      <td>${review.revContent}</td>
                      <td>${review.revReplyCnt}</td>
                      <td>
@@ -73,7 +73,7 @@
                    <form id='searchForm' action="/review/rev_list" method='get'>
                     <select name='type'>
                         <option value="">--</option>
-                        <option value="restNo" ${pageInfo.cri.type == 'restNo' ? 'selected' : ''}>음식점 번호</option>
+                        <option value="restName" ${pageInfo.cri.type == 'restName' ? 'selected' : ''}>음식점 이름</option>
                         <option value="revContent" ${pageInfo.cri.type == 'revContent' ? 'selected' : ''}>리뷰 내용</option>
                         <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
                      </select>  
