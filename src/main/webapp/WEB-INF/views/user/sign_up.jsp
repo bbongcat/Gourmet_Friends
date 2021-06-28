@@ -13,19 +13,91 @@
     #userAddress{
         top: 5px;
     }
-    
+
     #userOaddress{
-        width: 40%; 
+        width: 40%;
         display: inline;
     }
 </style>
 
-<article class="container">
-    <div class="page-header">
-        <div class="col-md-6 col-md-offset-3">
-            <h3>회원가입</h3>
+<div class="jumbotron d-flex align-items-center" style="background-color: transparent;">
+    <div class="container text-center">
+        <div class="margin10">
+            <form action="/user/sign_up" method="post" role="form" id="userCheck" name="user">
+
+                <input type="hidden" name="userAuth" value="COMMON">
+
+                <div class="form-group">
+                    <label for="userId">아이디</label>
+                    <input type="text" class="form-control" id="userId" name="userId" placeholder="ID">
+                    <div class="eheck-font" id="id-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPw">비밀번호</label>
+                    <input type="password" class="form-control" id="userPw" name="userPw" placeholder="PASSWORD">
+                    <div class="eheck-font" id="pw-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPw2">비밀번호 확인</label>
+                    <input type="password" class="form-control" id="userPw2" name="userPw2" placeholder="Confirm PASSWORD">
+                    <div class="eheck-font" id="pw2-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userName">이름</label>
+                    <input type="text" class="form-control" id="userName" name="userName" placeholder="NAME">
+                    <div class="eheck-font" id="name-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userBirth">생년월일</label>
+                    <input type="tel" class="form-control" id="userBirth" name="userBirth" placeholder="ex)19990101">
+                    <div class="eheck-font" id="birth-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userEmail">이메일 주소</label>
+                    <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="E-mail">
+                    <div class="eheck-font" id="email-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhone">휴대폰 번호('-'없이 번호만 입력해주세요)</label>
+                    <input type="tel" class="form-control" id="userPhone" name="userphone" placeholder="Phone-Number">
+                    <div class="eheck-font" id="phone-check"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userGender">성별</label>
+                    <input type="checkbox" id="userGender" name="userGender" value="남">남
+                    <input type="checkbox" id="userGender" name="userGender" value="여">여
+                </div>
+
+                <div class="form-group">
+                    <label for="userAddress">주소</label>
+                    <input type="text" class="form-control" placeholder="우편번호" name="userOaddress" id="userOaddress" readonly>
+                    <button type="button" class="btn btn-default" onclick='execPostCode();'><i class="fa fa-search"></i>우편번호 찾기</button>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="도로명 주소" name="userAddress" id="userAddress" readonly>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="상세주소" name="userDetailaddress" id="userDetailaddress">
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn-box">회원가입</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+<%--<article class="container">
     <div class="col-sm-6 col-md-offset-3">
         <form action="/user/sign_up" method="post" role="form" id="userCheck" name="user">
 
@@ -98,7 +170,7 @@
             </div>
         </form>        
     </div>
-</article>
+</article>--%>
 
 <script>
 
@@ -107,18 +179,18 @@
     $(document).ready(function(){
 
         //모든 공백 체크 정규식 
-        const empCheck = RegExp(/\s/g); 
+        const empCheck = RegExp(/\s/g);
         //아이디 정규식 
-        const idCheck = RegExp(/^[a-z0-9][a-z0-9_\-]{4,19}$/); 
+        const idCheck = RegExp(/^[a-z0-9][a-z0-9_\-]{4,19}$/);
         // 비밀번호 정규식 
         const pwCheck = RegExp(/^[A-Za-z0-9]{4,12}$/);
         // 이름 정규식 
-        const nameCheck = RegExp(/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/); 
+        const nameCheck = RegExp(/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/);
         // 이메일 검사 정규식 
-        const mailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i); 
+        const mailCheck = RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i);
         // 휴대폰 번호 정규식 
-        const phoneCheck = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/); 
-            
+        const phoneCheck = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/);
+
         const address = $('#userDetailaddress');
 
         //아이디 중복 확인 
@@ -305,7 +377,7 @@
 
         //생일 유효성 검사
         let birthCheck = false;
-        
+
         $('#userBirth').blur(function(){
             const dateStr = $(this).val();
             const year = Number(dateStr.substr(0,4));//입력한 값의 0~4자리까지(연)
@@ -359,21 +431,21 @@
             }
         });
     });
-   
-        
+
+
         //우편번호 찾기
         function execPostCode(){
             daum.postcode.load(function(){
-        
+
                 new daum.Postcode({
                     oncomplete : function(data){
                     //팝업에서 검색결과 항목을 클릭했을 때 실행 할 코드를 작성하는 부분 
-        
+
                     //도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                     //내려오는 변수가 값이 없는 경우엔 공백('') 값을 가지므로, 이를 참고하여 분기 한다.
                     let fullRoadAddr = data.roadAddress;//도로명 주소 변수
                     let extraRoadAddr = '';//도로명 조합형 주소 변수
-        
+
                     //법정동명이 있을 경우 추가한다.(법정리는 제외)
                     //법정동의 경우 마지막 문자가 '동/로/가'로 끝난다.
                     if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -391,22 +463,22 @@
                     if(fullRoadAddr !== ''){
                         fullRoadAddr += extraRoadAddr;
                     }
-                    
+
                     //우편번호와 주소정보를 해당필드에 넣는다.
                     console.log(data.zonecode);
                     console.log(fullRoadAddr);
-                    
+
                     $('[name=userOaddress]').val(data.zonecode);
                     $('[name=userAddress]').val(fullRoadAddr);
-        
+
                     document.getElementById('userOaddress').value = data.zonecode; //5자리 새우편번호 사용
                     document.getElementById('userAddress').value = fullRoadAddr;
-        
+
                     }
                 }).open();
             });
         }
-    
-    
+
+
 </script>
 <%@include file="../includes/footer.jsp"%>

@@ -67,7 +67,7 @@
 
         <nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="#">
+                <a class="navbar-brand d-flex align-items-center" href="/main/">
                     <span class="title-logo">Gourmet Friends</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-header"
@@ -86,7 +86,7 @@
                             <a class="nav-link" href="#">Review</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Food Friends</a>
+                            <a class="nav-link" href="/food_friends/ff_list">Food Friends</a>
                         </li>
                         <c:if test="${sessionScope.loginUser == null}">
                             <li class="nav-item">
@@ -100,7 +100,7 @@
                         <c:if test="${sessionScope.loginUser != null}">
                             <c:if test="${loginUser.userAuth == 'ADMIN'}">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/admin/manager">관리자 페이지</a>
+                                    <a class="nav-link" href="/admin/manager">Admin</a>
                                 </li>
                             </c:if>
                             <li class="nav-item">

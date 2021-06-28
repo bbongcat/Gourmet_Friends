@@ -16,16 +16,18 @@
  }
 </style>--%>
 
-<div class="jumbotron d-flex align-items-center" style="background-image: url(img/bg-2.jpg)">
+<div class="jumbotron d-flex align-items-center">
    <div class="container">
-      <h1 class="display-2 mb-4">밥친구 게시판</h1>
+      <h1 class="">밥친구 게시판</h1>
        <div class="k-font-subtitle">
            FoodFriends List Page
-           <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">게시글 등록</button>
+           <a href="/food_friends/ff_register/" style="position:absolute; right: 3%;">
+               <button id='regBtn' type="button" class="btn-box">게시글 등록</button>
+           </a>
        </div>
 
        <!-- /.panel-heading -->
-       <div class="panel-body">
+       <div class="table-container">
            <table class="table table-striped table-bordered table-hover k-font">
 
                <tr>
