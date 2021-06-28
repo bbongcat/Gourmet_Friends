@@ -18,15 +18,15 @@
 
 <div class="jumbotron d-flex align-items-center" style="background-image: url(img/bg-2.jpg)">
    <div class="container">
-      <h1 class="display-2 mb-4">FoodFriends List</h1>
-       <div class="panel-heading">
+      <h1 class="display-2 mb-4">밥친구 게시판</h1>
+       <div class="k-font-subtitle">
            FoodFriends List Page
            <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">게시글 등록</button>
        </div>
 
        <!-- /.panel-heading -->
        <div class="panel-body">
-           <table class="table table-striped table-bordered table-hover">
+           <table class="table table-striped table-bordered table-hover k-font">
 
                <tr>
                    <th>번호</th>

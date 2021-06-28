@@ -104,7 +104,7 @@
                                 </li>
                             </c:if>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">${loginUser.name} Profile</a>
+                                <a class="nav-link" href="#">${loginUser.userName} Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Settings</a>
