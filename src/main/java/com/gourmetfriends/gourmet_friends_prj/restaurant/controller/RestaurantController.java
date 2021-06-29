@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/restaurant")
 @RequiredArgsConstructor
 @Log4j2
 public class RestaurantController {
@@ -27,7 +26,7 @@ public class RestaurantController {
         log.info("메인페이지 접속");
     }
 
-    @GetMapping("/rest_list")
+    @GetMapping("/restaurant/rest_list")
     public void restList(@RequestParam("c") int cateCode,
                          @RequestParam("l") int tier, Model model){
         log.info("/restaurant/rest_list GET요청");
@@ -35,6 +34,11 @@ public class RestaurantController {
        List<Restaurant> restCateList = restaurantService.restCateList(cateCode, tier);
 
        model.addAttribute("restCateList",restCateList);
+    }
+
+    @GetMapping("/restaurant/menu_list")
+    public void menuList(){
+
     }
 
 }
