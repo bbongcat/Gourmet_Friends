@@ -18,5 +18,5 @@ public class GourmetFriendsApplication {
     public static void main(String[] args) {
         SpringApplication.run(GourmetFriendsApplication.class, args);
     }
-
+    
 }
