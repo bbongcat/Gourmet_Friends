@@ -52,9 +52,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> restCateList(String cateCode, Long tier) {
+    public List<Restaurant> restCateList(int cateCode, int tier){
 
-        String cateParent = null;
+        int cateParent = 0;
 
         if(tier == 1){
             cateParent = cateCode;

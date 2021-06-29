@@ -30,5 +30,5 @@ public interface RestaurantService {
     int restDelete(Long restNo);
 
     //카테고리별 음식점 리스트
-    List<Restaurant> restCateList(String cateCode, Long tier);
+    List<Restaurant> restCateList(int cateCode, int tier);
 }

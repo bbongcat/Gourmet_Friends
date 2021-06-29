@@ -12,7 +12,7 @@
       <title>Document</title>
 
       <link rel="stylesheet" href="/css/admin/rest_manage.css">
-      <script src="/vendor/jquery/jquery.min.js"></script>
+      <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
       
   </head>
   <body>

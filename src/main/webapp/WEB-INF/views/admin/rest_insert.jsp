@@ -10,8 +10,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <link rel="stylesheet" href="/css/admin/rest_insert.css">
-      <script src="/vendor/jquery/jquery.min.js"></script>
-
+      <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
 
   </head>
   <body>

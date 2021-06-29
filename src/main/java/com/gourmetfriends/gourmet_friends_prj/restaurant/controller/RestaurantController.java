@@ -28,7 +28,8 @@ public class RestaurantController {
     }
 
     @GetMapping("/rest_list")
-    public void restList(@RequestParam("c") String cateCode, @RequestParam("l") Long tier, Model model){
+    public void restList(@RequestParam("c") int cateCode,
+                         @RequestParam("l") int tier, Model model){
         log.info("/restaurant/rest_list GET요청");
 
        List<Restaurant> restCateList = restaurantService.restCateList(cateCode, tier);

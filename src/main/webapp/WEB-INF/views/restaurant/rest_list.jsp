@@ -11,7 +11,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/css/restaurant.css">
-    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
 
     <style>
         section#content ul li { display:inline-block; margin:10px; }

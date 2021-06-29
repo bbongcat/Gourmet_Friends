@@ -11,7 +11,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="/css/admin/menu_modify.css">
-    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
 </head>

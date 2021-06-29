@@ -71,7 +71,7 @@
             <div class="collapse navbar-collapse" id="navbar-nav-header">
                 <ul class="navbar-nav ml-auto k-font">
                     <li class="nav-item">
-                        <a class="nav-link" href="/main/">Home</a>
+                        <a class="nav-link" href="/main">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Restaurant</a>
@@ -80,7 +80,7 @@
                         <a class="nav-link" href="#">Review</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/food_friends/ff_list/">Food Friends</a>
+                        <a class="nav-link" href="/food_friends/ff_list">Food Friends</a>
                     </li>
 
                     <!-- 로그인 하지 않은 상태 -->

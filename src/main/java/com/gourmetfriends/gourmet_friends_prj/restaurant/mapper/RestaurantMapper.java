@@ -32,11 +32,11 @@ public interface RestaurantMapper {
     int restDelete(Long restNo);
 
     //카테고리별 음식점 리스트 : 1차 분류
-    List<Restaurant> restCateList1(String cateCode, String cateParent);
+    List<Restaurant> restCateList1(int cateCode, int cateParent);
 
     //카테고리별 음식점 리스트 : 2차 분류
-    List<Restaurant> restCateList2(String cateCode, String cateParent);
+    List<Restaurant> restCateList2(int cateCode, int cateParent);
 
     //카테고리별 음식점 리스트 : 3차 분류
-    List<Restaurant> restCateList3(String cateCode);
+    List<Restaurant> restCateList3(int cateCode);
 }

@@ -67,7 +67,7 @@
 
         <nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="/main/">
+                <a class="navbar-brand d-flex align-items-center" href="/main">
                     <span class="title-logo">Gourmet Friends</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-header"
@@ -83,7 +83,7 @@
                             <a class="nav-link" href="#">Restaurant</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Review</a>
+                            <a class="nav-link" href="/review/rev_list">Review</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/food_friends/ff_list">Food Friends</a>

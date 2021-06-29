@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.springframework:spring-tx'
     implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'net.sf.json-lib:json-lib'
 
 
 }
