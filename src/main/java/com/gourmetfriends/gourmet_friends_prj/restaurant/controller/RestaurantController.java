@@ -38,7 +38,6 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/menu_list")
     public void menuList(){
-
     }
 
 }
