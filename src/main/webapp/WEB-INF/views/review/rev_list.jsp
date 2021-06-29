@@ -14,7 +14,7 @@
 
 <div class="row">
    <div class="col-lg-12">
-      <h1 class="page-header">리뷰 게시판</h1>
+      <h1 class="page-header">Review board</h1>
    </div>
    <!-- /.col-lg-12 -->
 </div>
@@ -24,7 +24,6 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-            Review List Page
             <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">리뷰 등록</button>
          </div>
 

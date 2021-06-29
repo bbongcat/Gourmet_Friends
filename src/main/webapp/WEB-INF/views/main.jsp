@@ -74,10 +74,10 @@
                         <a class="nav-link" href="/main">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Restaurant</a>
+                        <a class="nav-link" href="/restaurant">Restaurant</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Review</a>
+                        <a class="nav-link" href="/review/rev_list">Review</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/food_friends/ff_list">Food Friends</a>

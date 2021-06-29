@@ -1,27 +1,35 @@
 package com.gourmetfriends.gourmet_friends_prj.restaurant.controller;
 
+import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Menu;
+import com.gourmetfriends.gourmet_friends_prj.restaurant.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.util.List;
+
 
 @Controller
 @RequiredArgsConstructor
 @Log4j2
 public class MenuController {
 
+    private final MenuService menuService;
+
     @GetMapping("/main")
     public void mainPage(){
         log.info("메인페이지 접속");
+    }
+
+    @GetMapping("/restaurant/menu_list")
+    public void restMenuList(Long restNo, Model model){
+        log.info("/restaurant/menu_list GET요청");
+
+        List<Menu> restMenuList = menuService.restMenuList(restNo);
+
+        model.addAttribute("restMenuList", restMenuList);
     }
 
 

@@ -2,6 +2,7 @@ package com.gourmetfriends.gourmet_friends_prj.restaurant.service;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Category;
+import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Menu;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant;
 
 import java.util.List;
@@ -31,4 +32,6 @@ public interface RestaurantService {
 
     //카테고리별 음식점 리스트
     List<Restaurant> restCateList(int cateCode, int tier);
+
+
 }

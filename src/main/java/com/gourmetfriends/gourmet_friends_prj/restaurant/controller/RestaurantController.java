@@ -19,9 +19,8 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
-    private final MenuService menuService;
 
-    @GetMapping("/main")
+    @GetMapping("/restaurant")
     public void mainPage(){
         log.info("메인페이지 접속");
     }
@@ -36,8 +35,6 @@ public class RestaurantController {
        model.addAttribute("restCateList",restCateList);
     }
 
-    @GetMapping("/restaurant/menu_list")
-    public void menuList(){
-    }
+
 
 }

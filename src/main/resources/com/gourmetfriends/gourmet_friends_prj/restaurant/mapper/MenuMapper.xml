@@ -67,5 +67,10 @@
         DELETE FROM menu WHERE menu_no = #{menuNo}
     </delete>
 
+    <select id="restMenuList" resultMap="menuMap">
+        SELECT menu_no, menu_name,menu_intro, menu_price, menu_thumb_img
+        FROM menu WHERE rest_no = #{restNo}
+    </select>
+
 
 </mapper>

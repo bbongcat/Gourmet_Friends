@@ -55,6 +55,9 @@
 
     <!-- jQuery -->
     <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" 
+              integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+              crossorigin="anonymous"></script>
 
 </head>
 
@@ -77,10 +80,10 @@
                 <div class="collapse navbar-collapse" id="navbar-nav-header">
                     <ul class="navbar-nav ml-auto k-font">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="/main">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Restaurant</a>
+                            <a class="nav-link" href="/restaurant">Restaurant</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/review/rev_list">Review</a>
