@@ -18,11 +18,11 @@ import java.nio.file.Files;
 @RequiredArgsConstructor
 @Log4j2
 public class MenuController {
-
-    @GetMapping("/main")
-    public void mainPage(){
-        log.info("메인페이지 접속");
-    }
+//
+//    @GetMapping("/main")
+//    public void mainPage(){
+//        log.info("메인페이지 접속");
+//    }
 
 
 
