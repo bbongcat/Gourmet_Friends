@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,13 +12,6 @@
 
     <link rel="stylesheet" href="/css/restaurant.css">
     <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
-
-    <style>
-        section#content ul li { display:inline-block; margin:10px; }
-        section#content div.restThumb img { width:200px; height:200px; }
-        section#content div.restName { padding:10px 0; text-align:center; }
-        section#content div.restName a { color:#000; }
-    </style>
 
 </head>
 <body>
@@ -41,16 +34,20 @@
             
                 <section id="content">
                     <ul>
-                        <C:ForEach items="${restCateList}" var="restCateList">
+                        <c:forEach items="${restCateList}" var="restCateList">
                             <li>
-                                <div class="restThumb">
+                                <div class="thumb">
                                     <img src="${restCateList.restThumbImg}">
                                 </div>
-                                <div class="restName">
-                                    <a href="/restaurant/rest_list?restNo=${restCateList.restNo}">${restCateList.restName}</a>
+                                <div class="name">
+                                    <a href="/restaurant/menu_list?restNo=${restCateList.restNo}">${restCateList.restName}</a>
                                 </div>
+                                <div class="ph">전화번호: ${restCateList.restPh}</div>
+                                <div class="time">영업시간: ${restCateList.restPh}</div>
+                                <div class="address">주소: ${restCateList.restAddress} 
+                                    ${restCateList.restDetailaddress}</div>
                             </li>
-                        </C:ForEach>
+                        </c:forEach>
                     </ul>
                 </section>
                 

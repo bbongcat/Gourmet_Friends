@@ -87,26 +87,28 @@
     </delete>
 
     <select id="restCateList1" resultMap="restaurantMap" >
-        SELECT a.rest_no, a.rest_name, a.cate_code, b.cate_parent, b.cate_name,
-               a.rest_img, a.rest_thumb_img
+        SELECT a.rest_no, a.rest_name,a.rest_ph,a.rest_time,a.rest_address,rest_detailaddress,
+               a.cate_code, b.cate_parent, b.cate_name,a.rest_img, a.rest_thumb_img
         FROM restaurant a
         INNER JOIN category b ON a.cate_code = b.cate_code
         WHERE a.cate_code = #{cateCode} OR (a.cate_code = #{cateCode} OR b.cate_parent = #{cateParent})
     </select>
 
     <select id="restCateList2" resultMap="restaurantMap">
-        SELECT a.rest_no, a.rest_name, a.cate_code,b.cate_parent, b.cate_name,
-               a.rest_img, a.rest_thumb_img
+        SELECT a.rest_no, a.rest_name, a.rest_ph,a.rest_time,a.rest_address,rest_detailaddress,
+               a.cate_code,b.cate_parent, b.cate_name,a.rest_img, a.rest_thumb_img
         FROM restaurant a
         INNER JOIN category b ON a.cate_code = b.cate_code
         WHERE a.cate_code = #{cateCode} OR b.cate_parent = #{cateParent}
     </select>
 
     <select id="restCateList3" resultMap="restaurantMap">
-        SELECT a.rest_no, a.rest_name, a.cate_code,b.cate_parent, b.cate_name,
-               a.rest_img, a.rest_thumb_img
+        SELECT a.rest_no, a.rest_name, a.rest_ph,a.rest_time,a.rest_address,rest_detailaddress,
+               a.cate_code,b.cate_parent, b.cate_name,a.rest_img, a.rest_thumb_img
         FROM restaurant a
         INNER JOIN category b ON a.cate_code = b.cate_code
         WHERE a.cate_code = #{cateCode}
     </select>
+
+
 </mapper>

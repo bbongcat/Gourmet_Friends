@@ -45,4 +45,9 @@ public class MenuServiceImpl implements MenuService {
     public int menuDelete(Long menuNo) {
         return menuMapper.menuDelete(menuNo);
     }
+
+    @Override
+    public List<Menu> restMenuList(Long restNo) {
+        return menuMapper.restMenuList(restNo);
+    }
 }

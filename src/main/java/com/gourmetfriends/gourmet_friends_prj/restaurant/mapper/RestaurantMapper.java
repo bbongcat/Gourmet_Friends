@@ -2,6 +2,7 @@ package com.gourmetfriends.gourmet_friends_prj.restaurant.mapper;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Category;
+import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Menu;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -39,4 +40,5 @@ public interface RestaurantMapper {
 
     //카테고리별 음식점 리스트 : 3차 분류
     List<Restaurant> restCateList3(int cateCode);
+
 }

@@ -2,6 +2,7 @@ package com.gourmetfriends.gourmet_friends_prj.restaurant.service;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Category;
+import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Menu;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.domain.Restaurant;
 import com.gourmetfriends.gourmet_friends_prj.restaurant.mapper.RestaurantMapper;
 import lombok.RequiredArgsConstructor;

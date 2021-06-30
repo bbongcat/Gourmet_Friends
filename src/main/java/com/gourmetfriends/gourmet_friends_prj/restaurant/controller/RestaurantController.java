@@ -18,26 +18,23 @@ import java.util.List;
 @Log4j2
 public class RestaurantController {
 
-//    private final RestaurantService restaurantService;
-//    private final MenuService menuService;
-//
-//    @GetMapping("/main")
-//    public void mainPage(){
-//        log.info("메인페이지 접속");
-//    }
-//
-//    @GetMapping("/restaurant/rest_list")
-//    public void restList(@RequestParam("c") int cateCode,
-//                         @RequestParam("l") int tier, Model model){
-//        log.info("/restaurant/rest_list GET요청");
-//
-//       List<Restaurant> restCateList = restaurantService.restCateList(cateCode, tier);
-//
-//       model.addAttribute("restCateList",restCateList);
-//    }
-//
-//    @GetMapping("/restaurant/menu_list")
-//    public void menuList(){
-//    }
+    private final RestaurantService restaurantService;
+
+    @GetMapping("/restaurant")
+    public void mainPage(){
+        log.info("메인페이지 접속");
+    }
+
+    @GetMapping("/restaurant/rest_list")
+    public void restList(@RequestParam("c") int cateCode,
+                         @RequestParam("l") int tier, Model model){
+        log.info("/restaurant/rest_list GET요청");
+
+       List<Restaurant> restCateList = restaurantService.restCateList(cateCode, tier);
+
+       model.addAttribute("restCateList",restCateList);
+    }
+
+
 
 }

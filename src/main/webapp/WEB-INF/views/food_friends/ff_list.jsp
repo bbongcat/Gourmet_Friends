@@ -18,9 +18,8 @@
 
 <div class="jumbotron d-flex align-items-center">
    <div class="container">
-      <h1 class="">밥친구 게시판</h1>
+      <h1 class="">FoodFriends Board</h1>
        <div class="k-font-subtitle">
-           FoodFriends List Page
            <a href="/food_friends/ff_register/" style="position:absolute; right: 3%;">
                <button id='regBtn' type="button" class="btn-box">게시글 등록</button>
            </a>

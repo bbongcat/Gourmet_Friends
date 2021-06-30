@@ -51,6 +51,18 @@ aside#aside li:hover > ul.low2 li a { background:#eee; border:1px solid #eee;}
 aside#aside li:hover > ul.low2 li a:hover { background:#fff;}
 aside#aside li > ul.low2 li { width:180px; }
 
+section#content ul li { display:inline-block; margin:10px; }
+section#content div.thumb img { width:200px; height:200px; }
+section#content div.name {font-size: 15px; font-weight: bold;}
+section#content div.name a { color:#000; }
+section#content div.ph {font-size: 13px;}
+section#content div.time {font-size: 13px;}
+section#content div.address {font-size: 13px;}
+
+section#content div.price {font-size: 13px;}
+section#content div.intro {font-size: 13px;}
+section#content div.intro > p {font-size: 13px; margin: 5px;}
+
 
 
  

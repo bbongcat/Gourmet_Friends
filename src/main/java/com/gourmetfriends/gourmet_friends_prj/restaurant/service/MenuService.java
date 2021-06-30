@@ -24,4 +24,6 @@ public interface MenuService {
 
     //메뉴 삭제
     int menuDelete(Long menuNo);
+
+    List<Menu> restMenuList(Long restNo);
 }
