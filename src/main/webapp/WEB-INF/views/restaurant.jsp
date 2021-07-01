@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,39 +12,49 @@
 
 </head>
 <body>
-    <div id="root">
-        <header id="header">
-            <div id="header_box">
-                <%@include file="includes/restaurant/header.jsp"%>
+<div id="root">
+    <header id="header">
+        <div id="header_box">
+            <%@include file="includes/restaurant/header.jsp" %>
+        </div>
+    </header>--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@include file="includes/header.jsp" %>
 
-            </div>
-        </header>
 
-        <nav id="nav">
-            <div id="nav_box">
-                <%@include file="includes/restaurant/nav.jsp"%>
-            </div>
-        </nav>
-        
-        <section id="container">
-            <div id="container_box">
-            
-                <section id="content">
-                  본문 영역
-                </section>
-                
-                <aside id="aside">
-                    <%@ include file="includes/restaurant/aside.jsp" %>
-                </aside>
-                
-            </div>
+<nav id="nav">
+    <div id="nav_box">
+        <%@include file="includes/restaurant/nav.jsp" %>
+    </div>
+</nav>
+
+<section id="container">
+    <div id="container_box">
+
+        <section id="content">
+            본문 영역
         </section>
+
+        <aside id="aside">
+            <%@ include file="includes/restaurant/aside.jsp" %>
+        </aside>
+
+    </div>
+</section>
+
+
+<%@include file="includes/footer.jsp" %>
+<%--
 
         <footer id="footer">
             <div id="footer_box">
                 <%@ include file="includes/restaurant/footer.jsp" %>
-            </div>		
+            </div>
         </footer>
     </div>
 </body>
 </html>
+--%>

@@ -10,27 +10,30 @@ body {
     background-attachment: fixed;
     position: relative;
     /*font-family: 'Lato', sans-serif;*/
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 300;
     font-size: 1.6rem;
 }
 
 .k-font {
-    font-family: 'Noto Sans KR', sans-serif;
+    /*font-family: 'Noto Sans KR', sans-serif;*/
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 300;
     font-size: 1.6rem;
 }
 
 .k-font-subtitle {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-    font-size: 1.9rem;
+    /*font-family: 'Noto Sans KR', sans-serif;*/
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 300;
+    font-size: 2.5rem;
 }
 
 .k-font-title {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 500;
-    font-size: 3.5rem;
+    /*font-family: 'Noto Sans KR', sans-serif;*/
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 400;
+    font-size: 5rem;
 }
 
 body:after {
@@ -699,10 +702,12 @@ footer {
         flex-direction: column;
     }
 }
+
 .margin10 {
     margin-left: 10%;
     margin-right: 10%;
 }
+
 .btn-box {
     background-color: #343A40;
     margin-top: 0;
@@ -711,12 +716,29 @@ footer {
     border: 0px solid #f78f24;
     opacity: 0.8
 }
+
 .table-container {
     margin-top: 20px;
 }
 
 .btn-block {
-    display:inline-block;
-    width:40%
+    display: inline-block;
+    width: 40%
     align-items: center;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
 }

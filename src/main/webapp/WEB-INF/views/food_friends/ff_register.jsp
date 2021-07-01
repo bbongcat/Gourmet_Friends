@@ -4,9 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="../includes/header.jsp" %>
 
-<div class="jumbotron d-flex align-items-center" style="background-image: url(img/bg-2.jpg)">
+<div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-2.jpg);">
     <div class="container text-center">
-        <h1 class="display-2 mb-4">Food Friends</h1>
+        <h1 class="display-2 mb-4 k-font-title">Food Friends</h1>
         <p>
             나만의 밥친구를 찾아보세요.
         </p>
@@ -18,7 +18,7 @@
         <div class="section-content">
             <!-- Section Title -->
             <div class="title-wrap">
-                <h2 class="section-title">내 곁의 밥친구</h2>
+                <h2 class="section-title k-font-subtitle">내 곁의 밥친구</h2>
                 <p class="section-sub-title">당신의 음식 취향, 먹고 싶은 음식, 심지어 취미까지.<br>뭐든 알려주세요. 밥친구가 나타날거에요.</p>
 
             </div>

@@ -217,7 +217,7 @@
                                             <a href="#"><h6><small>food friends</small></h6></a>
                                         </div>
                                         <div class="blog-title">
-                                            <a href="#"><h4 class="k-font-subtitle">나와 입맛이 딱 맞는 밥친구!</h4></a>
+                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">나와 입맛이 딱 맞는 밥친구!</h4></a>
                                         </div>
                                         <div class="blog-meta">
                                             <p class="blog-date">2021. 04. 30</p> /
@@ -254,7 +254,7 @@
                                             <a href="#"><h6><small>order</small></h6></a>
                                         </div>
                                         <div class="blog-title">
-                                            <a href="#"><h4 class="k-font-subtitle">근처 맛집을 누구보다 잘 아는 앱</h4></a>
+                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">근처 맛집을 가장 잘 아는 앱</h4></a>
                                         </div>
                                         <div class="blog-meta">
                                             <p class="blog-date">2021. 05. 04.</p> /
@@ -291,7 +291,7 @@
                                             <a href="#"><h6><small>review</small></h6></a>
                                         </div>
                                         <div class="blog-title">
-                                            <a href="#"><h4 class="k-font-subtitle">나도 어느새 이 동네 맛집 전문가</h4></a>
+                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">나도 어느새 동네 맛집 전문가</h4></a>
                                         </div>
                                         <div class="blog-meta">
                                             <p class="blog-date">2021. 05. 10.</p> /
