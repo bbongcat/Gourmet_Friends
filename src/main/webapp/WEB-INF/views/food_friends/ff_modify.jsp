@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         <label>회원ID</label>
-                        <input class="form-control" name='writer' value='${foodFriends.userId}' readonly>
+                        <input class="form-control" name='writer' value='${loginUser.userId}' readonly>
                     </div>
 
                     <div class="form-group">

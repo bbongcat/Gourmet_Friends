@@ -108,6 +108,7 @@
                                 <input type="file" id="restImg" name="file">
                             </div>
                             <div class="select_img"><img src=""></div>
+                            <%=request.getRealPath("/") %>
                         </div>
                     </form>
 

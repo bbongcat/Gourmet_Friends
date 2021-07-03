@@ -72,6 +72,8 @@
                                 <input type="file" id="menuImg" name="file">
                             </div>
                             <div class="select_img"><img src=""></div>
+                            <%=request.getRealPath("/") %>
+
                         </div>
                        
                     </form>

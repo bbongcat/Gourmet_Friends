@@ -105,7 +105,7 @@
 
                     <div class="form-group">
                         <label>회원</label>
-                        <input class="form-control" name='userId' value='${review.userId}' readonly>
+                        <input class="form-control" name='userId' value='${loginUser.userId}' readonly>
                     </div>
 
                     <div class="form_group">                       

@@ -103,11 +103,7 @@
                     <div class="form_section_title">
                         <label for="restImg">음식점 메인 이미지</label>
                     </div>
-                    <p>원본 이미지</p>
                     <img src="${restInfo.restImg}" class="oriImg">
-
-                    <p>썸네일</p>
-                    <img src="${restInfo.restThumbImg}" class="thumbImg">
                 </div>
 
                 <div class="btn_section">

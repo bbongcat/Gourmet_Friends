@@ -27,7 +27,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final RestaurantService restaurantService;
 
-    private static final String REVIEW_UPLOAD_PATH = "C:\\git-practice\\team_project\\upload\\review_upload";
+    private static final String REVIEW_UPLOAD_PATH = "C:\\git-practice\\team_project\\Gourmet_Friends\\src\\main\\resources\\static";
 
     //리뷰 게시물 목록 요청 처리
     @GetMapping("/review/rev_list")
@@ -53,17 +53,17 @@ public class ReviewController {
     public String revRegister(Review review, MultipartFile file, RedirectAttributes ra) throws Exception {
         log.info("/review/rev_register POST요청: " + review);
 
-        String imgUploadPath = REVIEW_UPLOAD_PATH + File.separator;
+        String imgUploadPath = REVIEW_UPLOAD_PATH + File.separator + "imgUpload";
         String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
         String fileName = null;
 
         if(file.getOriginalFilename() != null && file.getOriginalFilename() != ""){
             fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 
-            review.setReviewImg(File.separator + ymdPath + File.separator + fileName);
-            review.setReviewThumbImg(File.separator + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+            review.setReviewImg(File.separator  + "imgUpload" + ymdPath + File.separator + fileName);
+            review.setReviewThumbImg(File.separator  + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         } else {
-            fileName = REVIEW_UPLOAD_PATH  + File.separator + "none.png";
+            fileName = REVIEW_UPLOAD_PATH + File.separator + "img" + File.separator + "none.png";
             review.setReviewImg(fileName);
             review.setReviewThumbImg(fileName);
         }
@@ -90,12 +90,12 @@ public class ReviewController {
             new File(REVIEW_UPLOAD_PATH + req.getParameter("reviewImg")).delete();
             new File(REVIEW_UPLOAD_PATH + req.getParameter("reviewThumbImg")).delete();
 
-            String imgUploadPath = REVIEW_UPLOAD_PATH;
+            String imgUploadPath = REVIEW_UPLOAD_PATH + File.separator + "imgUpload";
             String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
             String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),ymdPath);
 
-            review.setReviewImg(File.separator + ymdPath + File.separator + fileName);
-            review.setReviewThumbImg(File.separator + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+            review.setReviewImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+            review.setReviewThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         }else {
             review.setReviewImg(req.getParameter("reviewImg"));
             review.setReviewThumbImg(req.getParameter("reviewThumbImg"));

@@ -68,6 +68,8 @@
             <label for="review">메뉴 이미지</label>
             <input type="file" id="reviewImg" name="file">
             <div class="select_img"><img src=""></div>
+            <%=request.getRealPath("/") %>
+
           </div>
           
           <button type="submit" class="btn btn-default">Submit Button</button>
@@ -103,7 +105,7 @@
             if(this.files && this.files[0]){
                 let reader = new FileReader;
                 reader.onload = function(data){
-                    $(".select_ img img").attr("src",data.target.result).width(500);
+                    $(".select_img img").attr("src",data.target.result).width(500);
                 }
                 reader.readAsDataURL(this.files[0]);
             }

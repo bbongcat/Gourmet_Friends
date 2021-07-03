@@ -53,16 +53,12 @@
         </div>
 
         <div class="form-group">
-          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userId}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${review.userId}" readonly>
         </div>
 
         <div class="form_group">         
           <label for="reviewImg">리뷰 이미지</label>
-          <p>원본 이미지</p>
           <img src="${review.reviewImg}" class="oriImg">
-
-          <p>썸네일</p>
-          <img src="${review.reviewThumbImg}" class="thumbImg">
         </div>
 
         <c:if test="${loginUser.userId == review.userId}">
@@ -153,7 +149,7 @@
         </div>
         <div class="form-group">
           <label>회원</label>
-          <input class="form-control" name='userId' value='${loginUser.userNick}'>
+          <input class="form-control" name='userId' value='${loginUser.userId}'>
         </div>
         <div class="form-group">
           <label>리뷰 댓글 시간</label>

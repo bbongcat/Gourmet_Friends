@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-          <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userId}" readonly>
+          <label>회원</label> <input class="form-control" name='userId' value="${foodFriends.userId}" readonly>
         </div>
 
         <c:if test="${loginUser.userId == foodFriends.userId}">

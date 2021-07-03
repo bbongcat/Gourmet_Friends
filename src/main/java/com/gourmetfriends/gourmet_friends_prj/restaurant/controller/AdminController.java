@@ -32,8 +32,8 @@ public class AdminController {
     private final RestaurantService restaurantService;
     private final MenuService menuService;
 
-    private static final String REST_UPLOAD_PATH = "C:\\git-practice\\team_project\\upload\\rest_upload";
-    private static final String MENU_UPLOAD_PATH = "C:\\git-practice\\team_project\\upload\\menu_upload";
+    private static final String REST_UPLOAD_PATH = "C:\\git-practice\\team_project\\Gourmet_Friends\\src\\main\\resources\\static";
+    private static final String MENU_UPLOAD_PATH = "C:\\git-practice\\team_project\\Gourmet_Friends\\src\\main\\resources\\static";
 
     //관리자 메인 페이지 접속
     @GetMapping("/manager")
@@ -89,17 +89,17 @@ public class AdminController {
     public String menuInsert(Menu menu, MultipartFile file ,RedirectAttributes ra) throws Exception {
         log.info("/admin/menu_insert POST요청: " + menu);
 
-        String imgUploadPath = MENU_UPLOAD_PATH;
+        String imgUploadPath = MENU_UPLOAD_PATH + File.separator + "imgUpload";
         String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
         String fileName = null;
 
         if(file.getOriginalFilename() != null && file.getOriginalFilename() != ""){
             fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 
-            menu.setMenuImg(File.separator + ymdPath + File.separator + fileName);
-            menu.setMenuThumbImg(File.separator + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+            menu.setMenuImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+            menu.setMenuThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         } else {
-            fileName = MENU_UPLOAD_PATH + File.separator + "none.png";
+            fileName = MENU_UPLOAD_PATH + File.separator + "img" + File.separator + "none.png";
             menu.setMenuImg(fileName);
             menu.setMenuThumbImg(fileName);
         }
@@ -165,12 +165,12 @@ public class AdminController {
             new File(MENU_UPLOAD_PATH + req.getParameter("menuImg")).delete();
             new File(MENU_UPLOAD_PATH + req.getParameter("menuThumbImg")).delete();
 
-            String imgUploadPath = MENU_UPLOAD_PATH;
+            String imgUploadPath = MENU_UPLOAD_PATH + File.separator + "imgUpload";
             String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
             String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),ymdPath);
 
-            menu.setMenuImg(File.separator + ymdPath + File.separator + fileName);
-            menu.setMenuThumbImg(File.separator + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+            menu.setMenuImg(File.separator + "imgUpload"+ ymdPath + File.separator + fileName);
+            menu.setMenuThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         }else {
             menu.setMenuImg(req.getParameter("menuImg"));
             menu.setMenuThumbImg(req.getParameter("menuThumbImg"));
@@ -200,16 +200,16 @@ public class AdminController {
     public String restInsert(Restaurant restaurant, MultipartFile file, RedirectAttributes ra) throws Exception {
         log.info("/admin/rest_insert POST요청: " + restaurant);
 
-        String imgUploadPath = REST_UPLOAD_PATH;
+        String imgUploadPath = REST_UPLOAD_PATH + File.separator + "imgUpload";
         String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
         String fileName = null;
 
         if(file.getOriginalFilename() != null && file.getOriginalFilename() != ""){
             fileName = UploadFileUtils.fileUpload(imgUploadPath,file.getOriginalFilename(), file.getBytes(), ymdPath);
-            restaurant.setRestImg(File.separator + ymdPath + File.separator + fileName);
-            restaurant.setRestThumbImg(File.separator + ymdPath + File.separator + "s" + File.separator + "s_" +fileName);
+            restaurant.setRestImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+            restaurant.setRestThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" +fileName);
         } else {
-            fileName = REST_UPLOAD_PATH + File.separator + "none.png";
+            fileName = REST_UPLOAD_PATH + File.separator + "img" + File.separator + "none.png";
 
             restaurant.setRestImg(fileName);
             restaurant.setRestThumbImg(fileName);
@@ -240,12 +240,12 @@ public class AdminController {
             new File(REST_UPLOAD_PATH + req.getParameter("restImg")).delete();
             new File(REST_UPLOAD_PATH + req.getParameter("restThumbImg")).delete();
 
-            String imgUploadPath = REST_UPLOAD_PATH;
+            String imgUploadPath = REST_UPLOAD_PATH + File.separator + "imgUpload";
             String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
             String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(),ymdPath);
 
-            restaurant.setRestImg(File.separator + ymdPath + File.separator + fileName);
-            restaurant.setRestThumbImg(File.separator + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+            restaurant.setRestImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+            restaurant.setRestThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
         }else {
             restaurant.setRestImg(req.getParameter("restImg"));
             restaurant.setRestThumbImg(req.getParameter("restThumbImg"));

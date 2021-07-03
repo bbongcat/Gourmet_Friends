@@ -61,11 +61,8 @@
                     <div class="form_section_title">
                         <label for="menuImg">메뉴 이미지</label>
                     </div>
-                    <p>원본 이미지</p>
                     <img src="${menuInfo.menuImg}" class="oriImg">
 
-                    <p>썸네일</p>
-                    <img src="${menuInfo.menuThumbImg}" class="thumbImg">
                 </div>
 
                 <div class="btn_section">

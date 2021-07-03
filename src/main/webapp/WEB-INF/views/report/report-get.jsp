@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>회원</label> <input class="form-control" name='userId' value="${loginUser.userNick}" readonly>
+                    <label>회원</label> <input class="form-control" name='userId' value="${report.userId}" readonly>
                 </div>
 
                 <button id='list-btn' class="btn btn-info">목록</button>
