@@ -151,7 +151,7 @@
         </div>
         <div class="form-group">
           <label>회원</label>
-          <input class="form-control" name='userId' value='${loginUser.userId}'>
+          <input class="form-control" name='userId'value='userId'>
         </div>
         <div class="form-group">
           <label>리뷰 댓글 시간</label>
