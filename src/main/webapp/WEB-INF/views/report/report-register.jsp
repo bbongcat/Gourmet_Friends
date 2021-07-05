@@ -25,6 +25,10 @@
         <form role="form" action="/report/report-register" method="post">
 
           <div class="form-group">
+            <label>리뷰 번호</label> <input class="form-control" name='revBno'>
+          </div>
+
+          <div class="form-group">
             <label>신고내용</label>
             <textarea class="form-control" name="reportContent" id="reportContent_textarea"></textarea>
           </div>

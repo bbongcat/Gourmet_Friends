@@ -30,23 +30,42 @@
                     </tr>
 
 
-               <c:forEach var="report" items="${report-list}">
+               <c:forEach var="report" items="${report_list}">
                   <tr>
                      <td>${report.reportNo}</td>
 
-                     <td>${report.revBno}</td>
-
                      <td>
                         <a class='move' href="/report/report-get${pageInfo.makeParam(pageInfo.cri.page)}&reportNo=${report.reportNo}">
-                            ${report.reportContent}
+                           ${report.revBno}
                         </a>
-                    </td>
+                     </td>
+
+                     <td>${report.reportContent}</td>
 
                      <td>${report.userId}</td>
-                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${report.reportDate}" /></td>
+                     <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${report.reportDate}"/></td>
                   </tr>
                </c:forEach>
             </table>
+
+            <!-- search -->
+            <div class='row'>
+               <div class="col-lg-12">
+
+                  <form id='searchForm' action="/report/report-list" method='get'>
+                   <select name='type'>
+                       <option value="">--</option>
+                       <option value="reportNo" ${pageInfo.cri.type == 'reportNo' ? 'selected' : ''}>신고 번호</option>
+                       <option value="reportContent" ${pageInfo.cri.type == 'reportContent' ? 'selected' : ''}>신고 내용</option>
+                       <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
+                    </select>  
+                     <input type='text' name='keyword' value="${pageInfo.cri.keyword}" /> 
+                        
+                     <button class='btn btn-default'>Search</button>
+                  </form>
+               </div>
+            </div>
+            <!-- end search -->
 
             <!-- pagination  -->
             <div class="pull-right">

@@ -24,7 +24,9 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-            <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">리뷰 등록</button>
+             <c:if test="${loginUser != null}">
+                 <button id='regBtn' type="button" class="btn btn-primary btn-xs pull-right">리뷰 등록</button>
+             </c:if>
          </div>
 
          <!-- /.panel-heading -->
@@ -162,6 +164,8 @@ $(document).ready(function() {
             $modalBody.textContent = '리뷰가 수정되었습니다.';
         }else if(msg === 'delSuccess'){
             $modalBody.textContent = '리뷰가 삭제되었습니다.';
+        }else if(msg === 'reportSuccess'){
+            $modalBody.textContent = '리뷰가 신고되었습니다.';
         }
         //모달창 오픈
         $('#myModal').modal('show');

@@ -2,6 +2,7 @@ package com.gourmetfriends.gourmet_friends_prj.report.mapper;
 
 import com.gourmetfriends.gourmet_friends_prj.common.Criteria;
 import com.gourmetfriends.gourmet_friends_prj.report.domain.Report;
+import com.gourmetfriends.gourmet_friends_prj.review.domain.Review;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public interface ReportMapper {
 
     //총 리뷰 신고 수 조회
     int reportGetTotalCount();
+
+    //리뷰 신고 번호로 조회
+    List<Report> reportGetListByReportNo(Criteria cri);
+    //음식점 코드로 검색 게시물 조회
+    int reportGetTotalCountByReportNo(Criteria cri);
 
     //검색 처리 통합 조회
     List<Report> reportGetSearchList(Criteria cri);

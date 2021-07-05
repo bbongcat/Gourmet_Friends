@@ -29,7 +29,7 @@ public class ReportController {
     public String reportList(Criteria cri, Model model){
         log.info("/report/report-list GET요청 발생: " + cri);
         List<Report> reportList = reportService.reportSearchList(cri);
-        model.addAttribute("report-list",reportList);
+        model.addAttribute("report_list",reportList);
         model.addAttribute("pageInfo", new PageMaker(cri,reportService.reportGetTotal(cri)));
         return "report/report-list";
     }
@@ -46,8 +46,8 @@ public class ReportController {
     public String reportRegister(Report report, RedirectAttributes ra){
         log.info("/report/report-register POST요청: " + report);
         reportService.reportRegister(report);
-        ra.addFlashAttribute("msg","regSuccess");
-        return "redirect:report/report-get";
+        ra.addFlashAttribute("msg","reportSuccess");
+        return "redirect:/review/rev_list";
     }
 
     //리뷰 신고 글 상세 보기 요청

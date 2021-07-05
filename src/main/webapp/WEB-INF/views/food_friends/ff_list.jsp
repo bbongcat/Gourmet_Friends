@@ -21,7 +21,9 @@
         <div class="title-container">
             <h1 class="k-font-title">밥친구 게시판</h1>
             <a href="/food_friends/ff_register/">
-                <button id='regBtn' type="button" class="btn-box">게시글 등록</button>
+                <c:if test="${loginUser != null}">
+                    <button id='regBtn' type="button" class="btn-box">게시글 등록</button>
+                </c:if>
             </a>
         </div>
 

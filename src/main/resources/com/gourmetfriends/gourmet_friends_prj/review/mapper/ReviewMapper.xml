@@ -85,9 +85,10 @@
 
     <select id="revGetSearchTotal" resultType="int">
         SELECT COUNT(*)
-        FROM review
+        FROM review a
+        LEFT OUTER JOIN restaurant b ON a.rest_no = b.rest_no
         <if test="type == 'restName'">
-            WHERE rest_name LIKE CONCAT('%',#{keyword},'%')
+            WHERE b.rest_name LIKE CONCAT('%',#{keyword},'%')
         </if>
         <if test="type == 'revContent'">
             WHERE rev_content LIKE CONCAT('%',#{keyword},'%')

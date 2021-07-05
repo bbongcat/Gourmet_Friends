@@ -29,6 +29,20 @@
         FROM report
     </select>
 
+    <select id="reportGetListByReportNo" resultMap="reportMap">
+        SELECT report_no,user_id,rev_bno,report_content,report_date
+        FROM report
+        WHERE report_no LIKE CONCAT('%',#{keyword},'%')
+        ORDER BY report_no DESC
+        LIMIT #{startIndex} , #{amount}
+    </select>
+
+    <select id="reportGetTotalCountByReportNo" resultType="int">
+        SELECT COUNT(*)
+        FROM report
+        WHERE report_no = #{reportNo}
+    </select>
+
     <select id="reportGetSearchList" resultMap="reportMap">
         <![CDATA[
             SELECT report_no, rev_bno, user_id,report_content,report_date
