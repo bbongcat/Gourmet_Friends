@@ -101,12 +101,12 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"
                 aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+              <h4 class="modal-title" id="myModalLabel">밥친구 댓글 등록</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
                 <label>댓글내용</label> 
-                <input class="form-control" name='ffContent' value='New Reply'>
+                <input class="form-control" name='ffContent'>
               </div>      
               <div class="form-group">
                 <label>회원ID</label> 
@@ -137,7 +137,7 @@
 <!-- 댓글 관련 스크립트 -->
 <script>
 
-  let bno = '${foodFriends.ffBno}';
+  let ffBno = '${foodFriends.ffBno}';
 
   
   let curPageNum = 1; 
@@ -237,7 +237,7 @@
     }
     let data = '';
   
-    for(let reply of replies){
+    for(let ffReply of replies){
       data += '<li class="left clearfix" data-rno = "'+ ffReply.ffRno +'">';
       data += '   <div>';
       data += '     <div class="header">';
@@ -257,10 +257,10 @@
   function showReplyList(page){
     fetch('/api/v1/replies/'+ ffBno + '/' + page)
         .then(res => res.json())
-        .then(ffReplyMap => {
+        .then(replyMap => {
           
-          makeReplyListDOM(ffReplyMap);
-          document.querySelector('.ffReplyCnt').textContent = ffReplyMap.count;
+          makeReplyListDOM(replyMap);
+          document.querySelector('.ffReplyCnt').textContent = replyMap.count;
         });
   }
 
@@ -296,9 +296,9 @@
 
       //서버로 전송할 데이터 - 디버깅 
       const replyObj ={
-          bno: bno,
-          reply: $('input[name=ffReply]').val(),
-          replyer: $('input[name=userId]').val()
+          ffBno: ffBno,
+          ffContent: $('input[name=ffContent]').val(),
+          userId: $('input[name=userId]').val(),
       };
 
       console.log(replyObj);
@@ -332,13 +332,13 @@
       $modal.find('input[name=ffDate]').parent().show();
 
       
-      const rno = e.currentTarget.dataset.rno;
+      const ffRno = e.currentTarget.dataset.rno;
 
-      fetch('/api/v1/replies/' + rno)
+      fetch('/api/v1/replies/' + ffRno)
             .then(res => res.json())
-            .then(reply => {
+            .then(ffReply => {
               // console.log(reply);
-              $('input[name=ffReply]').val(ffReply.ffReply);
+              $('input[name=ffContent]').val(ffReply.ffContent);
               $('input[name=userId]').val(ffReply.userId);
               $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
               $('input[name=ffDate]').attr('redaonly','readonly');
@@ -352,8 +352,8 @@
     //댓글 수정 버튼 클릭 이벤트 
     $('#modalModBtn').on('click',e =>{
       const modDataObj = {
-        rno: $modal.data('ffRno'),
-        reply: $('input[name=ffReply]').val()
+        ffRno: $modal.data('ffRno'),
+        ffContent: $('input[name=ffContent]').val()
       }
       // console.log(modDataObj);
       const reqInfo = {
@@ -361,6 +361,8 @@
         headers: {'content-type': 'application/json'},
         body: JSON.stringify(modDataObj)
       }
+
+      console.log(modDataObj);
 
       fetch('/api/v1/replies/'+ modDataObj.ffRno,reqInfo)
             .then(res => res.text())

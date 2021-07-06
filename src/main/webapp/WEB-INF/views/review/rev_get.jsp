@@ -9,10 +9,7 @@
 .star-rating {
   color: #FFFF00;
 }
-.oriImg{
-  width: 500px;
-  height: auto;
-}
+
 </style>
 
 <div class="row">
@@ -147,11 +144,11 @@
       <div class="modal-body">
         <div class="form-group">
           <label>리뷰 댓글 내용</label>
-          <input class="form-control" name='revReply' value='NEW 댓글'>
+          <input class="form-control" name='revContent'>
         </div>
         <div class="form-group">
           <label>회원</label>
-          <input class="form-control" name='userId'value='userId'>
+          <input class="form-control" name='userId' value='userId'>
         </div>
         <div class="form-group">
           <label>리뷰 댓글 시간</label>
@@ -176,7 +173,7 @@
 
 <!-- 댓글 관련 스크립트 -->
 <script>
-  let bno = '${review.revBno}'; 
+  let revBno = '${review.revBno}'; 
 
   let curPageNum = 1;
 
@@ -258,23 +255,20 @@
     });
   }
 
-  function makeReplyListDOM({
-    replies,
-    count
-  }) {
+  function makeReplyListDOM({replies,count}) {
     if (replies === null || replies.length === 0) {
       return;
     }
     let data = '';
 
-    for (let reply of replies) {
+    for (let revReply of replies) {
       data += '<li class="left clearfix" data-rno = "' + revReply.revRno + '">';
       data += '   <div>';
       data += '     <div class="header">';
       data += '         <strong class="primary-font">' + revReply.userId + '</strong>';
       data += '     <small class="pull-right text-muted">' + formatDate(revReply.revDate) + '</small>';
       data += '    </div>';
-      data += '    <p>' + revReply.revReply + '</p>';
+      data += '    <p>' + revReply.revContent+ '</p>';
       data += '   </div>';
       data += '</li>';
     }
@@ -284,7 +278,7 @@
 
 
   function showReplyList(page) {
-    fetch('/api/v1/rev_replies/' + revBno + '/' + page)
+    fetch('/api/v2/replies/' + revBno + '/' + page)
       .then(res => res.json())
       .then(replyMap => {
         makeReplyListDOM(replyMap);
@@ -318,29 +312,34 @@
     $('#modalRegisterBtn').on('click', e => {
 
       const replyObj = {
-        bno: revBno,
-        reply: $('input[name=revReply]').val(),
-        replyer: $('input[name=userId]').val()
+        revBno: revBno,
+        revContent: $('input[name=revContent]').val(),
+        userId: $('input[name=userId]').val()
       };
+
+      console.log(replyObj);
 
       const reqInfo = {
         method: 'POST',
         headers: {
-          'content-type': 'application/json'
+          'content-type':'application/json'
         },
-        body: JSON.stringify(replyObj)
+        body:JSON.stringify(replyObj)
       };
-      fetch('/api/v1/rev_replies/', reqInfo)
-        .then(res => res.text())
-        .then(msg => {
-          if (msg === 'regSuccess') {
-            $modal.modal('hide');
-            $modal.find('input').val('');
-            showReplyList(curPageNum);
-          } else {
-            alert('댓글 등록 실패');
-          }
-     });
+
+      fetch('/api/v2/replies/',reqInfo)
+            .then(res => res.text())
+            .then(msg => {
+              console.log(msg);
+              if(msg === 'regSuccess'){
+                $modal.modal('hide');
+                $modal.find('input').val('');
+                showReplyList(curPageNum);
+              }else{
+                alert('댓글 등록을 실패하였습니다.');
+              }
+          });
+
     });
     
 
@@ -349,12 +348,14 @@
       $modal.find('button[id != modalRegisterBtn]').show();
       $modal.find('input[name=revDate]').parent().show();
 
-      const rno = e.currentTarget.dataset.rno;
+      const revRno = e.currentTarget.dataset.rno;
 
-      fetch('/api/v1/rev_replies/' + revRno)
+      console.log(revBno);
+      
+      fetch('/api/v2/replies/' + revRno)
         .then(res => res.json())
-        .then(reply => {
-          $('input[name=revReply]').val(revReply.revReply);
+        .then(revReply => {
+          $('input[name=revContent]').val(revReply.revContent);
           $('input[name=userId]').val(revReply.userId);
           $('input[name=revDate]').val(formatDate(revReply.revDate));
           $('input[name=revDate]').attr('redaonly', 'readonly');
@@ -367,9 +368,10 @@
 
     $('#modalModBtn').on('click', e => {
       const modDataObj = {
-        rno: $modal.data('revRno'),
-        reply: $('input[name=revReply]').val()
+        revRno: $modal.data('revRno'),
+        revContent: $('input[name=revContent]').val()
       }
+      
       const reqInfo = {
         method: 'PUT',
         headers: {
@@ -378,7 +380,9 @@
         body: JSON.stringify(modDataObj)
       }
 
-      fetch('/api/v1/rev_replies/' + modDataObj.revRno, reqInfo)
+      console.log(modDataObj);
+
+      fetch('/api/v2/replies/' + modDataObj.revRno, reqInfo)
         .then(res => res.text())
         .then(msg => {
           if (msg === 'modSuccess') {
@@ -395,7 +399,7 @@
         method: 'DELETE'
       };
 
-      fetch('/api/v1/rev_replies/' + revBno + '/' + $modal.data('revRno'), reqInfo)
+      fetch('/api/v2/replies/' + revBno + '/' + $modal.data('revRno'), reqInfo)
         .then(res => res.text())
         .then(msg => {
           if (msg === 'delSuccess') {
@@ -437,21 +441,6 @@
         location.href='/report/report-register';
     });
 
-    function checkModal(msg) {
-
-    const $modalBody = document.querySelector('.modal-body');
-
-    if (msg === '') {
-        return;
-    }
-
-    if (msg === 'reportSuccess') {
-        $modalBody.textContent = '리뷰가 신고되었습니다.';
-    }
-
-    //모달창 오픈
-    $('#myModal').modal('show');
-    }
   
   });
 </script>

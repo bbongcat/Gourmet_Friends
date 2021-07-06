@@ -99,8 +99,8 @@
     
     <insert id="write">
         INSERT INTO food_friends
-            (ff_bno,title, content, user_id)
-        VALUES(seq_food_friends.nextval,#{title},#{content},#{userId})
+            (ff_bno,title, content, user_id,cate_notice)
+        VALUES(seq_food_friends.nextval,#{title},#{content},#{userId},#{cateNotice})
     </insert>
 
     <update id="update">

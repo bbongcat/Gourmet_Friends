@@ -19,16 +19,13 @@ class FFReplyMapperTest {
     @Test
     @DisplayName("게시물 번호에 해당하는 20개 댓글이 정상적으로 삽입되어야 한다.")
     void ffReplyInsertTest(){
-        for(int i = 1; i <= 20; i++){
+
             FFReply ffReply = new FFReply();
-            ffReply.setFfBno(7L);
-            ffReply.setFfContent("7번 게시물 댓글 no" + i);
-            ffReply.setUserId("테스터" + i);
+            ffReply.setFfBno(97L);
+            ffReply.setFfContent("97번 게시물 댓글 no");
+            ffReply.setUserId("테스터");
 
             ffReplyMapper.insert(ffReply);
-
-        }
-        assertTrue(ffReplyMapper.getCount(7L) == 20);
     }
 
     @Test

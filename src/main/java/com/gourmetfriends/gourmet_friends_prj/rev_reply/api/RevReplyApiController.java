@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/rev_replies")
+@RequestMapping("/api/v2/replies")
 @RequiredArgsConstructor
 @Log4j2
 public class RevReplyApiController {
@@ -25,41 +25,45 @@ public class RevReplyApiController {
             @PathVariable Long revBno,
             @PathVariable int page
     ){
-        log.info("/api/v1/rev_replies/" + revBno + "/" + page + "GET");
+        log.info("/api/v2/replies/" + revBno + "/" + page + " GET");
         Criteria cri = new Criteria(page, 10,0);
 
-        Map<String, Object> revReplies = revReplyService.revGetList(revBno, cri);
+        Map<String, Object> replies = revReplyService.revGetList(revBno, cri);
 
-        return new ResponseEntity<>(revReplies, HttpStatus.OK);
+        return new ResponseEntity<>(replies, HttpStatus.OK);
     }
 
     //리뷰 댓글 개별 조회
     @GetMapping("/{revRno}")
     public ResponseEntity<RevReply> revGet(@PathVariable Long revRno){
-        log.info("/api/v1/rev_replies/" + revRno + " :GET");
+        log.info("/api/v2/replies/" + revRno + " :GET");
         return new ResponseEntity<>(revReplyService.revGet(revRno),HttpStatus.OK);
     }
 
     //리뷰 댓글 등록
-    @PostMapping("/{revRno}")
+    @PostMapping("/")
     public ResponseEntity<String> revCreate(@RequestBody RevReply revReply){
-        log.info("/api/v1/rev_replies/ POST: " + revReply);
+        log.info("/api/v2/replies/ POST: " + revReply);
 
-        int revRegCount = revReplyService.revRegister(revReply);
+        int count = revReplyService.revRegister(revReply);
+        System.out.println(revReply);
 
-        return revRegCount == 1 ?
+        System.out.println(count);
+
+        return count == 1 ?
                 new ResponseEntity<>("regSuccess", HttpStatus.OK)
                 :new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
     //리뷰 댓글 수정
     @PutMapping("/{revRno}")
-    @PatchMapping("{revRno}")
+    @PatchMapping("/{revRno}")
     public ResponseEntity<String> revModify(@PathVariable Long revRno, @RequestBody RevReply revReply){
         revReply.setRevRno(revRno);
-        log.info("/api/v1/rev_replies/" + revRno + "PUT: " + revReply);
-        int revModCount = revReplyService.revModify(revReply);
-        return revModCount == 1 ?
+        log.info("/api/v2/replies/" + revRno + "PUT: " + revReply);
+        int modCount = revReplyService.revModify(revReply);
+        return modCount == 1 ?
                 new ResponseEntity<>("modSuccess", HttpStatus.OK)
                 :new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -67,9 +71,9 @@ public class RevReplyApiController {
     //리뷰 댓글 삭제
     @DeleteMapping("/{revBno}/{revRno}")
     public ResponseEntity<String> revDelete(@PathVariable Long revRno, @PathVariable Long revBno){
-        log.info("/api/v1/rev_replies/" + revBno + "/" + revRno + "DELETE");
-        int revDelCount = revReplyService.revRemove(revBno, revRno);
-        return revDelCount == 1 ?
+        log.info("/api/v2/replies/" + revBno + "/" + revRno + "DELETE");
+        int delCount = revReplyService.revRemove(revBno, revRno);
+        return delCount == 1 ?
                 new ResponseEntity<>("delSuccess", HttpStatus.OK)
                 :new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

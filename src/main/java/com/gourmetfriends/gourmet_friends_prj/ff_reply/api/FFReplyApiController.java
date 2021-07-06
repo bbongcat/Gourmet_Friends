@@ -43,6 +43,7 @@ public class FFReplyApiController {
         log.info("/api/v1/replies/ POST : " + ffReply);
 
         int count = ffReplyService.register(ffReply);
+        System.out.println(ffReply);
 
         return count == 1 ?
                 new ResponseEntity<>("regSuccess", HttpStatus.OK)

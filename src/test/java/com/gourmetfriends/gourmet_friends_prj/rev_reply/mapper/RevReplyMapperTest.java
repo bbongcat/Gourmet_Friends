@@ -19,17 +19,13 @@ class RevReplyMapperTest {
     @Test
     @DisplayName("리뷰 번호에 해당하는 20개의 댓글이 정상적으로 삽입되어야 한다. ")
     void revReplyInsertTest(){
-        for(int i = 1; i <= 20; i++){
+
 
             RevReply revReply = new RevReply();
-            revReply.setRevBno(2L);
-            revReply.setRevReply("2번 리뷰 댓글 번호 No" + i);
-            revReply.setUserId("user" + i);
-
-             revReplyMapper.revInsert(revReply);
-        }
-
-        assertTrue(revReplyMapper.revGetCount(2L) == 20);
+            revReply.setRevBno(162L);
+            revReply.setRevContent("2번 리뷰 댓글 번호 No" );
+            revReply.setUserId("user");
+            revReplyMapper.revInsert(revReply);
     }
 
     @Test
@@ -44,17 +40,16 @@ class RevReplyMapperTest {
     @Test
     @DisplayName("특정 댓글을 삭제할 수 있어야 한다.")
     void revReplyDeleteTest(){
-        int revDelSuccessNum = revReplyMapper.revDelete(21L);
+        int revDelSuccessNum = revReplyMapper.revDelete(162L);
 
-        assertTrue(revDelSuccessNum == 1);
-        assertNull(revReplyMapper.revRead(21L));
+
     }
 
     @Test
     @DisplayName("특정 리뷰 댓글을 수정할 수 있어야 한다.")
     void revReplyModifyTest(){
         RevReply revReply = revReplyMapper.revRead(22L);
-        revReply.setRevReply("리뷰 댓글을 수정했지");
+        revReply.setRevContent("리뷰 댓글을 수정했지");
 
         revReplyMapper.revUpdate(revReply);
 
