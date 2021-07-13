@@ -1,3 +1,15 @@
+alter table food_friends alter column reg_date datetime DEFAULT NOW();
+alter table food_friends alter column update_date datetime DEFAULT NOW();
+
+
+alter table ff_reply alter column ff_date datetime DEFAULT NOW();
+
+alter table food_friends
+    add cate_notice varchar(20) DEFAULT 'GENERAL';
+
+alter table review alter column report_cnt bigint;
+
+
 -- use gourmet_friends;
 
 create table `food_friends`

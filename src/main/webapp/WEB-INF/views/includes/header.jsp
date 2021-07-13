@@ -55,9 +55,9 @@
 
     <!-- jQuery -->
     <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" 
-              integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-              crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
 
 </head>
 
@@ -91,6 +91,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/food_friends/ff_list">Food Friends</a>
                         </li>
+
+                        <!-- 로그인 하지 않은 상태 -->
                         <c:if test="${sessionScope.loginUser == null}">
                             <li class="nav-item">
                                 <a class="nav-link" href="/user/login">Login</a>
@@ -100,6 +102,7 @@
                             </li>
                         </c:if>
 
+                        <!-- 로그인한 상태 -->
                         <c:if test="${sessionScope.loginUser != null}">
                             <c:if test="${loginUser.userAuth == 'ADMIN'}">
                                 <li class="nav-item">
@@ -107,56 +110,75 @@
                                 </li>
                             </c:if>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">${loginUser.userName} Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Settings</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="/user/logout">Logout</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">${loginUser.userName}&nbsp;
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                            data-target="#navbar-user-profile"
+                                            aria-controls="navbar-user-profile" aria-expanded="false"
+                                            aria-label="Toggle navigation">
+                                        <span class="lnr lnr-chevron-down-circle"></span>
+                                    </button>
+                                </a>
+                            </li>
+                            <%--<div class="navbar-collapse" id="navbar-user-profile">
+                                <ul class="navbar-nav ml-auto k-font">
+                                    <li class="nav-item">
+                                        <span class="nav-link">회원 : ${loginUser.userName}</span>
+                                        <span class="nav-link">회원등급 : ${loginUser.userRank}</span>
+                                        <span class="nav-link">회원권한 : ${loginUser.userAuth}</span>
+                                    </li>
+                                </ul>
+                            </div>--%>
+
+                            <%--<li class="nav-item">
+                                <span class="nav-link">회원 : ${loginUser.userName}</span>
+                                <span class="nav-link">회원등급 : ${loginUser.userRank}</span>
+                                <span class="nav-link">회원권한 : ${loginUser.userAuth}</span>
+                            </li>--%>
+                            <%-- 유저 닉네임만 띄우고 누르면 회원명, 회원등급, 회원권한 뜨도록 --%>
                         </c:if>
-                        <!--  이름, 등급, 권한 뜨게 (메인페이지에 넣어서 안 이쁠 경우 게시판 들어갔을때만 보이게)  -->
                     </ul>
                 </div>
             </div>
         </nav>
     </nav>
-        <%--<ul class="nav navbar-top-links navbar-right">
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
+    <%--<ul class="nav navbar-top-links navbar-right">
+        <!-- /.dropdown -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
 
-                <c:if test="${sessionScope.loginUser == null}">
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/user/login"><i class="fa fa-gear fa-fw"></i> Login </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="/user/sign_up"><i class="fa fa-sign-out fa-fw"></i> sign-up </a>
-                        </li>
-                    </ul>
-                </c:if>
+            <c:if test="${sessionScope.loginUser == null}">
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="/user/login"><i class="fa fa-gear fa-fw"></i> Login </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/user/sign_up"><i class="fa fa-sign-out fa-fw"></i> sign-up </a>
+                    </li>
+                </ul>
+            </c:if>
 
-                <c:if test="${sessionScope.loginUser != null}">
-                    <ul class="dropdown-menu dropdown-user">
-                        <c:if test="${loginUser.userAuth == 'ADMIN'}">
-                            <li><a href="/admin/manager">관리자 페이지</a></li>
-                        </c:if>
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> ${loginUser.name} Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                </c:if>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-        <!-- /.navbar-top-links -->--%>
+            <c:if test="${sessionScope.loginUser != null}">
+                <ul class="dropdown-menu dropdown-user">
+                    <c:if test="${loginUser.userAuth == 'ADMIN'}">
+                        <li><a href="/admin/manager">관리자 페이지</a></li>
+                    </c:if>
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> ${loginUser.name} Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </c:if>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->--%>
 
 <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>

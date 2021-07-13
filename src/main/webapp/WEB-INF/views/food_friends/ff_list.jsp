@@ -36,7 +36,8 @@
                     <th>제목</th>
                     <th>회원</th>
                     <th>작성일</th>
-                    <th>수정일</th>
+<%--                    <th>수정일</th>--%>
+                    <%--수정일 빼는거 어떤지 (글에 들어갔을 때만 나오게 한다던지)--%>
                 </tr>
 
                 <c:forEach var="foodFriends" items="${noticeList}">
@@ -53,7 +54,7 @@
 
                         <td>${foodFriends.userId}</td>
                         <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}"/></td>
-                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>
+<%--                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>--%>
                     </tr>
                 </c:forEach>
 
@@ -70,7 +71,7 @@
 
                         <td>${foodFriends.userId}</td>
                         <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}"/></td>
-                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>
+<%--                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>--%>
                     </tr>
                 </c:forEach>
             </table>
@@ -81,7 +82,6 @@
 
                     <form id='searchForm' action="/food_friends/ff_list" method='get'>
                         <select name='type'>
-                            <option value="">--</option>
                             <option value="title" ${pageInfo.cri.type == 'title' ? 'selected' : ''}>제목</option>
                             <option value="content" ${pageInfo.cri.type == 'content' ? 'selected' : ''}>내용</option>
                             <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
@@ -89,7 +89,7 @@
                                 내용
                             </option>
                         </select>
-                        <input type='text' name='keyword' value="${pageInfo.cri.keyword}"/>
+                        <input type='text' name='keyword' value="${pageInfo.cri.keyword}" placeholder="검색어를 입력하세요"/>
 
                         <button class='btn btn-default'>검색</button>
                     </form>

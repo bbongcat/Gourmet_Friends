@@ -61,7 +61,7 @@
 <div class="boxed-page">
     <nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="/main">
                 <span class="title-logo">Gourmet Friends</span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-header"
@@ -94,17 +94,45 @@
                     </c:if>
 
                     <!-- 로그인한 상태 -->
-                    <c:if test="${loginUser != null}">
+                    <c:if test="${sessionScope.loginUser != null}">
+                        <c:if test="${loginUser.userAuth == 'ADMIN'}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/manager">Admin</a>
+                            </li>
+                        </c:if>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/logout">Logout</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="#">${loginUser.userName}&nbsp;
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbar-user-profile"
+                                        aria-controls="navbar-user-profile" aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                    <span class="lnr lnr-chevron-down-circle"></span>
+                                </button>
+                            </a>
+                        </li>
+                        <%--<div class="collapse navbar-collapse" id="navbar-user-profile">
+                            <ul class="navbar-nav ml-auto k-font">
+                                <li class="nav-item">
+                                    <span class="nav-link">회원 : ${loginUser.userName}</span>
+                                    <span class="nav-link">회원등급 : ${loginUser.userRank}</span>
+                                    <span class="nav-link">회원권한 : ${loginUser.userAuth}</span>
+                                </li>
+                            </ul>
+                        </div>--%>
+
+                        <%--                                <i class="lnr lnr-chevron-down-circle"></i>--%>
+
+
+                        <%--<li class="nav-item">
                             <span class="nav-link">회원 : ${loginUser.userName}</span>
                             <span class="nav-link">회원등급 : ${loginUser.userRank}</span>
                             <span class="nav-link">회원권한 : ${loginUser.userAuth}</span>
-                        </li>
+                        </li>--%>
+                        <%-- 유저 닉네임만 띄우고 누르면 회원명, 회원등급, 회원권한 뜨도록 --%>
                     </c:if>
-                    <!--  이름, 등급, 권한 뜨게 (메인페이지에 넣어서 안 이쁠 경우 게시판 들어갔을때만 보이게)  -->
                 </ul>
             </div>
         </div>
@@ -217,7 +245,8 @@
                                             <a href="#"><h6><small>food friends</small></h6></a>
                                         </div>
                                         <div class="blog-title">
-                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">나와 입맛이 딱 맞는 밥친구!</h4></a>
+                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">나와 입맛이 딱 맞는
+                                                밥친구!</h4></a>
                                         </div>
                                         <div class="blog-meta">
                                             <p class="blog-date">2021. 04. 30</p> /
@@ -254,7 +283,8 @@
                                             <a href="#"><h6><small>order</small></h6></a>
                                         </div>
                                         <div class="blog-title">
-                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">근처 맛집을 가장 잘 아는 앱</h4></a>
+                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">근처 맛집을 가장 잘
+                                                아는 앱</h4></a>
                                         </div>
                                         <div class="blog-meta">
                                             <p class="blog-date">2021. 05. 04.</p> /
@@ -291,7 +321,8 @@
                                             <a href="#"><h6><small>review</small></h6></a>
                                         </div>
                                         <div class="blog-title">
-                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">나도 어느새 동네 맛집 전문가</h4></a>
+                                            <a href="#"><h4 class="k-font-subtitle" style="font-size: 2rem;">나도 어느새 동네
+                                                맛집 전문가</h4></a>
                                         </div>
                                         <div class="blog-meta">
                                             <p class="blog-date">2021. 05. 10.</p> /
