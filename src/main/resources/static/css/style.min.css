@@ -765,3 +765,21 @@ footer {
     font-size: 1.4rem;
 }
 
+.get-reply {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+}
+
+.reply-content {
+    display: flex;
+    text-decoration: none;
+    margin-left: 0;
+    padding: 0;
+    z-index: 900;
+}
+
+.page-link {
+
+}

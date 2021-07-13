@@ -19,9 +19,9 @@
                 <article class="col-md-8 offset-md-2 contact-form-holder mt-4">
 
                     <div class="get-title">
-<%--                        <span>글번호 : ${foodFriends.ffBno}</span>--%>
+                        <%--                        <span>글번호 : ${foodFriends.ffBno}</span>--%>
                         <span>${foodFriends.title}</span>
-                        <span class="lnr lnr-user">  ${foodFriends.userId}</span>
+                        <span class="lnr lnr-user"> ${foodFriends.userId}</span>
                     </div>
 
 
@@ -35,54 +35,41 @@
                         <button id='modify-btn' class="btn btn-blue">수정</button>
                     </c:if>
                     <button id='list-btn' class="btn btn-blue">목록</button>
+                    <c:if test="${loginUser != null}">
+                        <button id='addReplyBtn' class='btn btn-brown'>댓글 등록</button>
+                    </c:if>
                     <br>
                     <br>
 
 
                     <!-- 댓글 영역 -->
                     <div class='row'>
-
                         <div class="col-lg-12">
 
-                            <!-- /.panel -->
-                            <div class="panel panel-default">
-
-
-                                <div class="panel-heading">
-                                    <i class="fa fa-comments fa-fw"></i> 댓글 <span class="ffReplyCnt"></span>
-
-                                    <c:if test="${loginUser != null}">
-                                        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 등록
-                                        </button>
-                                    </c:if>
-                                </div>
-
-
-                                <!-- /.panel-heading -->
-                                <div class="panel-body">
-
-                                    <ul class="chat">
-                                        <!-- 실제 댓글이 들어갈 부분 -->
-                                    </ul>
-                                    <!-- ./ end ul -->
-                                </div>
-                                <!-- /.panel .chat-panel -->
-
-                                <!-- 댓글 페이지 목록  -->
-                                <div class="panel-footer"></div>
-
-
+                            <div class="get-reply">
+                                <span class="lnr lnr-bubble">&nbsp;<span class="ffReplyCnt"></span></span>
                             </div>
-                        </div>
-                        <!-- ./ end row -->
-                    </div>
 
+
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <ul class="chat reply-content">
+                                    <!-- 실제 댓글이 들어갈 부분 -->
+                                </ul>
+                                <!-- ./ end ul -->
+                            </div>
+                            <!-- /.panel .chat-panel -->
+
+                            <!-- 댓글 페이지 목록  -->
+                            <div class="panel-footer"></div>
+
+                        </div>
+                    </div>
                 </article>
             </div>
         </div>
     </div>
 </section>
-
 
 
 <!-- Modal -->
@@ -91,29 +78,30 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"
-                aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">밥친구 댓글 등록</h4>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">밥친구 댓글 등록</h4>
             </div>
             <div class="modal-body">
-              <div class="form-group">
-                <label>댓글내용</label>
-                <input class="form-control" name='ffContent'>
-              </div>
-              <div class="form-group">
-                <label>회원ID</label>
-                <input class="form-control" name='userId' value='userId'>
-              </div>
-              <div class="form-group">
-                <label>댓글 등록 시간</label>
-                <input class="form-control" name='ffDate' value='2018-01-01 13:13'>
-              </div>
+                <div class="form-group">
+                    <label>댓글내용</label>
+                    <input class="form-control" name='ffContent'>
+                </div>
+                <div class="form-group">
+                    <label>ID</label>
+                    <input class="form-control" name='userId' value='userId'>
+                </div>
+                <div class="form-group">
+                    <label>댓글 등록 시간</label>
+                    <input class="form-control" name='ffDate' value='2018-01-01 13:13'>
+                </div>
 
             </div>
             <div class="modal-footer">
-                <button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
-                <button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
-                <button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
+                <button id='modalModBtn' type="button" class="btn btn-blue">수정</button>
+                <button id='modalRemoveBtn' type="button" class="btn btn-blue">삭제</button>
+                <button id='modalRegisterBtn' type="button" class="btn btn-blue">등록</button>
                 <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
             </div>
         </div>
@@ -129,7 +117,7 @@
 <!-- 댓글 관련 스크립트 -->
 <script>
 
-  let ffBno = '${foodFriends.ffBno}';
+    let ffBno = '${foodFriends.ffBno}';
 
 
     let curPageNum = 1;
@@ -166,7 +154,7 @@
         (hour < 10) ? hour = '0' + hour : hour;
         (minute < 10) ? minute = '0' + minute : minute;
 
-        return year + "-" + month + "-" + day + "-" + ampm + " " + hour + ":" + minute;
+        return year + "-" + month + "-" + day + " " + ampm + " " + hour + ":" + minute;
     }
 
 
@@ -222,39 +210,39 @@
         });
     }
 
-  
-  function makeReplyListDOM({replies, count}){
-    if(replies === null || replies.length === 0){
-      return;
+
+    function makeReplyListDOM({replies, count}) {
+        if (replies === null || replies.length === 0) {
+            return;
+        }
+        let data = '';
+
+        for (let ffReply of replies) {
+            data += '<li class="left clearfix" data-rno = "' + ffReply.ffRno + '">';
+            data += '   <div>';
+            data += '     <div class="header">';
+            data += '         <strong class="primary-font">' + ffReply.userId + '</strong>';
+            data += '     <small class="pull-right text-muted">' + formatDate(ffReply.ffDate) + '</small>';
+            data += '    </div>';
+            data += '    <p>' + ffReply.ffContent + '</p>';
+            data += '   </div>';
+            data += '</li>';
+        }
+        document.querySelector('.chat').innerHTML = data;
+
+        showReplyPage(count);
     }
-    let data = '';
-  
-    for(let ffReply of replies){
-      data += '<li class="left clearfix" data-rno = "'+ ffReply.ffRno +'">';
-      data += '   <div>';
-      data += '     <div class="header">';
-      data += '         <strong class="primary-font">' + ffReply.userId + '</strong>';
-      data += '     <small class="pull-right text-muted">'+ formatDate(ffReply.ffDate) + '</small>';
-      data += '    </div>';
-      data += '    <p>'+ ffReply.ffContent +'</p>';
-      data += '   </div>';
-      data += '</li>';
+
+
+    function showReplyList(page) {
+        fetch('/api/v1/replies/' + ffBno + '/' + page)
+            .then(res => res.json())
+            .then(replyMap => {
+
+                makeReplyListDOM(replyMap);
+                document.querySelector('.ffReplyCnt').textContent = replyMap.count;
+            });
     }
-    document.querySelector('.chat').innerHTML = data;
-    
-    showReplyPage(count);
-  }
-
-
-  function showReplyList(page){
-    fetch('/api/v1/replies/'+ ffBno + '/' + page)
-        .then(res => res.json())
-        .then(replyMap => {
-
-          makeReplyListDOM(replyMap);
-          document.querySelector('.ffReplyCnt').textContent = replyMap.count;
-        });
-  }
 
     //JQuery영역
     $(document).ready(function () {
@@ -274,7 +262,7 @@
 
             $modal.find('#modalCloseBtn').show();
 
-      $modal.modal('show');
+            $modal.modal('show');
 
         });
 
@@ -286,12 +274,12 @@
         //게시물 등록 서버요청 비동기 처리 이벤트
         $('#modalRegisterBtn').on('click', e => {
 
-      //서버로 전송할 데이터 - 디버깅 
-      const replyObj ={
-          ffBno: ffBno,
-          ffContent: $('input[name=ffContent]').val(),
-          userId: $('input[name=userId]').val(),
-      };
+            //서버로 전송할 데이터 - 디버깅
+            const replyObj = {
+                ffBno: ffBno,
+                ffContent: $('input[name=ffContent]').val(),
+                userId: $('input[name=userId]').val(),
+            };
 
             console.log(replyObj);
 
@@ -323,17 +311,17 @@
             $modal.find('button[id != modalRegisterBtn]').show();
             $modal.find('input[name=ffDate]').parent().show();
 
-      
-      const ffRno = e.currentTarget.dataset.rno;
 
-      fetch('/api/v1/replies/' + ffRno)
-            .then(res => res.json())
-            .then(ffReply => {
-              // console.log(reply);
-              $('input[name=ffContent]').val(ffReply.ffContent);
-              $('input[name=userId]').val(ffReply.userId);
-              $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
-              $('input[name=ffDate]').attr('redaonly','readonly');
+            const ffRno = e.currentTarget.dataset.rno;
+
+            fetch('/api/v1/replies/' + ffRno)
+                .then(res => res.json())
+                .then(ffReply => {
+                    // console.log(reply);
+                    $('input[name=ffContent]').val(ffReply.ffContent);
+                    $('input[name=userId]').val(ffReply.userId);
+                    $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
+                    $('input[name=ffDate]').attr('redaonly', 'readonly');
 
                     $modal.data('ffRno', ffRno);
                 });
@@ -341,32 +329,32 @@
             $modal.modal('show');
         });
 
-    //댓글 수정 버튼 클릭 이벤트 
-    $('#modalModBtn').on('click',e =>{
-      const modDataObj = {
-        ffRno: $modal.data('ffRno'),
-        ffContent: $('input[name=ffContent]').val()
-      }
-      // console.log(modDataObj);
-      const reqInfo = {
-        method: 'PUT',
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(modDataObj)
-      }
+        //댓글 수정 버튼 클릭 이벤트
+        $('#modalModBtn').on('click', e => {
+            const modDataObj = {
+                ffRno: $modal.data('ffRno'),
+                ffContent: $('input[name=ffContent]').val()
+            }
+            // console.log(modDataObj);
+            const reqInfo = {
+                method: 'PUT',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(modDataObj)
+            }
 
-      console.log(modDataObj);
+            console.log(modDataObj);
 
-      fetch('/api/v1/replies/'+ modDataObj.ffRno,reqInfo)
-            .then(res => res.text())
-            .then(msg => {
-              if(msg === 'modSuccess'){
-                $modal.modal('hide');
-                showReplyList(curPageNum);
-              }else{
-                alert('수정에 실패하였습니다.');
-              }
-            });
-    });
+            fetch('/api/v1/replies/' + modDataObj.ffRno, reqInfo)
+                .then(res => res.text())
+                .then(msg => {
+                    if (msg === 'modSuccess') {
+                        $modal.modal('hide');
+                        showReplyList(curPageNum);
+                    } else {
+                        alert('수정에 실패하였습니다.');
+                    }
+                });
+        });
 
 
         $('#modalRemoveBtn').on('click', e => {
