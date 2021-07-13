@@ -54,10 +54,10 @@ public class FoodFriendsServiceImpl implements FoodFriendsService{
         List<FoodFriends> noticeList = new ArrayList<>();
         List<FoodFriends> commonList = new ArrayList<>();
         for (FoodFriends ff : searchList) {
-            if (ff.getCateNotice() == CateNotice.GENERAL) {
-                commonList.add(ff);
-            } else {
+            if (ff.getCateNotice() == CateNotice.SPECIFIC) {
                 noticeList.add(ff);
+            } else {
+                commonList.add(ff);
             }
         }
         Map<String, List<FoodFriends>> searchDataMap = new HashMap<>();

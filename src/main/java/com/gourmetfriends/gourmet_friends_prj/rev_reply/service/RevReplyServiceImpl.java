@@ -21,9 +21,9 @@ public class RevReplyServiceImpl implements RevReplyService {
     @Override
     @Transactional
     public int revRegister(RevReply revReply) {
-        int revCount = revReplyMapper.revInsert(revReply);
+        int count = revReplyMapper.revInsert(revReply);
         reviewMapper.revIncreaseReplyCount(revReply.getRevBno());
-        return 0;
+        return count;
     }
 
     @Override
@@ -38,16 +38,16 @@ public class RevReplyServiceImpl implements RevReplyService {
 
     @Override
     public int revRemove(Long revBno, Long revRno) {
-        int revCount = revReplyMapper.revDelete(revRno);
+        int count = revReplyMapper.revDelete(revRno);
         reviewMapper.revIncreaseReplyCount(revBno);
-        return revCount;
+        return count;
     }
 
     @Override
     public Map<String, Object> revGetList(Long revBno, Criteria cri) {
         Map<String,Object> revReplyMap = new HashMap<>();
-        revReplyMap.put("revCount",revReplyMapper.revGetCount(revBno));
-        revReplyMap.put("revReplies",revReplyMapper.revGetList(revBno,cri));
+        revReplyMap.put("count",revReplyMapper.revGetCount(revBno));
+        revReplyMap.put("replies",revReplyMapper.revGetList(revBno,cri));
         return revReplyMap;
     }
 }

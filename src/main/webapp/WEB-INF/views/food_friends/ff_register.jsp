@@ -30,7 +30,7 @@
                             <label>카테고리</label>&nbsp;
                             <select name="cateNotice">
                                 <c:if test="${loginUser.userAuth == 'ADMIN'}">
-                                    <option value="SPECIFIC">공지</option>
+                                    <option selected value="SPECIFIC">공지</option>
                                 </c:if>
                                 <option value="GENERAL" selected>일반</option>
                             </select>

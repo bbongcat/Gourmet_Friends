@@ -91,24 +91,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">&times;
-                </button>
-                <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+              <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">밥친구 댓글 등록</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label>댓글내용</label>
-                    <input class="form-control" name='ffContent' value='New Reply'>
-                </div>
-                <div class="form-group">
-                    <label>회원ID</label>
-                    <input class="form-control" name='userId' value='userId'>
-                </div>
-                <div class="form-group">
-                    <label>댓글 등록 시간</label>
-                    <input class="form-control" name='ffDate' value='2018-01-01 13:13'>
-                </div>
+              <div class="form-group">
+                <label>댓글내용</label>
+                <input class="form-control" name='ffContent'>
+              </div>
+              <div class="form-group">
+                <label>회원ID</label>
+                <input class="form-control" name='userId' value='userId'>
+              </div>
+              <div class="form-group">
+                <label>댓글 등록 시간</label>
+                <input class="form-control" name='ffDate' value='2018-01-01 13:13'>
+              </div>
 
             </div>
             <div class="modal-footer">
@@ -130,7 +129,7 @@
 <!-- 댓글 관련 스크립트 -->
 <script>
 
-    let bno = '${foodFriends.ffBno}';
+  let ffBno = '${foodFriends.ffBno}';
 
 
     let curPageNum = 1;
@@ -223,39 +222,39 @@
         });
     }
 
-
-    function makeReplyListDOM({replies, count}) {
-        if (replies === null || replies.length === 0) {
-            return;
-        }
-        let data = '';
-
-        for (let reply of replies) {
-            data += '<li class="left clearfix" data-rno = "' + ffReply.ffRno + '">';
-            data += '   <div>';
-            data += '     <div class="header">';
-            data += '         <strong class="primary-font">' + ffReply.userId + '</strong>';
-            data += '     <small class="pull-right text-muted">' + formatDate(ffReply.ffDate) + '</small>';
-            data += '    </div>';
-            data += '    <p>' + ffReply.ffContent + '</p>';
-            data += '   </div>';
-            data += '</li>';
-        }
-        document.querySelector('.chat').innerHTML = data;
-
-        showReplyPage(count);
+  
+  function makeReplyListDOM({replies, count}){
+    if(replies === null || replies.length === 0){
+      return;
     }
-
-
-    function showReplyList(page) {
-        fetch('/api/v1/replies/' + ffBno + '/' + page)
-            .then(res => res.json())
-            .then(ffReplyMap => {
-
-                makeReplyListDOM(ffReplyMap);
-                document.querySelector('.ffReplyCnt').textContent = ffReplyMap.count;
-            });
+    let data = '';
+  
+    for(let ffReply of replies){
+      data += '<li class="left clearfix" data-rno = "'+ ffReply.ffRno +'">';
+      data += '   <div>';
+      data += '     <div class="header">';
+      data += '         <strong class="primary-font">' + ffReply.userId + '</strong>';
+      data += '     <small class="pull-right text-muted">'+ formatDate(ffReply.ffDate) + '</small>';
+      data += '    </div>';
+      data += '    <p>'+ ffReply.ffContent +'</p>';
+      data += '   </div>';
+      data += '</li>';
     }
+    document.querySelector('.chat').innerHTML = data;
+    
+    showReplyPage(count);
+  }
+
+
+  function showReplyList(page){
+    fetch('/api/v1/replies/'+ ffBno + '/' + page)
+        .then(res => res.json())
+        .then(replyMap => {
+
+          makeReplyListDOM(replyMap);
+          document.querySelector('.ffReplyCnt').textContent = replyMap.count;
+        });
+  }
 
     //JQuery영역
     $(document).ready(function () {
@@ -275,7 +274,7 @@
 
             $modal.find('#modalCloseBtn').show();
 
-            $modal.modal('show');
+      $modal.modal('show');
 
         });
 
@@ -287,12 +286,12 @@
         //게시물 등록 서버요청 비동기 처리 이벤트
         $('#modalRegisterBtn').on('click', e => {
 
-            //서버로 전송할 데이터 - 디버깅
-            const replyObj = {
-                bno: bno,
-                reply: $('input[name=ffReply]').val(),
-                replyer: $('input[name=userId]').val()
-            };
+      //서버로 전송할 데이터 - 디버깅 
+      const replyObj ={
+          ffBno: ffBno,
+          ffContent: $('input[name=ffContent]').val(),
+          userId: $('input[name=userId]').val(),
+      };
 
             console.log(replyObj);
 
@@ -324,17 +323,17 @@
             $modal.find('button[id != modalRegisterBtn]').show();
             $modal.find('input[name=ffDate]').parent().show();
 
+      
+      const ffRno = e.currentTarget.dataset.rno;
 
-            const rno = e.currentTarget.dataset.rno;
-
-            fetch('/api/v1/replies/' + rno)
-                .then(res => res.json())
-                .then(reply => {
-                    // console.log(reply);
-                    $('input[name=ffReply]').val(ffReply.ffReply);
-                    $('input[name=userId]').val(ffReply.userId);
-                    $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
-                    $('input[name=ffDate]').attr('redaonly', 'readonly');
+      fetch('/api/v1/replies/' + ffRno)
+            .then(res => res.json())
+            .then(ffReply => {
+              // console.log(reply);
+              $('input[name=ffContent]').val(ffReply.ffContent);
+              $('input[name=userId]').val(ffReply.userId);
+              $('input[name=ffDate]').val(formatDate(ffReply.ffDate));
+              $('input[name=ffDate]').attr('redaonly','readonly');
 
                     $modal.data('ffRno', ffRno);
                 });
@@ -342,30 +341,32 @@
             $modal.modal('show');
         });
 
-        //댓글 수정 버튼 클릭 이벤트
-        $('#modalModBtn').on('click', e => {
-            const modDataObj = {
-                rno: $modal.data('ffRno'),
-                reply: $('input[name=ffReply]').val()
-            }
-            // console.log(modDataObj);
-            const reqInfo = {
-                method: 'PUT',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(modDataObj)
-            }
+    //댓글 수정 버튼 클릭 이벤트 
+    $('#modalModBtn').on('click',e =>{
+      const modDataObj = {
+        ffRno: $modal.data('ffRno'),
+        ffContent: $('input[name=ffContent]').val()
+      }
+      // console.log(modDataObj);
+      const reqInfo = {
+        method: 'PUT',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(modDataObj)
+      }
 
-            fetch('/api/v1/replies/' + modDataObj.ffRno, reqInfo)
-                .then(res => res.text())
-                .then(msg => {
-                    if (msg === 'modSuccess') {
-                        $modal.modal('hide');
-                        showReplyList(curPageNum);
-                    } else {
-                        alert('수정에 실패하였습니다.');
-                    }
-                });
-        });
+      console.log(modDataObj);
+
+      fetch('/api/v1/replies/'+ modDataObj.ffRno,reqInfo)
+            .then(res => res.text())
+            .then(msg => {
+              if(msg === 'modSuccess'){
+                $modal.modal('hide');
+                showReplyList(curPageNum);
+              }else{
+                alert('수정에 실패하였습니다.');
+              }
+            });
+    });
 
 
         $('#modalRemoveBtn').on('click', e => {

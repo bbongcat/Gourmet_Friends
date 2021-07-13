@@ -6,15 +6,15 @@
 
 <%@include file="../includes/header.jsp" %>
 
-<%--<style>
- tr.noticeList td{
+<style>
+ tr.noticeList td>a{
     color: red;
     font-weight: bold;
  }
- tr.commonList td{
+ tr.commonList td>a{
      color: blue;
  }
-</style>--%>
+</style>
 
 <div class="jumbotron d-flex align-items-center">
     <div class="container">

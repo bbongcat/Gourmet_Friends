@@ -8,13 +8,13 @@
         <result property="revRno" column="rev_rno"/>
         <result property="revBno" column="rev_bno"/>
         <result property="userId" column="user_id"/>
-        <result property="revReply" column="rev_reply"/>
+        <result property="revContent" column="rev_content"/>
         <result property="revDate" column="rev_date"/>
     </resultMap>
     
     <insert id="revInsert">
-        INSERT INTO rev_reply (rev_rno, rev_bno, rev_reply, user_id)
-        VALUES (seq_rev_reply.nextval, #{revBno}, #{revReply}, #{userId})
+        INSERT INTO rev_reply (rev_rno, rev_bno, rev_content, user_id)
+        VALUES (seq_rev_reply.nextval, #{revBno}, #{revContent}, #{userId})
     </insert>
 
     <select id="revRead" resultMap="revReplyMap">
@@ -29,7 +29,7 @@
 
     <update id="revUpdate">
         UPDATE rev_reply
-        SET rev_reply = #{revReply}
+        SET rev_content = #{revContent}
         WHERE rev_rno = #{revRno}
     </update>
 
@@ -40,7 +40,7 @@
     </select>
 
     <select id="revGetList" resultMap="revReplyMap">
-        SELECT rev_rno, rev_bno, rev_reply, user_id, rev_date
+        SELECT rev_rno, rev_bno, rev_content, user_id, rev_date
         FROM rev_reply
         WHERE rev_bno = #{revBno} AND rev_rno > 0
         LIMIT #{cri.startIndex} , #{cri.amount}

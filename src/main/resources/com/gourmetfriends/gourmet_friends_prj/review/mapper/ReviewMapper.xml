@@ -131,14 +131,14 @@
     <!-- 리뷰 댓글 수 증가 -->
     <update id="revIncreaseReplyCount">
         UPDATE review
-        SET rev_reply_cnt(SELECT COUNT(*) FROM rev_reply WHERE rev_bno = #{revBno})
+        SET rev_reply_cnt = (SELECT COUNT(*) FROM rev_reply WHERE rev_bno = #{revBno})
         WHERE rev_bno = #{revBno}
     </update>
 
     <!-- 리뷰 신고 수 증가 -->
     <update id="revIncreaseReportCount">
         UPDATE review
-        SET report_cnt(SELECT COUNT(*) FROM report WHERE rev_bno = #{revBno})
+        SET report_cnt = (SELECT COUNT(*) FROM report WHERE rev_bno = #{revBno})
         WHERE rev_bno = #{revBno}
     </update>
 
