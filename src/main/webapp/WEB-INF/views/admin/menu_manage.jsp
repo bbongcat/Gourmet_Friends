@@ -1,26 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-  <!DOCTYPE html>
-  <html lang="ko">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      
-      <link rel="stylesheet" href="/css/admin/menu_manage.css">
-      <script src="/vendor/jQueryValidation/jquery.validate.min"></script>
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-  </head>
-  <body>
-        <%@include file="../includes/admin/header.jsp"%>
-            
-            <div class="admin_content_wrap">
-                <div class="admin_content_subject"><span>메뉴 관리</span></div>
+<%@include file="../includes/admin/header.jsp" %>
 
-                <div class="menu_table_wrap">
+<div class="jumbotron d-flex align-items-center">
+    <div class="container">
+        <div class="section-content">
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
+                    <span>메뉴 관리</span>
                     <c:if test="${menuListChk != 'empty'}">
                         <table class="menu_table">
                             <th>
@@ -38,7 +29,7 @@
                                         <a class="move" href='<c:out value="${menuList.menuNo}"/>'>
                                             <c:out value="${menuList.menuName}"></c:out>
                                         </a>
-                                    </td>     
+                                    </td>
                                     <td><c:out value="${menuList.restName}"></c:out></td>
                                     <td><c:out value="${menuList.menuPrice}"></c:out></td>
                                 </tr>
@@ -66,26 +57,27 @@
                 </div>
 
                 <!-- pagination  -->
-            <div class="pull-right">
-                <ul class="pagination">
-                    <c:if test = "${pageInfo.prev}">
-                        <li class="paginate_button previous">
-                            <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
-                        </li>
-                    </c:if>
-                        
-                    <c:forEach var= "num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                        <li class="paginate_button"><a href="/admin/menu_manage${pageInfo.makeParam(num)}">${num}</a></li>
-                    </c:forEach>
+                <div class="pull-right">
+                    <ul class="pagination">
+                        <c:if test="${pageInfo.prev}">
+                            <li class="paginate_button previous">
+                                <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
+                            </li>
+                        </c:if>
 
-                    <c:if test = "${pageInfo.next}">
-                        <li class="paginate_button next">
-                            <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
-                        </li>
-                    </c:if>
+                        <c:forEach var="num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+                            <li class="paginate_button"><a
+                                    href="/admin/menu_manage${pageInfo.makeParam(num)}">${num}</a></li>
+                        </c:forEach>
 
-                </ul>
-            </div>
+                        <c:if test="${pageInfo.next}">
+                            <li class="paginate_button next">
+                                <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
+                            </li>
+                        </c:if>
+
+                    </ul>
+                </div>
                 <!-- end pagination  -->
 
                 <form id="moveForm" action="/admin/menu_manage" method="GET">
@@ -95,82 +87,82 @@
                 </form>
 
             </div>
+        </div>
+    </div>
+</div>
 
-        
-        <%@include file="../includes/admin/footer.jsp"%>
 
-        <script>
+<%@include file="../includes/admin/footer.jsp" %>
 
-            $(document).ready(function(){
+<script>
 
-                let eResult = '<c:out value="${insert_result}"/>';
+    $(document).ready(function () {
 
-                checkResult(eResult);
+        let eResult = '<c:out value="${insert_result}"/>';
 
-                function checkResult(result){
-                    if(result === ''){
-                        return;
-                    }
-                    alert("메뉴'"+ eResult +"'를 등록하였습니다.");
+        checkResult(eResult);
+
+        function checkResult(result) {
+            if (result === '') {
+                return;
+            }
+            alert("메뉴'" + eResult + "'를 등록하였습니다.");
+        }
+
+        let modify_result = '${modify_result}';
+
+        if (modify_result == 1) {
+            alert("수정 완료");
+        }
+
+        let delete_result = '${delete_result}';
+
+        if (delete_result == 1) {
+            alert("삭제 완료");
+        }
+
+        function appendPageActive(currentPage) {
+
+            const $pageLiList = document.querySelectorAll('.paginate_button');
+            for ($li of $pageLiList) {
+                if ($li.textContent === currentPage) {
+                    $li.classList.add('active');
                 }
+            }
 
-                let modify_result = '${modify_result}';
+        }
 
-                if(modify_result == 1){
-                    alert("수정 완료");
-                }
+        (function () {
 
-                let delete_result = '${delete_result}';
+            appendPageActive("${pageInfo.cri.page}");
 
-                if(delete_result == 1){
-                    alert("삭제 완료");
-                }
+        }());
+    });
 
-                function appendPageActive(currentPage){
+    let moveForm = $('#moveForm');
+    let searchForm = $('#searchForm');
 
-                    const $pageLiList = document.querySelectorAll('.paginate_button');
-                    for($li of $pageLiList){
-                        if($li.textContent === currentPage){
-                            $li.classList.add('active');
-                        }
-                    }
+    //음식점 검색 버튼
+    $('#searchForm button').on('click', function (e) {
+        e.preventDefault();
 
-                }
+        if (!searchForm.find("input[name='keyword']").val()) {
+            alert("키워드를 입력하십시오.");
+            return false;
+        }
 
-                (function () {
+        searchForm.find("input[name='page']").val("1");
 
-                    appendPageActive("${pageInfo.cri.page}");
-
-                }());
-            });
-
-            let moveForm = $('#moveForm');
-            let searchForm = $('#searchForm');
-            
-            //음식점 검색 버튼 
-            $('#searchForm button').on('click',function(e){
-                e.preventDefault();
-                
-                if(!searchForm.find("input[name='keyword']").val()){
-                    alert("키워드를 입력하십시오.");
-                    return false;
-                }
-                
-                searchForm.find("input[name='page']").val("1");
-                
-                searchForm.submit();
-            });
+        searchForm.submit();
+    });
 
 
-            //메뉴 조회 페이지 이동 
-            $('.move').on('click',function(e){
-                e.preventDefault();
-                moveForm.append("<input type='hidden' name='menuNo' value='"+ $(this).attr("href") + "'>");
-                moveForm.attr("action","/admin/menu_detail");
-                moveForm.submit();
-            });
+    //메뉴 조회 페이지 이동
+    $('.move').on('click', function (e) {
+        e.preventDefault();
+        moveForm.append("<input type='hidden' name='menuNo' value='" + $(this).attr("href") + "'>");
+        moveForm.attr("action", "/admin/menu_detail");
+        moveForm.submit();
+    });
 
-        </script>
-
-  </body>
-  </html>
+</script>

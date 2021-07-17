@@ -5,12 +5,6 @@
 <%@include file="../includes/header.jsp" %>
 
 
-<nav id="nav">
-    <div id="nav_box">
-        <%@include file="../includes/restaurant/nav.jsp" %>
-    </div>
-</nav>
-
 <section id="container">
     <div id="container_box">
 

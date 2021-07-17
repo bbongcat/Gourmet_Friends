@@ -34,7 +34,6 @@
         </div>
     </div>
 </footer>
-</div>
 <!-- /#wrapper -->
 
 <!-- External JS -->

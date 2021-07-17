@@ -20,6 +20,12 @@
 </div>
 <!-- /.row -->--%>
 
+<div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-6.jpg);">
+    <div class="container text-center">
+        <h1 class="display-2 mb-4 eng-font-title">Review</h1>
+    </div>
+</div>
+
 <div class="jumbotron d-flex align-items-center">
     <div class="container">
         <div class="title-container">
@@ -31,16 +37,16 @@
 
         <!-- /.panel-heading -->
         <div class="table-container">
-            <table class="table table-bordered">
+            <table class="table-border">
 
                 <tr>
-                    <th>리뷰 번호</th>
-<%--                    <th>음식점 번호</th>--%>
-                    <th>음식점 이름</th>
-                    <th>리뷰 내용</th>
-<%--                    <th>댓글 수</th>--%>
-                    <th>리뷰 평점</th>
-<%--                    <th>회원</th>--%>
+                    <th class="rev-table-num">리뷰 번호</th>
+                    <%--                    <th>음식점 번호</th>--%>
+                    <th class="rev-table-restName">음식점 이름</th>
+                    <th class="rev-table-revContent">리뷰 내용</th>
+                    <%--                    <th>댓글 수</th>--%>
+                    <th class="rev-table-star">리뷰 평점</th>
+                    <%--                    <th>회원</th>--%>
                 </tr>
                 <%-- 음식점 번호, 회원 등은 글 상세 페이지에서 나오게 하는게 어떨지,
                  댓글 수는 삭제 고려--%>
@@ -53,42 +59,40 @@
                         <td>
                             <a class='move'
                                href="/review/rev_get${pageInfo.makeParam(pageInfo.cri.page)}&revBno=${review.revBno}">
-<%--                                    ${review.restNo}--%>
+                                    <%--                                    ${review.restNo}--%>
                             </a>
                         </td>
 
                         <td>${review.restName}</td>
                         <td>${review.revContent}</td>
-<%--                        <td>${review.revReplyCnt}</td>--%>
+                            <%--                        <td>${review.revReplyCnt}</td>--%>
                         <td>
                             <div class="star-rating">
                                 <c:forEach var="review" begin="1" end="${review.revStar}">★</c:forEach>
                             </div>
                         </td>
-<%--                        <td>${review.userId}</td>--%>
+                            <%--                        <td>${review.userId}</td>--%>
                     </tr>
                 </c:forEach>
             </table>
 
             <!-- search -->
-            <div class='row'>
-                <div class="col-lg-12">
+            <div class='search-container'>
 
-                    <form id='searchForm' action="/review/rev_list" method='get'>
-                        <select name='type'>
-                            <%--                        <option value="">--</option>--%>
-                            <option value="restName" ${pageInfo.cri.type == 'restName' ? 'selected' : ''}>음식점 이름
-                            </option>
-                            <option value="revContent" ${pageInfo.cri.type == 'revContent' ? 'selected' : ''}>리뷰
-                                내용
-                            </option>
-                            <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
-                        </select>
-                        <input type='text' name='keyword' value="${pageInfo.cri.keyword}"/>
+                <form id='searchForm' action="/review/rev_list" method='get'>
+                    <select name='type'>
+                        <%--                        <option value="">--</option>--%>
+                        <option value="restName" ${pageInfo.cri.type == 'restName' ? 'selected' : ''}>음식점 이름
+                        </option>
+                        <option value="revContent" ${pageInfo.cri.type == 'revContent' ? 'selected' : ''}>리뷰
+                            내용
+                        </option>
+                        <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
+                    </select>
+                    <input type='text' name='keyword' value="${pageInfo.cri.keyword}"/>
 
-                        <button class='btn btn-default'>Search</button>
-                    </form>
-                </div>
+                    <button class='btn btn-default'>Search</button>
+                </form>
             </div>
             <!-- end search -->
 

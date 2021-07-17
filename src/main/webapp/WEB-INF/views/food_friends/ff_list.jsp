@@ -7,17 +7,25 @@
 <%@include file="../includes/header.jsp" %>
 
 <style>
- tr.noticeList td>a{
-    color: red;
-    font-weight: bold;
- }
- tr.commonList td>a{
-     color: blue;
- }
+    /*tr.noticeList td > a {*/
+    /*    color: red;*/
+    /*    font-weight: bold;*/
+    /*}*/
+
+    /*tr.commonList td > a {*/
+    /*    color: blue;*/
+    /*}*/
 </style>
+
+<div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-2.jpg);">
+    <div class="container text-center">
+        <h1 class="display-2 mb-4 eng-font-title">Food Friends</h1>
+    </div>
+</div>
 
 <div class="jumbotron d-flex align-items-center">
     <div class="container">
+<%--        <div class="title-container board-title">--%>
         <div class="title-container">
             <h1 class="k-font-title">밥친구 게시판</h1>
             <a href="/food_friends/ff_register/">
@@ -29,14 +37,14 @@
 
         <!-- /.panel-heading -->
         <div class="table-container">
-            <table class="table table-bordered">
+            <table class="table-border">
 
                 <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>회원</th>
-                    <th>작성일</th>
-<%--                    <th>수정일</th>--%>
+                    <th class="fflist-table-num">번호</th>
+                    <th class="fflist-table-title">제목</th>
+                    <th class="fflist-table-user">회원</th>
+                    <th class="fflist-table-time">작성일</th>
+                    <%--                    <th>수정일</th>--%>
                     <%--수정일 빼는거 어떤지 (글에 들어갔을 때만 나오게 한다던지)--%>
                 </tr>
 
@@ -54,7 +62,7 @@
 
                         <td>${foodFriends.userId}</td>
                         <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}"/></td>
-<%--                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>--%>
+                            <%--                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>--%>
                     </tr>
                 </c:forEach>
 
@@ -65,35 +73,36 @@
                         <td>
                             <a class='move'
                                href="/food_friends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
-                                    ${foodFriends.title} [${foodFriends.ffReplyCnt}]
+                                    ${foodFriends.title}&nbsp;
+                                <c:if test="${foodFriends.ffReplyCnt != null}">
+                                    [${foodFriends.ffReplyCnt}]
+                                </c:if>
                             </a>
                         </td>
 
                         <td>${foodFriends.userId}</td>
                         <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.regDate}"/></td>
-<%--                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>--%>
+                            <%--                        <td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${foodFriends.updateDate}"/></td>--%>
                     </tr>
                 </c:forEach>
             </table>
 
             <!-- search -->
-            <div class='row'>
-                <div class="col-lg-12">
+            <div class='search-container'>
 
-                    <form id='searchForm' action="/food_friends/ff_list" method='get'>
-                        <select name='type'>
-                            <option value="title" ${pageInfo.cri.type == 'title' ? 'selected' : ''}>제목</option>
-                            <option value="content" ${pageInfo.cri.type == 'content' ? 'selected' : ''}>내용</option>
-                            <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
-                            <option value="titleContent" ${pageInfo.cri.type == 'titleContent' ? 'selected' : ''}>제목 or
-                                내용
-                            </option>
-                        </select>
-                        <input type='text' name='keyword' value="${pageInfo.cri.keyword}" placeholder="검색어를 입력하세요"/>
+                <form id='searchForm' action="/food_friends/ff_list" method='get'>
+                    <select name='type'>
+                        <option value="title" ${pageInfo.cri.type == 'title' ? 'selected' : ''}>제목</option>
+                        <option value="content" ${pageInfo.cri.type == 'content' ? 'selected' : ''}>내용</option>
+                        <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
+                        <option value="titleContent" ${pageInfo.cri.type == 'titleContent' ? 'selected' : ''}>제목 or
+                            내용
+                        </option>
+                    </select>
+                    <input type='text' name='keyword' value="${pageInfo.cri.keyword}" placeholder="검색어를 입력하세요"/>
 
-                        <button class='btn btn-default'>검색</button>
-                    </form>
-                </div>
+                    <button class='btn btn-blue'>검색</button>
+                </form>
             </div>
             <!-- end search -->
 

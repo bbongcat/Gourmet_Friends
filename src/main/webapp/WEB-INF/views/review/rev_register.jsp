@@ -35,7 +35,7 @@
                     <form role="form" action="/review/rev_register" method="post" enctype="multipart/form-data">
 
                         <div class="form-group" style="margin-bottom: 20px;">
-                            <label>음식점</label>
+                            <label for="restName_input">음식점</label>
                             <br>
                             <input id="restName_input" readonly>
                             <input id="restNo_input" name="restNo" type="hidden">
@@ -61,14 +61,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label>회원</label> <input class="form-control" name='userId' readonly
-                                                     value="${loginUser.userId}">
+                            <label>회원</label>
+                            <input class="form-control" name='userId' readonly
+                                   value="${loginUser.userId}">
                         </div>
 
                         <br>
 
                         <div class="form_group">
-                            <label for="review">메뉴 이미지</label>
+                            <label for="reviewImg">메뉴 이미지</label>
                             <br>
                             <input type="file" id="reviewImg" name="file">
                             <div class="select_img"><img src=""></div>

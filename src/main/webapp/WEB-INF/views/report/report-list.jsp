@@ -16,14 +16,14 @@
 
         <!-- /.panel-heading -->
         <div class="table-container">
-            <table class="table table-bordered">
+            <table class="table-border">
 
                 <tr>
-                    <th>번호</th>
-                    <th>리뷰 번호</th>
-                    <th>신고내용</th>
-                    <th>회원</th>
-                    <th>신고시간</th>
+                    <th class="fflist-table-num">번호</th>
+                    <%--                    <th>리뷰 번호</th>--%>
+                    <th class="fflist-table-title">신고내용</th>
+                    <th class="fflist-table-user">회원</th>
+                    <th class="fflist-table-time">신고시간</th>
                 </tr>
 
 
@@ -47,24 +47,22 @@
             </table>
 
             <!-- search -->
-            <div class='row'>
-                <div class="col-lg-12">
+            <div class='search-container'>
 
-                    <form id='searchForm' action="/report/report-list" method='get'>
-                        <select name='type'>
-                            <option value="">--</option>
-                            <option value="reportNo" ${pageInfo.cri.type == 'reportNo' ? 'selected' : ''}>신고 번호
-                            </option>
-                            <option value="reportContent" ${pageInfo.cri.type == 'reportContent' ? 'selected' : ''}>
-                                신고 내용
-                            </option>
-                            <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
-                        </select>
-                        <input type='text' name='keyword' value="${pageInfo.cri.keyword}"/>
+                <form id='searchForm' action="/report/report-list" method='get'>
+                    <select name='type'>
+                        <option value="">--</option>
+                        <option value="reportNo" ${pageInfo.cri.type == 'reportNo' ? 'selected' : ''}>신고 번호
+                        </option>
+                        <option value="reportContent" ${pageInfo.cri.type == 'reportContent' ? 'selected' : ''}>
+                            신고 내용
+                        </option>
+                        <option value="userId" ${pageInfo.cri.type == 'userId' ? 'selected' : ''}>회원ID</option>
+                    </select>
+                    <input type='text' name='keyword' value="${pageInfo.cri.keyword}"/>
 
-                        <button class='btn btn-default'>Search</button>
-                    </form>
-                </div>
+                    <button class='btn btn-default'>Search</button>
+                </form>
             </div>
             <!-- end search -->
 
