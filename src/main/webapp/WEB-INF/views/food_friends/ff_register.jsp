@@ -6,10 +6,10 @@
 
 <div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-2.jpg);">
     <div class="container text-center">
-        <h1 class="display-2 mb-4 eng-font-title">Food Friends</h1>
-        <p>
-            나만의 밥친구를 찾아보세요.
-        </p>
+        <h1 class="display-2 mb-4 eng-font-title" style="color: #FFFFFF;
+background: transparent;
+text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px 0px 20px, #FF2D95 0px 0px 30px, #FF2D95 0px 0px 40px, #FF2D95 0px 0px 50px, #FF2D95 0px 0px 75px;">
+            Food Friends</h1>
     </div>
 </div>
 

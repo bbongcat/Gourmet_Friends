@@ -746,7 +746,7 @@ table.table-border {
     border-spacing: 1px;
     text-align: center;
     line-height: 1.5;
-    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
 }
 table.table-border tr {
@@ -757,7 +757,7 @@ table.table-border th {
     font-weight: bold;
     vertical-align: top;
     border-bottom: 2px solid rgba(84, 87, 95, 0.86);
-    background: #efefef;
+    /*background: #efefef;*/
 }
 table.table-border td {
     /*width: 350px;*/
@@ -809,27 +809,31 @@ table.table-border td {
 }
 
 .get-content {
-    display: flex;
+    display: block;
     margin-top: 2rem;
     margin-bottom: 3rem;
     font-size: 1.4rem;
 }
 
 .get-reply {
-    display: flex;
+    display: block;
     margin-top: 1rem;
     margin-bottom: 1rem;
     justify-content: space-between;
 }
 
 .reply-content {
-    display: flex;
-    text-decoration: none;
-    margin-left: 0;
+    margin: 5px 0 5px 0;
     padding: 0;
-    z-index: 900;
 }
-
+.reply-content li {
+    display: block;
+    z-index: 900;
+    text-decoration: none;
+    /*box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;*/
+    padding: 3px 0px 3px 0px;
+    margin-top: 3px;
+}
 
 .form-section {
     margin-top: 1.1rem;
@@ -851,16 +855,43 @@ table.table-border td {
     left: 20px;
     top: 20px;
 }
-
-.cate-container > ul, li {
+.cate-tier1,
+.cate-tier2,
+.cate-tier3 {
+    display: block;
     list-style: none;
     color: #212529;
-    margin-bottom: 0.5rem;
+    margin: 0;
+    padding: 0px;
+    margin-bottom: 0.7rem;
 }
-.cate-container > .cate-tier1 {
+.cate-tier1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    /*margin-bottom: 8px;
+    margin-top: 8px;*/
+}
+.cate-tier1 li {
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+.cate-tier2 {
     font-size: 1.7rem;
+    font-weight: normal;
 }
-.cate-container > .cate-tier2, .cate-tier3 {
+.cate-tier3 {
+    margin-bottom: 15px;
+}
+.cate-tier3 li {
     font-size: 1.6rem;
+    font-weight: normal;
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    /*border-bottom: 1px solid #efefef;*/
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    /*display: none;*/
+}
+.showing {
+    display: block;
 }
 

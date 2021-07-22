@@ -19,13 +19,16 @@
 
 <div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-2.jpg);">
     <div class="container text-center">
-        <h1 class="display-2 mb-4 eng-font-title">Food Friends</h1>
+        <h1 class="display-2 mb-4 eng-font-title" style="color: #FFFFFF;
+background: transparent;
+text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px 0px 20px, #FF2D95 0px 0px 30px, #FF2D95 0px 0px 40px, #FF2D95 0px 0px 50px, #FF2D95 0px 0px 75px;">
+            Food Friends</h1>
     </div>
 </div>
 
 <div class="jumbotron d-flex align-items-center">
     <div class="container">
-<%--        <div class="title-container board-title">--%>
+        <%--        <div class="title-container board-title">--%>
         <div class="title-container">
             <h1 class="k-font-title">밥친구 게시판</h1>
             <a href="/food_friends/ff_register/">

@@ -19,10 +19,12 @@
 
 <div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-6.jpg);">
     <div class="container text-center">
-        <h1 class="display-2 mb-4 eng-font-title">Review</h1>
-        <p class="k-font">
+        <h1 class="display-2 mb-4 eng-font-title" style="color: #FFFFFF;
+background: transparent;
+text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px 0px 20px, #FF2D95 0px 0px 30px, #FF2D95 0px 0px 40px, #FF2D95 0px 0px 50px, #FF2D95 0px 0px 75px;">Review</h1>
+        <%--<p class="k-font">
             소중한 평가를 들려주세요.
-        </p>
+        </p>--%>
     </div>
 </div>
 
