@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%-- <nav> --%>
-<h3 style="margin-bottom: 20px;">Category</h3>
+<h3 style="display:flex; margin-bottom: 20px; justify-content:center; align-items: center;">Category</h3>
 
 <ul class="cate-tier1">
     <li><a href="/restaurant/rest_list?c=100000&l=1" style="margin-bottom: 30px;">음식점업</a>
