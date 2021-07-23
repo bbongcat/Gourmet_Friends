@@ -32,8 +32,8 @@ public class AdminController {
     private final RestaurantService restaurantService;
     private final MenuService menuService;
 
-    private static final String REST_UPLOAD_PATH = "C:\\git-practice\\team_project\\Gourmet_Friends\\src\\main\\resources\\static";
-    private static final String MENU_UPLOAD_PATH = "C:\\git-practice\\team_project\\Gourmet_Friends\\src\\main\\resources\\static";
+    private static final String REST_UPLOAD_PATH = "F:\\GourmetFriends\\src\\main\\resources\\static";
+    private static final String MENU_UPLOAD_PATH = "F:\\GourmetFriends\\src\\main\\resources\\static";
 
     //관리자 메인 페이지 접속
     @GetMapping("/manager")

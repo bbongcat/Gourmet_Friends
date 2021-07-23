@@ -7,41 +7,41 @@
 
 <div class="jumbotron d-flex align-items-center">
     <div class="container">
-        <div class="section-content">
-            <span>음식점 관리</span>
-            <div class="rest_table_wrap">
-                <c:if test="${restListChk != 'empty'}">
-                    <table class="rest_table">
-                        <th>
-                            <tr>
-                                <td class="th_coloumn_1">음식점 번호</td>
-                                <td class="th_coloumn_2">음식점 이름</td>
-                                <td class="th coloumn_3">음식점 카테고리</td>
-                                <td class="th_coloumn_4">음식점 전화번호</td>
-                                <td class="th_coloumn_5">음식점 영업시간</td>
-                                <td class="th_coloumn_6">음식점 우편주소</td>
-                                <td class="th_coloumn_7">음식점 도로명주소</td>
-                                <td class="th_coloumn_8">음식점 상세주소</td>
-                            </tr>
-                        </th>
+        <div>
+            <h3>음식점 관리</h3>
+            <br>
 
-                        <c:forEach items="${restList}" var="restList">
-                            <tr>
-                                <td><c:out value="${restList.restNo}"></c:out></td>
-                                <td>
-                                    <a class="move" href='<c:out value="${restList.restNo}"/>'>
-                                        <c:out value="${restList.restName}"></c:out>
-                                    </a>
-                                </td>
-                                <td><c:out value="${restList.cateName}"></c:out></td>
-                                <td><c:out value="${restList.restPh}"></c:out></td>
-                                <td><c:out value="${restList.restTime}"></c:out></td>
-                                <td><c:out value="${restList.restOaddress}"></c:out></td>
-                                <td><c:out value="${restList.restAddress}"></c:out></td>
-                                <td><c:out value="${restList.restDetailaddress}"></c:out></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+            <c:if test="${restListChk != 'empty'}">
+            <div class="table-container">
+                <table class="table-border">
+                    <tr>
+<%--                        <th class="th_column_1">음식점 번호</th>--%>
+                        <th style="width: 20%;">음식점명</th>
+                        <th style="width: 10%;">카테고리</th>
+                        <th style="width: 15%;">전화번호</th>
+                        <th style="width: 10%;">영업시간</th>
+<%--                        <th class="th_column_6">음식점 우편주소</th>--%>
+                        <th style="width: 45%;">주소</th>
+<%--                        <th class="th_column_8">음식점 상세주소</th>--%>
+                    </tr>
+
+                    <c:forEach items="${restList}" var="restList">
+                        <tr>
+<%--                            <td><c:out value="${restList.restNo}"></c:out></td>--%>
+                            <td>
+                                <a class="move" href='<c:out value="${restList.restNo}"/>'>
+                                    <c:out value="${restList.restName}"></c:out>
+                                </a>
+                            </td>
+                            <td><c:out value="${restList.cateName}"></c:out></td>
+                            <td><c:out value="${restList.restPh}"></c:out></td>
+                            <td><c:out value="${restList.restTime}"></c:out></td>
+<%--                            <td><c:out value="${restList.restOaddress} "></c:out></td>--%>
+                            <td><c:out value="${restList.restAddress} ${restList.restDetailaddress}"></c:out></td>
+<%--                            <td><c:out value="${restList.restDetailaddress}"></c:out></td>--%>
+                        </tr>
+                    </c:forEach>
+                </table>
                 </c:if>
 
                 <c:if test="${restListChk == 'empty'}">

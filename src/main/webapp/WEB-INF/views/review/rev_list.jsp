@@ -56,12 +56,12 @@ text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px
 
                 <c:forEach var="review" items="${rev_list}">
                     <tr>
-                        <td>${review.revBno}</td>
+<%--                        <td>${review.revBno}</td>--%>
 
                         <td>
                             <a class='move'
                                href="/review/rev_get${pageInfo.makeParam(pageInfo.cri.page)}&revBno=${review.revBno}">
-                                    <%--                                    ${review.restNo}--%>
+                                                                        ${review.restNo}
                             </a>
                         </td>
 

@@ -39,7 +39,7 @@ text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px
                     </c:if>
                     <button id='list-btn' class="btn btn-blue">목록</button>
                     <c:if test="${loginUser != null}">
-                        <button id='addReplyBtn' class='btn btn-brown'>댓글 등록</button>
+                        <button id='addReplyBtn' class='btn btn-blue'>댓글 등록</button>
                     </c:if>
                     <br>
                     <br>

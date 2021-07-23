@@ -14,11 +14,15 @@
                 <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
                     <form action="/admin/rest_insert" method="POST" id="insertForm" enctype="multipart/form-data">
 
+                        <h3>음식점 등록</h3>
+                        <br>
+                        <br>
+
                         <div class="form-group">
-                            <span>음식점 등록</span>
                             <div class="form_section_title">
-                                <span class="form-subtitle">음식점 카테고리</span>
+                                <span>음식점 카테고리</span>
                             </div>
+
                             <div class="form_section_content">
                                 <div class="form_section">
                                     <lable for="cate1">대분류</lable>&nbsp;
@@ -39,9 +43,11 @@
                                         <option class="form-option" selected value="none">선택</option>
                                     </select>
                                 </div>
+
 <%--                                <span id="warn_cateCode">음식점 카테고리를 선택해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -52,6 +58,7 @@
 <%--                                <span id="warn_restName">음식점 이름을 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -62,6 +69,7 @@
 <%--                                <span id="warn_restPh">음식점 전화번호를 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -72,6 +80,7 @@
 <%--                                <span id="warn_restTime">음식점 영업시간을 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -102,6 +111,7 @@
 <%--                                <span id="warn_restDetailaddress">음식점 상세주소를 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">

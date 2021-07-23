@@ -13,16 +13,19 @@
                 <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
                     <form action="/admin/menu_insert" method="POST" id="insertForm" enctype="multipart/form-data">
 
+                        <h3>메뉴 등록</h3>
+                        <br>
+
                         <div class="form_section">
-                            <span>메뉴 등록</span>
                             <div class="form_section_title">
                                 <label>메뉴 이름</label>
                             </div>
                             <div class="form_section_content">
                                 <input name="menuName">
-                                <span class="ck_warn menuName_warn">메뉴 이름을 입력해주세요.</span>
+<%--                                <span class="ck_warn menuName_warn">메뉴 이름을 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -30,11 +33,12 @@
                             </div>
                             <div class="form_section_content">
                                 <input id="restName_input" readonly>
-                                <input id="restNo_input" name="restNo" type="hidden">
+                                <input id="restNo_input" name="restNo" type="hidden">&nbsp;
                                 <button class="restNo_btn">음식점 선택</button>
-                                <span class="ck_warn restNo_warn">음식점을 선택해주세요.</span>
+<%--                                <span class="ck_warn restNo_warn">음식점을 선택해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -42,9 +46,10 @@
                             </div>
                             <div class="form_section_content bit">
                                 <input name="menuPrice" value="0">
-                                <span class="ck_warn menuPrice_warn">메뉴 가격을 입력해주세요.</span>
+<%--                                <span class="ck_warn menuPrice_warn">메뉴 가격을 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
@@ -52,25 +57,27 @@
                             </div>
                             <div class="form_section_content">
                                 <textarea name="menuIntro" id="menuIntro_textarea"></textarea>
-                                <span class="ck_warn menuIntro_warn">메뉴 소개를 입력해주세요.</span>
+<%--                                <span class="ck_warn menuIntro_warn">메뉴 소개를 입력해주세요.</span>--%>
                             </div>
                         </div>
+                        <br>
 
                         <div class="form_section">
                             <div class="form_section_title">
                                 <label for="menuImg">메뉴 이미지</label>
+                                <br>
                                 <input type="file" id="menuImg" name="file">
                             </div>
                             <div class="select_img"><img src=""></div>
 <%--                            <%=request.getRealPath("/") %>--%>
-
                         </div>
+                        <br>
 
                     </form>
 
                     <div class="btn_section">
-                        <button id="cancelBtn" class="btn">취 소</button>
-                        <button id="insertBtn" class="btn insert_btn">등 록</button>
+                        <button id="cancelBtn" type="button" class="btn btn-brown">취소</button>
+                        <button id="insertBtn" type="button" class="btn btn-brown">등록</button>
                     </div>
                 </div>
             </div>

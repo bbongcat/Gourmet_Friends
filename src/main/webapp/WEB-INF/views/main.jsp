@@ -138,10 +138,11 @@
         </div>
     </nav>
 
-    <div class="jumbotron d-flex align-items-center" style="background-image: url(img/bg-5.jpg)">
+    <div class="jumbotron d-flex align-items-center" style="background-image: url(img/bg-5.jpg); ">
         <div class="container text-center">
             <h1 class="display-2 mb-4">Gourmet ?</h1>
-            <p class="k-font">
+            <p class="k-font" style="display: inline;
+                box-shadow: inset 0 -10px 0 rgba(217,227,217,0.86);">
                 Gourmet Friends는 미식가를 뜻하는 Gourmet과 Friends를 합쳐 만든 단어로
                 <br>맛을 아는 친구들이 함께 모여 서로의 맛집 정보를 공유하는 플랫폼이 되고자 합니다.
             </p>

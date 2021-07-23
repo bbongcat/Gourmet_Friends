@@ -895,3 +895,14 @@ table.table-border td {
     display: block;
 }
 
+.detail-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 400;
+    /*border-bottom: 1px solid #a5b1c2;*/
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

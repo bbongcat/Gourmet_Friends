@@ -75,7 +75,7 @@ text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px
                             <br>
                             <input type="file" id="reviewImg" name="file">
                             <div class="select_img"><img src=""></div>
-                            <%=request.getRealPath("/") %>
+<%--                            <%=request.getRealPath("/") %>--%>
                         </div>
 
                         <br>

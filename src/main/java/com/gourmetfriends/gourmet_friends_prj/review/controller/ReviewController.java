@@ -27,7 +27,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final RestaurantService restaurantService;
 
-    private static final String REVIEW_UPLOAD_PATH = "C:\\git-practice\\team_project\\Gourmet_Friends\\src\\main\\resources\\static";
+    private static final String REVIEW_UPLOAD_PATH = "F:\\GourmetFriends\\src\\main\\resources\\static";
 
     //리뷰 게시물 목록 요청 처리
     @GetMapping("/review/rev_list")

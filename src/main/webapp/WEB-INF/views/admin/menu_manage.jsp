@@ -7,87 +7,85 @@
 
 <div class="jumbotron d-flex align-items-center">
     <div class="container">
-        <div class="section-content">
+        <div>
+            <h3>메뉴 관리</h3>
+            <br>
 
-            <div class="row">
-                <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
-                    <span>메뉴 관리</span>
-                    <c:if test="${menuListChk != 'empty'}">
-                        <table class="menu_table">
-                            <th>
-                                <tr>
-                                    <td class="th_column_1">메뉴 번호</td>
-                                    <td class="th_column_2">메뉴 이름</td>
-                                    <td class="th_column_3">음식점 이름</td>
-                                    <td class="th_column_4">메뉴 가격</td>
-                                </tr>
-                            </th>
-                            <c:forEach items="${menuList}" var="menuList">
-                                <tr>
-                                    <td><c:out value="${menuList.menuNo}"></c:out></td>
-                                    <td>
-                                        <a class="move" href='<c:out value="${menuList.menuNo}"/>'>
-                                            <c:out value="${menuList.menuName}"></c:out>
-                                        </a>
-                                    </td>
-                                    <td><c:out value="${menuList.restName}"></c:out></td>
-                                    <td><c:out value="${menuList.menuPrice}"></c:out></td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </c:if>
-
-                    <c:if test="${menuListChk == 'empty'}">
-                        <div class="table_empty">
-                            등록된 메뉴가 없습니다.
-                        </div>
-                    </c:if>
-                </div>
-
-                <!-- 검색 영역 -->
-                <div class="search_wrap">
-                    <form id="searchForm" action="/admin/menu_manage" method="GET">
-                        <div class="search_input">
-                            <input type="text" name="keyword" value='<c:out value="${pageInfo.cri.keyword}"></c:out>'>
-                            <input type="hidden" name="page" value='<c:out value="${pageInfo.cri.page}"></c:out>'>
-                            <input type="hidden" name="amount" value='${pageInfo.cri.keyword}'>
-                            <button class="btn search_btn">검 색</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- pagination  -->
-                <div class="pull-right">
-                    <ul class="pagination">
-                        <c:if test="${pageInfo.prev}">
-                            <li class="paginate_button previous">
-                                <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
-                            </li>
-                        </c:if>
-
-                        <c:forEach var="num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-                            <li class="paginate_button"><a
-                                    href="/admin/menu_manage${pageInfo.makeParam(num)}">${num}</a></li>
+            <c:if test="${menuListChk != 'empty'}">
+                <div class="table-container">
+                    <table class="table-border">
+                        <tr>
+                            <th style="width: 15%;">메뉴 번호</th>
+                            <th style="width: 35%;">메뉴명</th>
+                            <th style="width: 35%;">음식점명</th>
+                            <th style="width: 15%;">가격</th>
+                        </tr>
+                        <c:forEach items="${menuList}" var="menuList">
+                            <tr>
+                                <td><c:out value="${menuList.menuNo}"></c:out></td>
+                                <td>
+                                    <a class="move" href='<c:out value="${menuList.menuNo}"/>'>
+                                        <c:out value="${menuList.menuName}"></c:out>
+                                    </a>
+                                </td>
+                                <td><c:out value="${menuList.restName}"></c:out></td>
+                                <td><c:out value="${menuList.menuPrice}"></c:out></td>
+                            </tr>
                         </c:forEach>
-
-                        <c:if test="${pageInfo.next}">
-                            <li class="paginate_button next">
-                                <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
-                            </li>
-                        </c:if>
-
-                    </ul>
+                    </table>
                 </div>
-                <!-- end pagination  -->
+            </c:if>
 
-                <form id="moveForm" action="/admin/menu_manage" method="GET">
-                    <input type="hidden" name="page" value="${pageInfo.cri.page}">
-                    <input type="hidden" name="amount" value="${pageInfo.cri.amount}">
-                    <input type="hidden" name="keyword" value="${pageInfo.cri.keyword}">
-                </form>
-
-            </div>
+            <c:if test="${menuListChk == 'empty'}">
+                <div class="k-font">
+                    등록된 메뉴가 없습니다.
+                </div>
+            </c:if>
         </div>
+        <br>
+
+        <!-- 검색 영역 -->
+        <div class="search_wrap">
+            <form id="searchForm" action="/admin/menu_manage" method="GET">
+                <div class="search_input">
+                    <input type="text" name="keyword"
+                           value='<c:out value="${pageInfo.cri.keyword}"></c:out>'>
+                    <input type="hidden" name="page" value='<c:out value="${pageInfo.cri.page}"></c:out>'>
+                    <input type="hidden" name="amount" value='${pageInfo.cri.keyword}'>
+                    <button class="btn search_btn">검 색</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- pagination  -->
+        <div class="pull-right">
+            <ul class="pagination">
+                <c:if test="${pageInfo.prev}">
+                    <li class="paginate_button previous">
+                        <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.startPage-1)}">이전</a>
+                    </li>
+                </c:if>
+
+                <c:forEach var="num" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+                    <li class="paginate_button"><a
+                            href="/admin/menu_manage${pageInfo.makeParam(num)}">${num}</a></li>
+                </c:forEach>
+
+                <c:if test="${pageInfo.next}">
+                    <li class="paginate_button next">
+                        <a href="/admin/menu_manage${pageInfo.makeParam(pageInfo.endPage+1)}">다음</a>
+                    </li>
+                </c:if>
+
+            </ul>
+        </div>
+        <!-- end pagination  -->
+
+        <form id="moveForm" action="/admin/menu_manage" method="GET">
+            <input type="hidden" name="page" value="${pageInfo.cri.page}">
+            <input type="hidden" name="amount" value="${pageInfo.cri.amount}">
+            <input type="hidden" name="keyword" value="${pageInfo.cri.keyword}">
+        </form>
     </div>
 </div>
 
