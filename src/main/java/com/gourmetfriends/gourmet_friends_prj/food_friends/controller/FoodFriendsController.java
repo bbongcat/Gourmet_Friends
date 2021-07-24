@@ -62,7 +62,15 @@ public class FoodFriendsController {
         return "food_friends/ff_get";
     }
 
-    //게시글 수정 화면 요청
+    //게시글 수정화면 요청
+    @GetMapping("/ff_modify")
+    public String modify(Long ffBno,Model model, @ModelAttribute("pageInfo") Criteria cri){
+        log.info("/food_friends/ff_modify GET요청: " + ffBno);
+        model.addAttribute("foodFriends",foodFriendsService.get(ffBno));
+        return "food_friends/ff_modify";
+    }
+
+    //게시글 수정 요청
     @PostMapping("/ff_modify")
     public String modify(FoodFriends foodFriends, RedirectAttributes ra){
         log.info("/food_friends/ff_modify POST: " + foodFriends);

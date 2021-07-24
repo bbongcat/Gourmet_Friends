@@ -27,7 +27,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final RestaurantService restaurantService;
 
-    private static final String REVIEW_UPLOAD_PATH = "F:\\GourmetFriends\\src\\main\\resources\\static";
+    private static final String REVIEW_UPLOAD_PATH = "F:\\\\GourmetFriends\\\\src\\\\main\\\\resources\\\\static";
 
     //리뷰 게시물 목록 요청 처리
     @GetMapping("/review/rev_list")
@@ -79,6 +79,14 @@ public class ReviewController {
         log.info("/review/rev_get GET요청!: " + revBno);
         model.addAttribute("review",reviewService.revGet(revBno));
         return "review/rev_get";
+    }
+
+    //리뷰 수정 화면 요청
+    @GetMapping("/review/rev_modify")
+    public String modify(Long revBno,Model model, @ModelAttribute("pageInfo") Criteria cri){
+        log.info("/review/rev_modify GET요청: " + revBno);
+        model.addAttribute("review",reviewService.revGet(revBno));
+        return "/review/rev_modify";
     }
 
     //리뷰 수정 요청
