@@ -5,7 +5,7 @@
 <%@include file="../includes/header.jsp"%>
 
 <style>
-.rating .rate-radio {
+/* .rating .rate-radio {
     position: relative;
     display: inline-block;
     z-index: 20;
@@ -44,11 +44,15 @@
       padding: 10px;
       box-sizing: border-box;
       border: 1px solid #e0e0e0;
-   }
+   } */
    .select_img img {
        width: 500px;
        margin: 20px 0;
    }
+   .star-rating .on {
+        font-size: 25px;
+        color: #ffc048;
+    }
 </style>
 
 <div class="row">
@@ -87,21 +91,17 @@
                     </div>
 
                     <!-- 리뷰 평점 api생성하기 -->
-                    <div class="review-rating">
-                        <div class="warning-msg">별점을 선택해주세요</div>
-                        <div class="rating">
-                          <input type="checkbox" name="revStar" id="rating1" value="${review.revStar}" class="rate-radio" title="1점">
-                          <label for="rating1"></label>
-                          <input type="checkbox" name="revStar" id="rating2" value="${review.revStar}" class="rate-radio" title="2점">
-                          <label for="rating2"></label>
-                          <input type="checkbox" name="revStar" id="rating3" value="${review.revStar}" class="rate-radio" title="3점">
-                          <label for="rating3"></label>
-                          <input type="checkbox" name="revStar" id="rating4" value="${review.revStar}" class="rate-radio" title="4점">
-                          <label for="rating4"></label>
-                          <input type="checkbox" name="revStar" id="rating5" value="${review.revStar}" class="rate-radio" title="5점">
-                          <label for="rating5"></label>
+                    <div class="form-group">
+                        <label>리뷰 평점</label>
+                        <div class="star-rating">
+                            <a href="#" class="on" id="1">★</a>
+                            <a href="#" class="on" id="2">★</a>
+                            <a href="#" class="on" id="3">★</a>
+                            <a href="#" id="4">★</a>
+                            <a href="#" id="5">★</a>
+                            <input type="hidden" id="revStar" name="revStar" value="3">
                         </div>
-                      </div>
+                    </div>
 
                     <div class="form-group">
                         <label>회원</label>
@@ -159,31 +159,16 @@
         $actionForm.submit();
     });
 
-    //별점 마킹 모듈 프로토타입으로 생성
-    function Rating(){};
-    Rating.prototype.rate = 0;
-    Rating.prototype.setRate = function(newrate){
-        //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
-        this.rate = newrate;
-        let items = document.querySelectorAll('.rate-radio');
-        items.forEach(function(item, idx){
-            if(idx < newrate){
-                item.checked = true;
-            }else{
-                item.checked = false;
-            }
-        });
-    }
-    let rating = new Rating();//별점 인스턴스 생성
+    $(document).ready(function () {
 
-    document.addEventListener('DOMContentLoaded', function(){
-        //별점선택 이벤트 리스너
-        document.querySelector('.rating').addEventListener('click',function(e){
-            let elem = e.target;
-            if(elem.classList.contains('.rate-radio')){
-                rating.setRate(parseInt(elem.value));
-            }
-        })
+        $('.star-rating a').click(function () {
+            $(this).parent().children('a').removeClass('on');
+            $(this).addClass('on').prevAll('a').addClass('on');
+            let starRate = $(this).attr('id');
+            $('#revStar').val(starRate);
+            return false;
+        });
+
     });
 
     //리뷰 이미지 
