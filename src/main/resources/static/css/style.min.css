@@ -906,3 +906,30 @@ table.table-border td {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.rest-list {
+    list-style: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.rest-list > div {
+    margin-top: 5px;
+}
+
+.menu-list {
+    display: inline-grid;
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.menu-list > div {
+    margin-bottom: 8px;
+}
+.menu-wrap {
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin-bottom: 30px;
+}

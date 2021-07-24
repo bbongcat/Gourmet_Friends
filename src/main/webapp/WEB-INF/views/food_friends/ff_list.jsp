@@ -7,14 +7,14 @@
 <%@include file="../includes/header.jsp" %>
 
 <style>
-    /*tr.noticeList td > a {*/
-    /*    color: red;*/
-    /*    font-weight: bold;*/
-    /*}*/
+    tr.noticeList td > a {
+        color: #4a69bd;
+        font-weight: bold;
+    }
 
-    /*tr.commonList td > a {*/
-    /*    color: blue;*/
-    /*}*/
+    /*tr.commonList td > a {
+        color: blue;
+    }*/
 </style>
 
 <div class="jumbotron d-flex align-items-center" style="background-image: url(/img/bg-2.jpg);">
@@ -59,7 +59,10 @@ text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px
                         <td>
                             <a class='move'
                                href="/food_friends/ff_get${pageInfo.makeParam(pageInfo.cri.page)}&ffBno=${foodFriends.ffBno}">
-                                    ${foodFriends.title} [${foodFriends.ffReplyCnt}]
+                                    ${foodFriends.title}&nbsp;
+                                <c:if test="${foodFriends.ffReplyCnt != null}">
+                                    [${foodFriends.ffReplyCnt}]
+                                </c:if>
                             </a>
                         </td>
 
