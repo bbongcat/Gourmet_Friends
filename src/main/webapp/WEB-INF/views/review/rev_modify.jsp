@@ -5,51 +5,13 @@
 <%@include file="../includes/header.jsp" %>
 
 <style>
-/* .rating .rate-radio {
-    position: relative;
-    display: inline-block;
-    z-index: 20;
-    opacity: 0.001;
-    width: 60px;
-    height: 60px;
-    background-color: #fff;
-    cursor: pointer;
-    vertical-align: top;
-    display: none;
-  }
-  .rating .rate-radio + label {
-    position: relative;
-    display: inline-block;
-    margin-left: -4px;
-    z-index: 10;
-    width: 60px;
-    height: 60px;
-    background-image: url('./views/starrate.png');
-    background-repeat: no-repeat;
-    background-size: 60px 60px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-  }
-  .rating .rate-radio:checked + label {
-      background-color: #ff8;
-  }
-  .warning-msg {
-      display: none;
-      position: relative;
-      text-align: center;
-      background: #ffffff;
-      line-height: 26px;
-      width: 100%;
-      color: red;
-      padding: 10px;
-      box-sizing: border-box;
-      border: 1px solid #e0e0e0;
-   } */
-   .select_img img {
-       width: 500px;
-       margin: 20px 0;
-   }
-   .star-rating .on {
+
+    .select_img img {
+        width: 500px;
+        margin: 20px 0;
+    }
+
+    .star-rating .on {
         font-size: 25px;
         color: #ffc048;
     }
@@ -89,18 +51,18 @@ text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px
                             <textarea class="form-control" rows="5" name='revContent'>${review.revContent}</textarea>
                         </div>
 
-                    <!-- 리뷰 평점 api생성하기 -->
-                    <div class="form-group">
-                        <label>리뷰 평점</label>
-                        <div class="star-rating">
-                            <a href="#" class="on" id="1">★</a>
-                            <a href="#" class="on" id="2">★</a>
-                            <a href="#" class="on" id="3">★</a>
-                            <a href="#" id="4">★</a>
-                            <a href="#" id="5">★</a>
-                            <input type="hidden" id="revStar" name="revStar" value="3">
+                        <!-- 리뷰 평점 api생성하기 -->
+                        <div class="form-group">
+                            <label>리뷰 평점</label>
+                            <div class="star-rating">
+                                <a href="#" class="on" id="1">★</a>
+                                <a href="#" class="on" id="2">★</a>
+                                <a href="#" class="on" id="3">★</a>
+                                <a href="#" id="4">★</a>
+                                <a href="#" id="5">★</a>
+                                <input type="hidden" id="revStar" name="revStar" value="3">
+                            </div>
                         </div>
-                    </div>
 
                         <div class="form-group">
                             <label>회원</label>

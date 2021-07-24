@@ -39,6 +39,10 @@ text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px
                                     <span class="lnr lnr-map-marker"></span>&nbsp;
                                     <span>주소 : ${restCateList.restAddress} ${restCateList.restDetailaddress}</span>
                                 </div>
+                                <br>
+                                <div>
+                                    <img src="${restCateList.restImg}" class="oriImg">
+                                </div>
                             </li>
                         </c:forEach>
                     </ul>
