@@ -940,6 +940,7 @@ table.table-border td {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: auto;
-    height: auto;
+}
+.menu-img > img {
+    max-height: 200px;
 }

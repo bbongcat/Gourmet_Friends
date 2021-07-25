@@ -27,8 +27,8 @@
                                     <span>메뉴 소개 :</span><br>
                                         ${restMenuList.menuIntro}
                                 </div>
-                                <div>
-                                    <img class="menu-img" src="${restMenuList.menuThumbImg}">
+                                <div class="menu-img">
+                                    <img src="${restMenuList.menuThumbImg}">
                                 </div>
 <%--                                <div class="name">${restMenuList.menuName}</div>--%>
 <%--                                <div class="price">가격: ${restMenuList.menuPrice}</div>--%>
