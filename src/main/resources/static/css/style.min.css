@@ -923,6 +923,8 @@ table.table-border td {
     margin-bottom: 10px;
     margin-top: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    width: 300px;
+    height: 365px;
 }
 .menu-list > div {
     margin-bottom: 8px;
@@ -932,4 +934,12 @@ table.table-border td {
     justify-content: space-around;
     padding: 0;
     margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.menu-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
 }
