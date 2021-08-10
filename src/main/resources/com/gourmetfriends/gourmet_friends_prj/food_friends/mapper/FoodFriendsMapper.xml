@@ -52,7 +52,7 @@
     <!-- 목록 조회 통합 검색 -->
     <select id="getSearchList" resultMap="foodFriendsMap">
         <![CDATA[
-            SELECT ff_bno,title,content,user_id, reg_date, update_date,ff_reply_cnt
+            SELECT ff_bno,title,content,user_id, reg_date, update_date,ff_reply_cnt, cate_notice
             FROM food_friends
         ]]>
             <if test="type == 'title'">
